@@ -124,11 +124,31 @@ Page {
 
                 Text {
                     id: translation
+                    property int minimumPointSize: 12
+                    property int maximumPointSize: 64
+                    property int currentPointSize: 24
                     text: "Nothing found yet..."
                     width: col.width
                     wrapMode: Text.WordWrap
                     visible: false
-                    font.pointSize: 24
+                    font.pointSize: translation.currentPointSize
+
+                    PinchArea {
+                        id: translationPincher
+                        anchors.fill: parent
+                        onPinchUpdated: {
+                            var desiredSize = pinch.scale * translation.currentPointSize;
+                            if(desiredSize >= translation.minimumPointSize && desiredSize <= translation.maximumPointSize)
+                                translation.font.pointSize = desiredSize
+                        }
+                        onPinchFinished: {
+                            var desiredSize = pinch.scale * translation.currentPointSize;
+                            if(desiredSize >= translation.minimumPointSize && desiredSize <= translation.maximumPointSize)
+                                translation.currentPointSize = desiredSize
+
+                            translation.font.pointSize = translation.currentPointSize;
+                        }
+                    }
                 }
             }
         }
