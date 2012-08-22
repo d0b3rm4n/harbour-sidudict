@@ -32,7 +32,7 @@ Page {
     anchors.margins: rootWindow.pageMargin
     Component.onCompleted: {
         inputField.forceActiveFocus();
-        inputField.openSoftwareInputPanel();
+        inputField.platformOpenSoftwareInputPanel();
     }
 
     Item {
