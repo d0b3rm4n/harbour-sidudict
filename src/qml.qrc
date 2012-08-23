@@ -1,8 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>qml/main.qml</file>
-        <file>qml/MainWindow.qml</file>
-        <file>qml/dummy.qml</file>
-        <file>qml/EntryList.qml</file>
+        <file>qml/DictionaryStar.qml</file>
     </qresource>
 </RCC>

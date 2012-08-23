@@ -66,3 +66,8 @@ QString SiduDictLib::getTranslation(QString str){
     }
     return QString();
 }
+
+QStringList SiduDictLib::listSimilarWords(QString str){
+    updateList(str);
+    return m_suggestModel->stringList();
+}

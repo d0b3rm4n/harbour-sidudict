@@ -39,6 +39,7 @@ public:
     SiduDictLib();
     Q_INVOKABLE void updateList(QString);
     Q_INVOKABLE QString getTranslation(QString);
+    Q_INVOKABLE QStringList listSimilarWords(QString);
     QStringListModel *m_suggestModel;
 
 private:

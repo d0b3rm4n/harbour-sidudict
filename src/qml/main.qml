@@ -41,5 +41,6 @@ PageStackWindow{
     }
 
     // MainPage is what we see when the app starts, it links to the component specific pages
-    initialPage: MainWindow { }
+    // initialPage: MainWindow { }
+    initialPage: DictionaryStar {}
 }
