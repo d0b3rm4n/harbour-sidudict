@@ -24,34 +24,33 @@
  *                                                                         *
  ***************************************************************************/
 
-import QtQuick 1.0
+import QtQuick 1.1
+import Sailfish.Silica 1.0
 
 Item {
     id:entryList
-    height: 600
     signal entryClicked(string entry)
 
     Component {
         id: entryModelDelegate
-        Row {
-            Text {
-                text: display
-                font.pointSize: 26
+        Text {
+            anchors {left: parent.left; right: parent.right}
+            text: display
+            font.pointSize: theme.fontSizeMedium
+            color: theme.primaryColor
 
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        entryList.entryClicked(parent.text)
-                    }
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    entryList.entryClicked(parent.text)
                 }
             }
         }
     }
-
-        ListView {
-            anchors.fill: parent
-            model: entryListModel
-            delegate: entryModelDelegate
-            spacing: 26
-        }
+    SilicaListView{
+        anchors.fill: parent
+        model: entryListModel
+        delegate: entryModelDelegate
+        spacing: theme.paddingMedium
+    }
 }

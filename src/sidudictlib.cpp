@@ -47,7 +47,7 @@ void SiduDictLib::updateList(QString str){
 
     wordList.clear();
 
-    // qDebug() << m_sd->findWords(str.simplified());
+    qDebug() << m_sd->findWords(str.simplified());
     wordList.append(m_sd->findWords(str.simplified()));
 
     foreach (QString dict, m_sd->availableDicts()) {

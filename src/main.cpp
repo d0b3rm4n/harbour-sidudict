@@ -24,30 +24,28 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <QApplication>
 #include <QtDeclarative>
-
 #include "sidudictlib.h"
 
-int main(int argc, char **argv)
-{
-    QApplication app(argc, argv);
-    app.setProperty("NoMStyle", true);
-    QDir::setCurrent(app.applicationDirPath());
+ int main(int argc, char *argv[])
+ {
+     QScopedPointer<QApplication> app(new QApplication(argc, argv));
+     QScopedPointer<QDeclarativeView> view(new QDeclarativeView);
 
-    SiduDictLib stardict;
+     SiduDictLib stardict;
 
-    QDeclarativeView window;
-    window.rootContext()->setContextProperty("starDictLib", &stardict);
-    window.rootContext()->setContextProperty("entryListModel", stardict.m_suggestModel);
+     view->rootContext()->setContextProperty("starDictLib", &stardict);
+     view->rootContext()->setContextProperty("entryListModel", stardict.m_suggestModel);
 
-    window.setSource(QUrl("qrc:qml/main.qml"));
-    // window.setSource(QUrl("qrc:qml/dummy.qml"));
+     view->setSource(QUrl("qrc:qml/main.qml"));
 
-#ifdef __arm__
-    window.showFullScreen();
-#else
-    window.show();
-#endif
+     view->setAttribute(Qt::WA_OpaquePaintEvent);
+     view->setAttribute(Qt::WA_NoSystemBackground);
+     view->viewport()->setAttribute(Qt::WA_OpaquePaintEvent);
+     view->viewport()->setAttribute(Qt::WA_NoSystemBackground);
 
-    return app.exec();
-}
+     view->showFullScreen();
+
+     return app->exec();
+ }

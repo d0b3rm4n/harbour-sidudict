@@ -1,1 +1,7 @@
-sidudict.pro.user
+sidudict.pro.user*
+Makefile
+data/64x64/sidudict.png
+src/moc/
+src/obj/
+src/rcc/
+src/sidudict

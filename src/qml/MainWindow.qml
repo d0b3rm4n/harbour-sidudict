@@ -25,135 +25,147 @@
  ***************************************************************************/
 
 import QtQuick 1.1
-import com.nokia.meego 1.0
+import Sailfish.Silica 1.0
 
-Page {
+Page{
     id: mainWindow
-    anchors.margins: rootWindow.pageMargin
     Component.onCompleted: {
         inputField.forceActiveFocus();
-        inputField.platformOpenSoftwareInputPanel();
+        inputField.openSoftwareInputPanel()
     }
 
-    Item {
-        id: mainItem
+    Column {
+        id: col
         anchors.fill: parent
-        Flickable {
-            id: container
-            anchors.fill: parent
-            contentWidth: col.width
-            contentHeight: col.height
-            flickableDirection: Flickable.VerticalFlick
-            pressDelay: 100
-            Column {
-                id: col
-                spacing: 10
-                width: container.width
+        anchors.margins: theme.paddingMedium
+        spacing: theme.paddingMedium
 
-                Label {
-                    text: "Search for:"
+
+        Label {
+            id: searchLabel
+            anchors {left: parent.left; right: parent.right}
+            text: "Search for:"
+        }
+
+        TextField {
+            id: inputField
+            anchors {left: parent.left; right: parent.right}
+            inputMethodHints: Qt.ImhNoPredictiveText | Qt.ImhNoAutoUppercase
+            placeholderText: "Search..."
+
+            Keys.onReturnPressed: {
+                var tmpTranslation = starDictLib.getTranslation(inputField.text);
+                if (tmpTranslation.length > 0){
+                    translation.text = tmpTranslation
+                    parent.focus = true;
+                    myList.visible = false;
+                    translation.visible = true;
                 }
-
-                TextField {
-                    id: inputField
-                    anchors {left: parent.left; right: parent.right;}
-                    placeholderText: "Search..."
-                    maximumLength: 80
-
-                    Keys.onReturnPressed: {
-                        var tmpTranslation = starDictLib.getTranslation(inputField.text);
-                        if (tmpTranslation.length > 0){
-                            translation.text = tmpTranslation
-                            parent.focus = true;
-                            myList.visible = false;
-                            translation.visible = true;
-                        }
-                        else {
-                            suggestButton.clicked();
-                        }
-                    }
-
-//                    // does not work in meego !?
-//                    Keys.onPressed: {
-//                        console.log('onPressed');
-//                        if(event.key >= Qt.Key_A
-//                           && event.key <= Qt.Key_Z
-//                           || event.key == Qt.Key_Backspace){
-//                            translation.text = starDictLib.updateList(inputField.text);
-//                        }
-//                    }
+                else {
+                    suggestButton.clicked();
                 }
+            }
 
-                Button {
-                    id: deleteButton
-                    text: "new search"
-                    anchors {left: parent.left; right: parent.right;}
-
-                    onClicked: {
-                        inputField.text = "";
-                        inputField.forceActiveFocus();
-                        inputField.openSoftwareInputPanel();
-                    }
-
+            // does not work in!?
+            Keys.onPressed: {
+                console.log('onPressed');
+                if(event.key >= Qt.Key_A
+                        && event.key <= Qt.Key_Z
+                        || event.key === Qt.Key_Backspace){
+                    translation.text = starDictLib.updateList(inputField.text);
                 }
+            }
+        }
 
-                Button {
-                    id: suggestButton
-                    text: "suggestions"
-                    anchors {left: parent.left; right: parent.right;}
+        Button {
+            id: deleteButton
+            anchors {left: parent.left; right: parent.right}
+            text: "new search"
 
-                    onClicked: {
-                        translation.visible = false;
-                        myList.visible = true;
-                        translation.text = starDictLib.updateList(inputField.text);
-                    }
+            onClicked: {
+                inputField.text = "";
+                inputField.forceActiveFocus();
+                inputField.openSoftwareInputPanel();
+            }
 
-                }
+        }
 
-                EntryList{
-                    id: myList
-                    width: col.width
+        Button {
+            id: suggestButton
+            anchors {left: parent.left; right: parent.right}
+            text: "suggestions"
 
-                    onEntryClicked:{
-                        inputField.text = entry;
-                        translation.text = starDictLib.getTranslation(inputField.text);
-                        myList.visible = false;
-                        translation.visible = true;
-                    }
-                }
+            onClicked: {
+                translation.visible = false;
+                myList.visible = true;
+                starDictLib.updateList(inputField.text);
+            }
+        }
+
+
+        EntryList{
+            id: myList
+            width: col.width - (2 * col.spacing)
+            height: col.height - searchLabel.height - inputField.height - deleteButton.height - suggestButton.height
+
+            onEntryClicked:{
+                inputField.text = entry;
+                translation.text = starDictLib.getTranslation(inputField.text);
+                myList.visible = false;
+                translation.visible = true;
+            }
+        }
+
+        Item{
+            // anchors {left: parent.left; right: parent.right}
+            width: col.width - (2 * col.spacing)
+            height: col.height - searchLabel.height - inputField.height - deleteButton.height - suggestButton.height
+
+            SilicaFlickable {
+                anchors.fill: parent
+                pressDelay: 100
+                flickableDirection: Flickable.VerticalFlick
+                boundsBehavior: Flickable.DragAndOvershootBounds
+                contentHeight: 1.02 * translation.height + (2 * theme.paddingMedium)
 
                 Text {
                     id: translation
-                    property int minimumPointSize: 12
-                    property int maximumPointSize: 64
-                    property int currentPointSize: 24
+                    property int minimumPointSize: theme.fontSizeExtraSmall
+                    property int maximumPointSize: theme.fontSizeExtraLarge
+                    property int currentPointSize: theme.fontSizeMedium
                     text: "Nothing found yet..."
-                    width: col.width
+                    anchors {left: parent.left; right: parent.right;}
+
                     wrapMode: Text.WordWrap
                     visible: false
                     font.pointSize: translation.currentPointSize
+                    color: theme.primaryColor
 
                     PinchArea {
-                        id: translationPincher
                         anchors.fill: parent
                         onPinchUpdated: {
                             var desiredSize = pinch.scale * translation.currentPointSize;
                             if(desiredSize >= translation.minimumPointSize && desiredSize <= translation.maximumPointSize)
                                 translation.font.pointSize = desiredSize
+                            else if (desiredSize < translation.minimumPointSize)
+                                translation.font.pointSize = translation.minimumPointSize
+                            else if (desiredSize > translation.maximumPointSize)
+                                translation.font.pointSize = translation.maximumPointSize
                         }
                         onPinchFinished: {
                             var desiredSize = pinch.scale * translation.currentPointSize;
                             if(desiredSize >= translation.minimumPointSize && desiredSize <= translation.maximumPointSize)
                                 translation.currentPointSize = desiredSize
+                            else if (desiredSize < translation.minimumPointSize)
+                                translation.currentPointSize = translation.minimumPointSize
+                            else if (desiredSize > translation.maximumPointSize)
+                                translation.currentPointSize = translation.maximumPointSize
 
                             translation.font.pointSize = translation.currentPointSize;
                         }
                     }
                 }
             }
-        }
-        ScrollDecorator {
-            flickableItem: container
         }
     }
 }

@@ -25,22 +25,12 @@
  ***************************************************************************/
 
 import QtQuick 1.1
-import com.nokia.meego 1.0
+import Sailfish.Silica 1.0
 
-PageStackWindow{
+ApplicationWindow{
     id: rootWindow
-    property int pageMargin: 16
-
-    platformStyle: defaultStyle;
-
-    PageStackWindowStyle { id: defaultStyle }
-    PageStackWindowStyle {
-        id: customStyle;
-        background: "image://theme/meegotouch-wallpaper-portrait";
-        backgroundFillMode: Image.PreserveAspectCrop
-    }
 
     // MainPage is what we see when the app starts, it links to the component specific pages
     // initialPage: MainWindow { }
-    initialPage: DictionaryStar {}
+    initialPage: Component{ MainWindow{} }
 }
