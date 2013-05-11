@@ -41,13 +41,13 @@ Page{
         spacing: theme.paddingMedium
 
 
-        Label {
-            id: searchLabel
-            anchors {left: parent.left; right: parent.right}
-            text: "Search for:"
-        }
+//        Label {
+//            id: searchLabel
+//            anchors {left: parent.left; right: parent.right}
+//            text: "Search for:"
+//        }
 
-        TextField {
+        SearchField {
             id: inputField
             anchors {left: parent.left; right: parent.right}
             inputMethodHints: Qt.ImhNoPredictiveText | Qt.ImhNoAutoUppercase
@@ -67,38 +67,42 @@ Page{
             }
 
             onTextChanged: {
+                translation.visible = false;
+                myList.visible = true;
                 translation.text = starDictLib.updateList(inputField.text);
             }
         }
 
-        Button {
-            id: deleteButton
-            anchors {left: parent.left; right: parent.right}
-            text: "new search"
+//        Button {
+//            id: deleteButton
+//            anchors {left: parent.left; right: parent.right}
+//            text: "new search"
 
-            onClicked: {
-                inputField.text = "";
-                inputField.forceActiveFocus();
-                inputField.openSoftwareInputPanel();
-            }
+//            onClicked: {
+//                inputField.text = "";
+//                inputField.forceActiveFocus();
+//                inputField.openSoftwareInputPanel();
+//                translation.visible = false;
+//                myList.visible = true;
+//            }
 
-        }
+//        }
 
-        Button {
-            id: suggestButton
-            anchors {left: parent.left; right: parent.right}
-            text: "suggestions"
+//        Button {
+//            id: suggestButton
+//            anchors {left: parent.left; right: parent.right}
+//            text: "suggestions"
 
-            onClicked: {
-                translation.visible = false;
-                myList.visible = true;
-                starDictLib.updateList(inputField.text);
-            }
-        }
+//            onClicked: {
+//                translation.visible = false;
+//                myList.visible = true;
+//                starDictLib.updateList(inputField.text);
+//            }
+//        }
 
         function fillUpSpace() {
-            var hight = col.height - searchLabel.height - inputField.height
-                    - deleteButton.height - suggestButton.height - (4 * col.spacing);
+            // suggestButton.height
+            var hight = col.height - inputField.height - (1 * col.spacing);
             return hight;
         }
 
