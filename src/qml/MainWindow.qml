@@ -66,14 +66,8 @@ Page{
                 }
             }
 
-            // does not work in!?
-            Keys.onPressed: {
-                console.log('onPressed');
-                if(event.key >= Qt.Key_A
-                        && event.key <= Qt.Key_Z
-                        || event.key === Qt.Key_Backspace){
-                    translation.text = starDictLib.updateList(inputField.text);
-                }
+            onTextChanged: {
+                translation.text = starDictLib.updateList(inputField.text);
             }
         }
 
@@ -102,11 +96,17 @@ Page{
             }
         }
 
+        function fillUpSpace() {
+            var hight = col.height - searchLabel.height - inputField.height
+                    - deleteButton.height - suggestButton.height - (4 * col.spacing);
+            return hight;
+        }
 
         EntryList{
             id: myList
-            width: col.width - (2 * col.spacing)
-            height: col.height - searchLabel.height - inputField.height - deleteButton.height - suggestButton.height
+            anchors {left: parent.left; right: parent.right}
+            height: col.fillUpSpace();
+            clip: true
 
             onEntryClicked:{
                 inputField.text = entry;
@@ -116,53 +116,49 @@ Page{
             }
         }
 
-        Item{
-            // anchors {left: parent.left; right: parent.right}
-            width: col.width - (2 * col.spacing)
-            height: col.height - searchLabel.height - inputField.height - deleteButton.height - suggestButton.height
+        SilicaFlickable {
+            anchors {left: parent.left; right: parent.right}
+            height: col.fillUpSpace();
+            clip: true
+            pressDelay: 100
+            flickableDirection: Flickable.VerticalFlick
+            boundsBehavior: Flickable.DragAndOvershootBounds
+            contentHeight: translation.height
 
-            SilicaFlickable {
-                anchors.fill: parent
-                pressDelay: 100
-                flickableDirection: Flickable.VerticalFlick
-                boundsBehavior: Flickable.DragAndOvershootBounds
-                contentHeight: 1.02 * translation.height + (2 * theme.paddingMedium)
+            Text {
+                id: translation
+                property int minimumPointSize: theme.fontSizeExtraSmall
+                property int maximumPointSize: theme.fontSizeExtraLarge
+                property int currentPointSize: theme.fontSizeMedium
+                text: "Nothing found yet..."
+                anchors {left: parent.left; right: parent.right;}
 
-                Text {
-                    id: translation
-                    property int minimumPointSize: theme.fontSizeExtraSmall
-                    property int maximumPointSize: theme.fontSizeExtraLarge
-                    property int currentPointSize: theme.fontSizeMedium
-                    text: "Nothing found yet..."
-                    anchors {left: parent.left; right: parent.right;}
+                wrapMode: Text.WordWrap
+                visible: false
+                font.pointSize: translation.currentPointSize
+                color: theme.primaryColor
 
-                    wrapMode: Text.WordWrap
-                    visible: false
-                    font.pointSize: translation.currentPointSize
-                    color: theme.primaryColor
+                PinchArea {
+                    anchors.fill: parent
+                    onPinchUpdated: {
+                        var desiredSize = pinch.scale * translation.currentPointSize;
+                        if(desiredSize >= translation.minimumPointSize && desiredSize <= translation.maximumPointSize)
+                            translation.font.pointSize = desiredSize
+                        else if (desiredSize < translation.minimumPointSize)
+                            translation.font.pointSize = translation.minimumPointSize
+                        else if (desiredSize > translation.maximumPointSize)
+                            translation.font.pointSize = translation.maximumPointSize
+                    }
+                    onPinchFinished: {
+                        var desiredSize = pinch.scale * translation.currentPointSize;
+                        if(desiredSize >= translation.minimumPointSize && desiredSize <= translation.maximumPointSize)
+                            translation.currentPointSize = desiredSize
+                        else if (desiredSize < translation.minimumPointSize)
+                            translation.currentPointSize = translation.minimumPointSize
+                        else if (desiredSize > translation.maximumPointSize)
+                            translation.currentPointSize = translation.maximumPointSize
 
-                    PinchArea {
-                        anchors.fill: parent
-                        onPinchUpdated: {
-                            var desiredSize = pinch.scale * translation.currentPointSize;
-                            if(desiredSize >= translation.minimumPointSize && desiredSize <= translation.maximumPointSize)
-                                translation.font.pointSize = desiredSize
-                            else if (desiredSize < translation.minimumPointSize)
-                                translation.font.pointSize = translation.minimumPointSize
-                            else if (desiredSize > translation.maximumPointSize)
-                                translation.font.pointSize = translation.maximumPointSize
-                        }
-                        onPinchFinished: {
-                            var desiredSize = pinch.scale * translation.currentPointSize;
-                            if(desiredSize >= translation.minimumPointSize && desiredSize <= translation.maximumPointSize)
-                                translation.currentPointSize = desiredSize
-                            else if (desiredSize < translation.minimumPointSize)
-                                translation.currentPointSize = translation.minimumPointSize
-                            else if (desiredSize > translation.maximumPointSize)
-                                translation.currentPointSize = translation.maximumPointSize
-
-                            translation.font.pointSize = translation.currentPointSize;
-                        }
+                        translation.font.pointSize = translation.currentPointSize;
                     }
                 }
             }
