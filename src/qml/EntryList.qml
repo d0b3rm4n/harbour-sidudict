@@ -24,7 +24,7 @@
  *                                                                         *
  ***************************************************************************/
 
-import QtQuick 1.1
+import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 Item {
@@ -36,8 +36,8 @@ Item {
         Text {
             anchors {left: parent.left; right: parent.right}
             text: display
-            font.pointSize: theme.fontSizeMedium
-            color: theme.primaryColor
+            font.pointSize: Theme.fontSizeMedium
+            color: Theme.primaryColor
 
             MouseArea {
                 anchors.fill: parent
@@ -51,6 +51,6 @@ Item {
         anchors.fill: parent
         model: entryListModel
         delegate: entryModelDelegate
-        spacing: theme.paddingMedium
+        spacing: Theme.paddingMedium
     }
 }

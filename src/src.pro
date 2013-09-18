@@ -23,21 +23,19 @@ unix {
 }
 unix:DEFINES += HAVE_MMAP
 
-QT       += core gui declarative
+#QT       += core gui declarative
 
 TARGET = sidudict
 TEMPLATE = app
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
         lib/dictziplib.cpp \
         lib/distance.cpp \
         lib/lib.cpp \
         lib/stardict.cpp \
         sidudictlib.cpp
 
-HEADERS  += mainwindow.h \
-         lib/dictziplib.hpp \
+HEADERS  += lib/dictziplib.hpp \
          lib/distance.h \
          lib/file.hpp \
          lib/lib.h \
@@ -53,5 +51,5 @@ RESOURCES += \
 
 OTHER_FILES += qml/*.qml
 
-
+include(sailfishapplication/sailfishapplication.pri)
 

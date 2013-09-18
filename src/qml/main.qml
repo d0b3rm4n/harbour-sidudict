@@ -24,7 +24,7 @@
  *                                                                         *
  ***************************************************************************/
 
-import QtQuick 1.1
+import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 ApplicationWindow{
@@ -32,5 +32,5 @@ ApplicationWindow{
 
     // MainPage is what we see when the app starts, it links to the component specific pages
     // initialPage: MainWindow { }
-    initialPage: Component{ MainWindow{} }
+    initialPage: Component { MainWindow{} }
 }

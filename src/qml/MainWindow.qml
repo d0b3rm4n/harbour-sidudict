@@ -24,21 +24,21 @@
  *                                                                         *
  ***************************************************************************/
 
-import QtQuick 1.1
+import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 Page{
     id: mainWindow
     Component.onCompleted: {
         inputField.forceActiveFocus();
-        inputField.openSoftwareInputPanel()
+//        inputField.openSoftwareInputPanel()
     }
 
     Column {
         id: col
         anchors.fill: parent
-        anchors.margins: theme.paddingMedium
-        spacing: theme.paddingMedium
+        anchors.margins: Theme.paddingMedium
+        spacing: Theme.paddingMedium
 
 
 //        Label {
@@ -131,16 +131,16 @@ Page{
 
             Text {
                 id: translation
-                property int minimumPointSize: theme.fontSizeExtraSmall
-                property int maximumPointSize: theme.fontSizeExtraLarge
-                property int currentPointSize: theme.fontSizeMedium
+                property int minimumPointSize: Theme.fontSizeExtraSmall
+                property int maximumPointSize: Theme.fontSizeExtraLarge
+                property int currentPointSize: Theme.fontSizeMedium
                 text: "Nothing found yet..."
                 anchors {left: parent.left; right: parent.right;}
 
                 wrapMode: Text.WordWrap
                 visible: false
                 font.pointSize: translation.currentPointSize
-                color: theme.primaryColor
+                color: Theme.primaryColor
 
                 PinchArea {
                     anchors.fill: parent

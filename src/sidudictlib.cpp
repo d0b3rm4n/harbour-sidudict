@@ -47,7 +47,7 @@ void SiduDictLib::updateList(QString str){
 
     wordList.clear();
 
-    qDebug() << m_sd->findWords(str.simplified());
+    // qDebug() << m_sd->findWords(str.simplified());
     wordList.append(m_sd->findWords(str.simplified()));
 
     foreach (QString dict, m_sd->availableDicts()) {
@@ -59,6 +59,7 @@ void SiduDictLib::updateList(QString str){
 }
 
 QString SiduDictLib::getTranslation(QString str){
+    // qDebug() << "getTranslation for:" << str;
     foreach (QString dict, m_sd->availableDicts()) {
         if (m_sd->isTranslatable(dict, str.simplified())) {
             return m_sd->translate(dict,str.simplified()).translation();

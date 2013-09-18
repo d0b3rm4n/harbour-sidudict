@@ -5,3 +5,8 @@ src/moc/
 src/obj/
 src/rcc/
 src/sidudict
+debugfiles.list
+debuglinks.list
+debugsources.list
+documentation.list
+RPMS

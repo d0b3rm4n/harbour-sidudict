@@ -24,28 +24,49 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <QApplication>
-#include <QtDeclarative>
+//#include <QApplication>
+//#include <QQuickView>
+//#include "sidudictlib.h"
+
+// int main(int argc, char *argv[])
+// {
+//     QScopedPointer<QApplication> app(new QApplication(argc, argv));
+//     QScopedPointer<QDeclarativeView> view(new QDeclarativeView);
+
+//     SiduDictLib stardict;
+
+//     view->rootContext()->setContextProperty("starDictLib", &stardict);
+//     view->rootContext()->setContextProperty("entryListModel", stardict.m_suggestModel);
+
+//     view->setSource(QUrl("qrc:qml/main.qml"));
+
+//     view->setAttribute(Qt::WA_OpaquePaintEvent);
+//     view->setAttribute(Qt::WA_NoSystemBackground);
+//     view->viewport()->setAttribute(Qt::WA_OpaquePaintEvent);
+//     view->viewport()->setAttribute(Qt::WA_NoSystemBackground);
+
+//     view->showFullScreen();
+
+//     return app->exec();
+// }
+
+#include <QGuiApplication>
+#include <QQuickView>
+#include <QQmlContext>
+
+#include "sailfishapplication.h"
 #include "sidudictlib.h"
 
- int main(int argc, char *argv[])
- {
-     QScopedPointer<QApplication> app(new QApplication(argc, argv));
-     QScopedPointer<QDeclarativeView> view(new QDeclarativeView);
+Q_DECL_EXPORT int main(int argc, char *argv[])
+{
+    QScopedPointer<QGuiApplication> app(Sailfish::createApplication(argc, argv));
+    QScopedPointer<QQuickView> view(Sailfish::createView("qrc:/qml/main.qml"));
 
-     SiduDictLib stardict;
+    SiduDictLib stardict;
+    view.data()->rootContext()->setContextProperty("starDictLib", &stardict);
+    view.data()->rootContext()->setContextProperty("entryListModel", stardict.m_suggestModel);
 
-     view->rootContext()->setContextProperty("starDictLib", &stardict);
-     view->rootContext()->setContextProperty("entryListModel", stardict.m_suggestModel);
+    Sailfish::showView(view.data());
 
-     view->setSource(QUrl("qrc:qml/main.qml"));
-
-     view->setAttribute(Qt::WA_OpaquePaintEvent);
-     view->setAttribute(Qt::WA_NoSystemBackground);
-     view->viewport()->setAttribute(Qt::WA_OpaquePaintEvent);
-     view->viewport()->setAttribute(Qt::WA_NoSystemBackground);
-
-     view->showFullScreen();
-
-     return app->exec();
- }
+    return app->exec();
+}
