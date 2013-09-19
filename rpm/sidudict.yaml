@@ -11,17 +11,20 @@ Description: |
 Configure: none
 Builder: qtc5
 PkgConfigBR:
-- qdeclarative5-boostable
-- Qt5Core
-- Qt5Qml
 - Qt5Quick
+- Qt5Qml
+- Qt5Core
+- qdeclarative5-boostable
 Requires:
-- sailfishsilica-qt5
 - mapplauncherd-booster-silica-qt5
+- sailfishsilica-qt5
 Files:
-- /usr/share/applications/
-- /usr/share/icons/hicolor/64x64/apps/
-- /usr/share/icons/hicolor/48x48/apps/
-- /usr/share/applications
 - /usr/bin
+- /usr/share/applications
+- /usr/share/icons/hicolor/48x48/apps/
+- /usr/share/icons/hicolor/64x64/apps/
+- /usr/share/applications/
+- 
+- /usr/share/jolla-settings/entries
+- /usr/share/jolla-settings/pages/sidudict
 PkgBR: []

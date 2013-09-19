@@ -19,9 +19,14 @@ ICONPATH = /usr/share/icons/hicolor
 sidudict.desktop.path = /usr/share/applications/
 sidudict.desktop.files = data/sidudict.desktop
 
+sidudict.json.path = /usr/share/jolla-settings/entries
+sidudict.json.files = data/sidudict.json
+
+
 INSTALLS += 48.png \
             64.png \
-            sidudict.desktop
+            sidudict.desktop \
+            sidudict.json
 
 
 OTHER_FILES += \

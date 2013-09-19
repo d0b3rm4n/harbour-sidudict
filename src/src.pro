@@ -51,5 +51,10 @@ RESOURCES += \
 
 OTHER_FILES += qml/*.qml
 
+settings.qml.path = /usr/share/jolla-settings/pages/sidudict
+settings.qml.files = qml/settings.qml
+
+INSTALLS += settings.qml
+
 include(sailfishapplication/sailfishapplication.pri)
 

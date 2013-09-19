@@ -19,12 +19,12 @@ Group:      Qt/Qt
 License:    LICENSE
 Source0:    %{name}-%{version}.tar.bz2
 Source100:  sidudict.yaml
-Requires:   sailfishsilica-qt5
 Requires:   mapplauncherd-booster-silica-qt5
-BuildRequires:  pkgconfig(qdeclarative5-boostable)
-BuildRequires:  pkgconfig(Qt5Core)
-BuildRequires:  pkgconfig(Qt5Qml)
+Requires:   sailfishsilica-qt5
 BuildRequires:  pkgconfig(Qt5Quick)
+BuildRequires:  pkgconfig(Qt5Qml)
+BuildRequires:  pkgconfig(Qt5Core)
+BuildRequires:  pkgconfig(qdeclarative5-boostable)
 
 %description
 Short description of my SailfishOS Application
@@ -58,10 +58,12 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-/usr/share/applications/
-/usr/share/icons/hicolor/64x64/apps/
-/usr/share/icons/hicolor/48x48/apps/
-/usr/share/applications
 /usr/bin
+/usr/share/applications
+/usr/share/icons/hicolor/48x48/apps/
+/usr/share/icons/hicolor/64x64/apps/
+/usr/share/applications/
+/usr/share/jolla-settings/entries
+/usr/share/jolla-settings/pages/sidudict
 # >> files
 # << files

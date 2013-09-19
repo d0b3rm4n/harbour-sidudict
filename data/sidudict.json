@@ -1,0 +1,13 @@
+{
+    "entries": [
+    {
+        "path": "applications/sidudict.desktop",
+        "title": "Sidudict",
+        "type": "page",
+        "icon": "image://theme/icon-launcher-default",
+        "params": {
+            "source": "/usr/share/jolla-settings/pages/sidudict/settings.qml"
+        }
+    }
+    ]
+}
