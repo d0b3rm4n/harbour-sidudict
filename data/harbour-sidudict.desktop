@@ -1,0 +1,7 @@
+[Desktop Entry]
+Encoding=UTF-8
+X-Nemo-Application-Type=silica-qt5
+Type=Application
+Name=Sidudict
+Exec=harbour-sidudict
+Icon=harbour-sidudict

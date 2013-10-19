@@ -1,7 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>qml/main.qml</file>
-        <file>qml/MainWindow.qml</file>
-        <file>qml/EntryList.qml</file>
-    </qresource>
-</RCC>

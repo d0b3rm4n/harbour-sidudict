@@ -184,7 +184,7 @@ public:
     bool isTranslatable(const QString &dict, const QString &word);
     Translation translate(const QString &dict, const QString &word);
     virtual QStringList findSimilarWords(const QString &dict, const QString &word);
-    virtual QStringList findWords(const QString &word);
+    virtual QStringList findWords(const QString &dict, const QString &word);
 
 private:
     QString parseData(const char *data, int dictIndex = -1,

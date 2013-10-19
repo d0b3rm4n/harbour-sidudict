@@ -28,7 +28,10 @@
 #define SIDUDICTLIB_H
 
 #include <QStringListModel>
+#include <QModelIndex>
 
+#include "dictlistmodel.h"
+#include "suggestmodel.h"
 #include "lib/stardict.h"
 
 class SiduDictLib:public QObject
@@ -37,10 +40,16 @@ class SiduDictLib:public QObject
 
 public:
     SiduDictLib();
+    ~SiduDictLib();
     Q_INVOKABLE void updateList(QString);
-    Q_INVOKABLE QString getTranslation(QString);
-    Q_INVOKABLE QStringList listSimilarWords(QString);
-    QStringListModel *m_suggestModel;
+    Q_INVOKABLE QString getTranslation(QString, QString);
+//    Q_INVOKABLE QStringList listSimilarWords(QString);
+    Q_INVOKABLE void setSelectDict(int index, bool value);
+    SuggestModel *m_suggestModel;
+    DictListModel *m_availableDicts;
+
+public slots:
+    void availableDictsChanged(QModelIndex top, QModelIndex bottom);
 
 private:
     StarDict *m_sd;

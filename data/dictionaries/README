@@ -1,0 +1,21 @@
+get files from:
+
+https://github.com/tkedwards/wiktionarytodict/blob/master/packaging/wiktionarytodict_20130929.tar.gz
+resp.
+https://github.com/tkedwards/wiktionarytodict/tree/master/packaging
+
+unpack...
+
+dictzip -d *.dict.dz
+
+for INDEX in $(ls -1 *.index); do makedict --output-format stardict --input-format dictd $INDEX; done
+
+makedict:
+https://github.com/soshial/xdxf_makedict.git
+
+dictzip:
+from rpm:
+dictd-server
+Name        : dictd-server
+Version     : 1.12.0
+Release     : 5.fc19

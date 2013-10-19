@@ -27,48 +27,130 @@
 #include <QDebug>
 #include <QString>
 #include <QStringListModel>
+#include <QMultiHash>
+#include <QModelIndex>
+#include <QSettings>
+
+#include <logging.h>
 
 #include "sidudictlib.h"
+#include "dictlistmodel.h"
+#include "suggestmodel.h"
 #include "lib/stardict.h"
+#include "entrydictitem.h"
 
 SiduDictLib::SiduDictLib()
 {
-    m_sd = new StarDict(this);
-    m_suggestModel = new QStringListModel();
+    QSettings settings("harbour-sidudict","harbour-sidudict");
+    QStringList selectedDictList = settings.value("Sidudict/selectedDictList", QStringList()).toStringList();
 
-    qDebug() << "available dicts" << m_sd->availableDicts();
-    m_sd->setLoadedDicts(m_sd->availableDicts());
-    qDebug() << "loaded dicts" << m_sd->loadedDicts();
+    m_sd = new StarDict(this);
+    m_suggestModel = new SuggestModel();
+    QList<EntryDictItem*> emptyWordList;
+    emptyWordList.clear();
+    m_suggestModel->setSuggestMap(emptyWordList);
+
+    m_availableDicts = new DictListModel();
+
+    connect(m_availableDicts,
+            SIGNAL(dataChanged(QModelIndex,QModelIndex)),
+            this,
+            SLOT(availableDictsChanged(QModelIndex,QModelIndex)));
+
+    QMap<QString, bool> map;
+
+    LOG() << "available dicts" << m_sd->availableDicts();
+    foreach(QString dict, m_sd->availableDicts()){
+        if (selectedDictList.empty()) {
+            map.insert(dict, true);
+        } else {
+            if (selectedDictList.contains(dict)) {
+                map.insert(dict, true);
+            } else {
+                map.insert(dict, false);
+            }
+        }
+    }
+    m_availableDicts->setDictMap(map);
+
+    LOG() << "loaded dicts" << m_sd->loadedDicts();
+
+    foreach (QString dict, m_sd->availableDicts()) {
+        LOG() << m_sd->dictInfo(dict).name();
+        LOG() << m_sd->dictInfo(dict).author();
+        LOG() << m_sd->dictInfo(dict).description();
+        LOG() << m_sd->dictInfo(dict).wordsCount();
+    }
+}
+
+SiduDictLib::~SiduDictLib()
+{
+    IN;
+    QSettings settings("harbour-sidudict","harbour-sidudict");
+    settings.setValue("Sidudict/selectedDictList", m_availableDicts->selectedDictList());
+    settings.sync();
+    delete m_sd;
 }
 
 void SiduDictLib::updateList(QString str){
+    IN;
 
-    QStringList wordList;
-
+    QList<EntryDictItem*> wordList;
     wordList.clear();
 
-    // qDebug() << m_sd->findWords(str.simplified());
-    wordList.append(m_sd->findWords(str.simplified()));
+    if (str.isEmpty()){
+        m_suggestModel->setSuggestMap(wordList);
+    } else {
 
-    foreach (QString dict, m_sd->availableDicts()) {
-        // qDebug() << m_sd->findSimilarWords(dict, str.simplified());
-        wordList.append(m_sd->findSimilarWords(dict, str.simplified()));
+        if (str.size() >= 3){
+            foreach (QString dict, m_sd->availableDicts()) {
+                QList<EntryDictItem*> tmpWordList;
+                foreach(QString entry, m_sd->findSimilarWords(dict, str.simplified())){
+                    EntryDictItem *item =  new EntryDictItem(entry, dict);
+                    tmpWordList.append(item);
+                }
+                wordList.append(tmpWordList);
+            }
+        }
+
+        foreach (QString dict, m_sd->availableDicts()) {
+            QList<EntryDictItem*> tmpWordList;
+            foreach(QString entry, m_sd->findWords(dict, str.simplified())){
+                EntryDictItem *item =  new EntryDictItem(entry, dict);
+                tmpWordList.prepend(item);
+            }
+            wordList.append(tmpWordList);
+        }
+
+        m_suggestModel->setSuggestMap(wordList);
     }
-
-    m_suggestModel->setStringList(wordList);
 }
 
-QString SiduDictLib::getTranslation(QString str){
-    // qDebug() << "getTranslation for:" << str;
-    foreach (QString dict, m_sd->availableDicts()) {
-        if (m_sd->isTranslatable(dict, str.simplified())) {
-            return m_sd->translate(dict,str.simplified()).translation();
-        }
+QString SiduDictLib::getTranslation(QString entry, QString dict)
+{
+    IN;
+    LOG() << "getTranslation for:" << entry;
+    LOG() << "getTranslation in:" << dict;
+
+    if (m_sd->isTranslatable(dict, entry.simplified())) {
+        return m_sd->translate(dict, entry.simplified()).translation();
     }
+
     return QString();
 }
 
-QStringList SiduDictLib::listSimilarWords(QString str){
-    updateList(str);
-    return m_suggestModel->stringList();
+void SiduDictLib::setSelectDict(int index, bool value)
+{
+    IN;
+    m_availableDicts->setSelectDict(index, value);
+}
+
+void SiduDictLib::availableDictsChanged(QModelIndex top, QModelIndex bottom)
+{
+    IN;
+    Q_UNUSED(top);
+    Q_UNUSED(bottom);
+
+    LOG() << "selected dicts" << m_availableDicts->selectedDictList();
+    m_sd->setLoadedDicts(m_availableDicts->selectedDictList());
 }

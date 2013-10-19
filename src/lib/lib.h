@@ -207,7 +207,7 @@ class Libs
 
 
         bool LookupWithFuzzy(const gchar *sWord, gchar *reslist[], gint reslist_size, gint iLib);
-        gint LookupWithRule(const gchar *sWord, gchar *reslist[]);
+        gint LookupWithRule(const gchar *sWord, gchar *reslist[], gint iLib);
         bool LookupData(const gchar *sWord, std::vector<gchar *> *reslist);
     private:
         std::vector<Dict *> oLib; // word Libs.

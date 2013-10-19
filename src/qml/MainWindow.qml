@@ -1,7 +1,7 @@
 /***************************************************************************
 
     MainWindow.qml - Sidudict, a StarDict clone based on QStarDict
-    Copyright 2011 Reto Zingg <g.d0b3rm4n@gmail.com>
+    Copyright 2011 - 2013 Reto Zingg <g.d0b3rm4n@gmail.com>
 
  ***************************************************************************/
 
@@ -31,139 +31,131 @@ Page{
     id: mainWindow
     Component.onCompleted: {
         inputField.forceActiveFocus();
-//        inputField.openSoftwareInputPanel()
     }
 
-    Column {
-        id: col
+    //    SilicaListView {
+    //        anchors.fill: parent
+    //        model: entryListModel
+    //        spacing: Theme.paddingSmall
+    //        // prevent newly added list delegates from stealing focus away from the search field
+    ////        currentIndex: 0
+
+    //        PullDownMenu {
+    //            MenuItem {
+    //                text: "About"
+    //                onClicked: {
+    //                    console.log("Clicked option About")
+    //                    pageStack.push(Qt.resolvedUrl("about.qml"))
+    //                }
+    //            }
+    //            MenuItem {
+    //                text: "Help"
+    //                onClicked: {
+    //                    console.log("Clicked option Help")
+    //                    pageStack.push(Qt.resolvedUrl("help.qml"))
+    //                }
+    //            }
+    //            MenuItem {
+    //                text: "Settings"
+    //                onClicked: {
+    //                    console.log("Clicked option Settings")
+    //                    pageStack.push(Qt.resolvedUrl("settings.qml"))
+    //                }
+    //            }
+    //        }
+
+    //        header: SearchField {
+    //            id: inputField
+    //            width: parent.width
+    //            focus: true
+    //            inputMethodHints: Qt.ImhNoPredictiveText | Qt.ImhNoAutoUppercase
+    //            placeholderText: "Search..."
+
+    //            onTextChanged: {
+    //                starDictLib.updateList(inputField.text);
+    //            }
+    //        }
+
+    //        delegate: ListItem{
+    //            contentHeight: Theme.itemSizeMedium // two line delegate
+    //            onClicked:{
+    //                var translation = starDictLib.getTranslation(entry, dict)
+    //                pageStack.push(Qt.resolvedUrl("showEntry.qml"),{pageTitleEntry: entry, dictTranslatedEntry: translation})
+    //            }
+    //            Label {
+    //                id: label
+    //                text: entry
+    //                color: Theme.primaryColor
+    //            }
+    //            Label {
+    //                anchors.top: label.bottom
+    //                text: dict
+    //                font.pixelSize: Theme.fontSizeSmall
+    //                color: Theme.secondaryColor
+    //            }
+    //        }
+
+
+    SilicaFlickable {
         anchors.fill: parent
-        anchors.margins: Theme.paddingMedium
-        spacing: Theme.paddingMedium
-
-
-//        Label {
-//            id: searchLabel
-//            anchors {left: parent.left; right: parent.right}
-//            text: "Search for:"
-//        }
-
-        SearchField {
-            id: inputField
-            anchors {left: parent.left; right: parent.right}
-            inputMethodHints: Qt.ImhNoPredictiveText | Qt.ImhNoAutoUppercase
-            placeholderText: "Search..."
-
-            Keys.onReturnPressed: {
-                var tmpTranslation = starDictLib.getTranslation(inputField.text);
-                if (tmpTranslation.length > 0){
-                    translation.text = tmpTranslation
-                    parent.focus = true;
-                    myList.visible = false;
-                    translation.visible = true;
-                }
-                else {
-                    suggestButton.clicked();
+        contentHeight: col.height
+        PullDownMenu {
+            MenuItem {
+                text: "About"
+                onClicked: {
+                    console.log("Clicked option About")
+                    pageStack.push(Qt.resolvedUrl("about.qml"))
                 }
             }
-
-            onTextChanged: {
-                translation.visible = false;
-                myList.visible = true;
-                translation.text = starDictLib.updateList(inputField.text);
+            MenuItem {
+                text: "Help"
+                onClicked: {
+                    console.log("Clicked option Help")
+                    pageStack.push(Qt.resolvedUrl("help.qml"))
+                }
+            }
+            MenuItem {
+                text: "Settings"
+                onClicked: {
+                    console.log("Clicked option Settings")
+                    pageStack.push(Qt.resolvedUrl("settings.qml"))
+                }
             }
         }
 
-//        Button {
-//            id: deleteButton
-//            anchors {left: parent.left; right: parent.right}
-//            text: "new search"
 
-//            onClicked: {
-//                inputField.text = "";
-//                inputField.forceActiveFocus();
-//                inputField.openSoftwareInputPanel();
-//                translation.visible = false;
-//                myList.visible = true;
-//            }
+        Column {
+            id: col
+            width: parent.width
+            anchors.margins: Theme.paddingMedium
+            spacing: Theme.paddingSmall
 
-//        }
-
-//        Button {
-//            id: suggestButton
-//            anchors {left: parent.left; right: parent.right}
-//            text: "suggestions"
-
-//            onClicked: {
-//                translation.visible = false;
-//                myList.visible = true;
-//                starDictLib.updateList(inputField.text);
-//            }
-//        }
-
-        function fillUpSpace() {
-            // suggestButton.height
-            var hight = col.height - inputField.height - (1 * col.spacing);
-            return hight;
-        }
-
-        EntryList{
-            id: myList
-            anchors {left: parent.left; right: parent.right}
-            height: col.fillUpSpace();
-            clip: true
-
-            onEntryClicked:{
-                inputField.text = entry;
-                translation.text = starDictLib.getTranslation(inputField.text);
-                myList.visible = false;
-                translation.visible = true;
+            function fillUpSpace() {
+                var hight = Screen.height - inputField.height - (1 * col.spacing);
+                return hight;
             }
-        }
 
-        SilicaFlickable {
-            anchors {left: parent.left; right: parent.right}
-            height: col.fillUpSpace();
-            clip: true
-            pressDelay: 100
-            flickableDirection: Flickable.VerticalFlick
-            boundsBehavior: Flickable.DragAndOvershootBounds
-            contentHeight: translation.height
+            SearchField {
+                id: inputField
+                anchors {left: parent.left; right: parent.right}
+                inputMethodHints: Qt.ImhNoPredictiveText | Qt.ImhNoAutoUppercase
+                placeholderText: "Search..."
+                onTextChanged: {
+                    starDictLib.updateList(inputField.text);
+                }
+            }
 
-            Text {
-                id: translation
-                property int minimumPointSize: Theme.fontSizeExtraSmall
-                property int maximumPointSize: Theme.fontSizeExtraLarge
-                property int currentPointSize: Theme.fontSizeMedium
-                text: "Nothing found yet..."
-                anchors {left: parent.left; right: parent.right;}
+            EntryList{
+                id: myList
+                anchors {left: parent.left; right: parent.right}
+                anchors.margins: Theme.paddingMedium
+                height: col.fillUpSpace()
+                clip: true
 
-                wrapMode: Text.WordWrap
-                visible: false
-                font.pointSize: translation.currentPointSize
-                color: Theme.primaryColor
-
-                PinchArea {
-                    anchors.fill: parent
-                    onPinchUpdated: {
-                        var desiredSize = pinch.scale * translation.currentPointSize;
-                        if(desiredSize >= translation.minimumPointSize && desiredSize <= translation.maximumPointSize)
-                            translation.font.pointSize = desiredSize
-                        else if (desiredSize < translation.minimumPointSize)
-                            translation.font.pointSize = translation.minimumPointSize
-                        else if (desiredSize > translation.maximumPointSize)
-                            translation.font.pointSize = translation.maximumPointSize
-                    }
-                    onPinchFinished: {
-                        var desiredSize = pinch.scale * translation.currentPointSize;
-                        if(desiredSize >= translation.minimumPointSize && desiredSize <= translation.maximumPointSize)
-                            translation.currentPointSize = desiredSize
-                        else if (desiredSize < translation.minimumPointSize)
-                            translation.currentPointSize = translation.minimumPointSize
-                        else if (desiredSize > translation.maximumPointSize)
-                            translation.currentPointSize = translation.maximumPointSize
-
-                        translation.font.pointSize = translation.currentPointSize;
-                    }
+                onEntryClicked:{
+                    inputField.text = entry
+                    var translation = starDictLib.getTranslation(inputField.text, dict)
+                    pageStack.push(Qt.resolvedUrl("showEntry.qml"),{pageTitleEntry: entry, dictTranslatedEntry: translation})
                 }
             }
         }

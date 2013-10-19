@@ -1,72 +1,70 @@
 /***************************************************************************
 
     main.cpp - Sidudict, a StarDict clone based on QStarDict
-    Copyright 2011 Reto Zingg <g.d0b3rm4n@gmail.com>
+    Copyright 2013 Reto Zingg <g.d0b3rm4n@gmail.com>
+    This file is based on the Sailfish SDK template
 
  ***************************************************************************/
 
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- *   This program is distributed in the hope that it will be useful,       *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
- *   GNU General Public License for more details.                          *
- *                                                                         *
- *   You should have received a copy of the GNU General Public License     *
- *   along with this program; if not, write to the Free Software           *
- *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,            *
- *   MA 02110-1301, USA.                                                   *
- *                                                                         *
- ***************************************************************************/
+/*
+  Copyright (C) 2013 Jolla Ltd.
+  Contact: Thomas Perl <thomas.perl@jollamobile.com>
+  All rights reserved.
 
-//#include <QApplication>
-//#include <QQuickView>
-//#include "sidudictlib.h"
+  You may use this file under the terms of BSD license as follows:
 
-// int main(int argc, char *argv[])
-// {
-//     QScopedPointer<QApplication> app(new QApplication(argc, argv));
-//     QScopedPointer<QDeclarativeView> view(new QDeclarativeView);
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions are met:
+    * Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright
+      notice, this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+    * Neither the name of the Jolla Ltd nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
 
-//     SiduDictLib stardict;
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDERS OR CONTRIBUTORS BE LIABLE FOR
+  ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+  (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+  LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+  ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
 
-//     view->rootContext()->setContextProperty("starDictLib", &stardict);
-//     view->rootContext()->setContextProperty("entryListModel", stardict.m_suggestModel);
+#include <QtQuick>
 
-//     view->setSource(QUrl("qrc:qml/main.qml"));
-
-//     view->setAttribute(Qt::WA_OpaquePaintEvent);
-//     view->setAttribute(Qt::WA_NoSystemBackground);
-//     view->viewport()->setAttribute(Qt::WA_OpaquePaintEvent);
-//     view->viewport()->setAttribute(Qt::WA_NoSystemBackground);
-
-//     view->showFullScreen();
-
-//     return app->exec();
-// }
-
-#include <QGuiApplication>
-#include <QQuickView>
-#include <QQmlContext>
-
-#include "sailfishapplication.h"
+#include <sailfishapp.h>
 #include "sidudictlib.h"
 
-Q_DECL_EXPORT int main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
-    QScopedPointer<QGuiApplication> app(Sailfish::createApplication(argc, argv));
-    QScopedPointer<QQuickView> view(Sailfish::createView("qrc:/qml/main.qml"));
+    // SailfishApp::main() will display "qml/template.qml", if you need more
+    // control over initialization, you can use:
+    //
+    //   - SailfishApp::application(int, char *[]) to get the QGuiApplication *
+    //   - SailfishApp::createView() to get a new QQuickView * instance
+    //   - SailfishApp::pathTo(QString) to get a QUrl to a resource file
+    //
+    // To display the view, call "show()" (will show fullscreen on device).
+
+    // return SailfishApp::main(argc, argv);
+
+    QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
+    QScopedPointer<QQuickView> view(SailfishApp::createView());
 
     SiduDictLib stardict;
     view.data()->rootContext()->setContextProperty("starDictLib", &stardict);
     view.data()->rootContext()->setContextProperty("entryListModel", stardict.m_suggestModel);
+    view.data()->rootContext()->setContextProperty("availableDictListModel", stardict.m_availableDicts);
+    QUrl qmlPath(SailfishApp::pathTo("qml/main.qml"));
+    view.data()->setSource(qmlPath);
 
-    Sailfish::showView(view.data());
+    view.data()->show();
 
     return app->exec();
 }

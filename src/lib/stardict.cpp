@@ -34,12 +34,14 @@
 #include <QCoreApplication>
 #include <QDir>
 #include <QFile>
-#include <QSettings>
 #include <QStack>
 #include <glib.h>
 #include "lib.h"
 #include "file.hpp"
 #include <QDebug>
+
+#include "logging.h"
+
 namespace
 {
 void xdxf2html(QString &str);
@@ -116,31 +118,23 @@ class IfoFileFinder
 StarDict::StarDict(QObject *parent)
 {
     Q_UNUSED(parent);
+    IN;
 
     m_sdLibs = new Libs;
-    QSettings settings("qstardict","qstardict");
 
-    m_dictDirs = settings.value("StarDict/dictDirs", m_dictDirs).toStringList();
-    m_reformatLists = settings.value("StarDict/reformatLists", true).toBool();
-    m_expandAbbreviations = settings.value("StarDict/expandAbbreviations", true).toBool();
+
+    m_dictDirs = QStringList();
+    m_reformatLists = true;
+    m_expandAbbreviations = true;
     if (m_dictDirs.isEmpty())
     {
-#ifdef Q_OS_UNIX
-        m_dictDirs << "/usr/share/stardict/dic";
-#else
-        m_dictDirs << QCoreApplication::applicationDirPath() + "/dic";
-#endif // Q_OS_UNIX				
-        m_dictDirs << QDir::homePath() + "/.stardict/dic";
-        m_dictDirs << QDir::homePath() + "/MyDocs/Sidudict";
+        m_dictDirs << "/usr/share/harbour-sidudict/dic";
+        m_dictDirs << QDir::homePath() + "/Documents/Sidudict";
     }
 }
 
 StarDict::~StarDict()
 {
-    QSettings settings("qstardict","qstardict");
-    settings.setValue("StarDict/dictDirs", m_dictDirs);
-    settings.setValue("StarDict/reformatLists", m_reformatLists);
-    settings.setValue("StarDict/expandAbbreviations", m_expandAbbreviations);
     delete m_sdLibs;
 }
 
@@ -155,18 +149,26 @@ QStringList StarDict::availableDicts() const
 
 void StarDict::setLoadedDicts(const QStringList &loadedDicts)
 {
+    IN;
     QStringList available = availableDicts();
-    StdList disabled;
+    LOG() << "available: " << available;
+    StdList disabledUrl;
+    StdList availableUrl;
     for (QStringList::const_iterator i = available.begin(); i != available.end(); ++i)
     {
+        availableUrl.push_back(whereDict(*i, m_dictDirs).toUtf8().data());
         if (! loadedDicts.contains(*i))
-            disabled.push_back(i->toUtf8().data());
+            disabledUrl.push_back(whereDict(*i, m_dictDirs).toUtf8().data());
     }
-    m_sdLibs->reload(StdList(m_dictDirs), StdList(loadedDicts), disabled);
+    LOG() << "disabledUrl" << disabledUrl.toStringList();
+    LOG() << "availableUrl" << availableUrl.toStringList();
+    m_sdLibs->reload(StdList(m_dictDirs), availableUrl, disabledUrl);
 
     m_loadedDicts.clear();
     for (int i = 0; i < m_sdLibs->ndicts(); ++i)
         m_loadedDicts[QString::fromUtf8(m_sdLibs->dict_name(i).c_str())] = i;
+
+    LOG() << "m_loadedDicts" << m_loadedDicts;
 }
 
 StarDict::DictInfo StarDict::dictInfo(const QString &dict)
@@ -212,7 +214,7 @@ QStringList StarDict::findSimilarWords(const QString &dict, const QString &word)
     if (! m_loadedDicts.contains(dict))
         return QStringList();
     gchar *fuzzy_res[MaxFuzzy];
-    if (! m_sdLibs->LookupWithFuzzy(word.toUtf8().data(), fuzzy_res, MaxFuzzy, m_loadedDicts[dict]))
+    if (! m_sdLibs->LookupWithFuzzy(word.toUtf8().data(), fuzzy_res, MaxFuzzy, m_loadedDicts.value(dict)))
         return QStringList();
     QStringList result;
     for (gchar **p = fuzzy_res, **end = fuzzy_res + MaxFuzzy; p != end && *p; ++p)
@@ -223,9 +225,12 @@ QStringList StarDict::findSimilarWords(const QString &dict, const QString &word)
     return result;
 }
 
-QStringList StarDict::findWords(const QString &word)
+QStringList StarDict::findWords(const QString &dict, const QString &word)
 {
     QStringList returnList;
+
+    if (! m_loadedDicts.contains(dict))
+        return returnList;
 
     gchar **ppMatchWord =
             (gchar **) g_malloc(sizeof(gchar *) * (MAX_MATCH_ITEM_PER_LIB) * m_loadedDicts.size());
@@ -233,7 +238,7 @@ QStringList StarDict::findWords(const QString &word)
     ruleString.append("*");
 //    qDebug() << "ruleString:" << ruleString;
 
-    gint count = m_sdLibs->LookupWithRule(ruleString.toUtf8().data(), ppMatchWord);
+    gint count = m_sdLibs->LookupWithRule(ruleString.toUtf8().data(), ppMatchWord, m_loadedDicts.value(dict));
 //    qDebug() << "findWords count:" << count;
 
     if (count) {

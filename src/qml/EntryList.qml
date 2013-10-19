@@ -1,7 +1,7 @@
 /***************************************************************************
 
     EntryList.qml - Sidudict, a StarDict clone based on QStarDict
-    Copyright 2011 Reto Zingg <g.d0b3rm4n@gmail.com>
+    Copyright 2013 Reto Zingg <g.d0b3rm4n@gmail.com>
 
  ***************************************************************************/
 
@@ -28,29 +28,27 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 Item {
-    id:entryList
-    signal entryClicked(string entry)
+    id: entryList
+    signal entryClicked(string entry, string dict)
 
-    Component {
-        id: entryModelDelegate
-        Text {
-            anchors {left: parent.left; right: parent.right}
-            text: display
-            font.pointSize: Theme.fontSizeMedium
-            color: Theme.primaryColor
-
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    entryList.entryClicked(parent.text)
-                }
-            }
-        }
-    }
-    SilicaListView{
+    SilicaListView {
         anchors.fill: parent
         model: entryListModel
-        delegate: entryModelDelegate
-        spacing: Theme.paddingMedium
+        spacing: Theme.paddingSmall
+        delegate: ListItem{
+            contentHeight: Theme.itemSizeMedium // two line delegate
+            onClicked: entryList.entryClicked(entry, dict)
+            Label {
+                id: label
+                text: entry
+                color: Theme.primaryColor
+            }
+            Label {
+                anchors.top: label.bottom
+                text: dict
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.secondaryColor
+            }
+        }
     }
 }

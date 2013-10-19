@@ -1781,14 +1781,14 @@ inline bool less_for_compare(const char *lh, const char *rh)
     return stardict_strcmp(lh, rh) < 0;
 }
 
-gint Libs::LookupWithRule(const gchar *word, gchar **ppMatchWord)
+gint Libs::LookupWithRule(const gchar *word, gchar **ppMatchWord, gint iLib)
 {
     glong aiIndex[MAX_MATCH_ITEM_PER_LIB + 1];
     gint iMatchCount = 0;
     GPatternSpec *pspec = g_pattern_spec_new(word);
 
-    for (std::vector<Dict *>::size_type iLib = 0; iLib<oLib.size(); iLib++)
-    {
+//    for (std::vector<Dict *>::size_type iLib = 0; iLib<oLib.size(); iLib++)
+//    {
         //if(oLibs.LookdupWordsWithRule(pspec,aiIndex,MAX_MATCH_ITEM_PER_LIB+1-iMatchCount,iLib))
         // -iMatchCount,so save time,but may got less result and the word may repeat.
 
@@ -1813,7 +1813,7 @@ gint Libs::LookupWithRule(const gchar *word, gchar **ppMatchWord)
                     ppMatchWord[iMatchCount++] = g_strdup(sMatchWord);
             }
         }
-    }
+//    }
     g_pattern_spec_free(pspec);
 
     if (iMatchCount) // sort it.

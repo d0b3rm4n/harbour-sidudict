@@ -1,7 +1,7 @@
 /***************************************************************************
 
     main.qml - Sidudict, a StarDict clone based on QStarDict
-    Copyright 2011 Reto Zingg <g.d0b3rm4n@gmail.com>
+    Copyright 2011 - 2013 Reto Zingg <g.d0b3rm4n@gmail.com>
 
  ***************************************************************************/
 
@@ -29,8 +29,6 @@ import Sailfish.Silica 1.0
 
 ApplicationWindow{
     id: rootWindow
-
-    // MainPage is what we see when the app starts, it links to the component specific pages
-    // initialPage: MainWindow { }
-    initialPage: Component { MainWindow{} }
+    cover: Qt.resolvedUrl("cover.qml")
+    initialPage: Component { SearchPage{} }
 }

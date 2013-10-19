@@ -1,31 +1,19 @@
-#-------------------------------------------------
-#
-# Project created by QtCreator 2011-06-14T14:25:30
-#
-#-------------------------------------------------
+CONFIG += link_pkgconfig
+PKGCONFIG += glib-2.0
+LIBS += -lz
 
-unix {
-    CONFIG += link_pkgconfig
-    PKGCONFIG += glib-2.0
-    LIBS += -lz
+INSTALLS += target
+target.path = /usr/bin/
 
-    #VARIABLES
-    isEmpty(PREFIX) {
-        PREFIX = /usr/local
-    }
-
-    BINDIR = $$PREFIX/bin
-
-    #MAKE INSTALL
-    INSTALLS += target
-
-    target.path =$$BINDIR
-}
 unix:DEFINES += HAVE_MMAP
 
-#QT       += core gui declarative
+CONFIG += sailfishapp
 
-TARGET = sidudict
+CONFIG(release, debug|release) {
+    DEFINES += QT_NO_DEBUG_OUTPUT
+}
+
+TARGET = harbour-sidudict
 TEMPLATE = app
 
 SOURCES += main.cpp\
@@ -33,28 +21,24 @@ SOURCES += main.cpp\
         lib/distance.cpp \
         lib/lib.cpp \
         lib/stardict.cpp \
-        sidudictlib.cpp
+        sidudictlib.cpp \
+        dictlistmodel.cpp \
+        suggestmodel.cpp \
+        entrydictitem.cpp
 
-HEADERS  += lib/dictziplib.hpp \
+HEADERS  += logging.h \
+         lib/dictziplib.hpp \
          lib/distance.h \
          lib/file.hpp \
          lib/lib.h \
          lib/mapfile.hpp \
          lib/stardict.h \ 
-         sidudictlib.h
+         sidudictlib.h \
+         dictlistmodel.h \
+         suggestmodel.h \
+         entrydictitem.h
 
 DEPENDPATH += .
 INCLUDEPATH += .
 
-RESOURCES += \
-    qml.qrc
-
-OTHER_FILES += qml/*.qml
-
-settings.qml.path = /usr/share/jolla-settings/pages/sidudict
-settings.qml.files = qml/settings.qml
-
-INSTALLS += settings.qml
-
-include(sailfishapplication/sailfishapplication.pri)
-
+OTHER_FILES += qml/*.qml qml/*.js
