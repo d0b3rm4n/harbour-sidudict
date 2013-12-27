@@ -14,7 +14,7 @@ Name:       harbour-sidudict
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    A dictionary program based on QStarDict
 Version:    0.1
-Release:    1
+Release:    2
 Group:      Qt/Qt
 License:    GPLv2+ and dictionaries under cc by-sa 3.0
 Source0:    %{name}-%{version}.tar.bz2
