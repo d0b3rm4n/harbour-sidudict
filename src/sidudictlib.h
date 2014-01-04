@@ -1,7 +1,7 @@
 /***************************************************************************
 
     sidudictlib.h - Sidudict, a StarDict clone based on QStarDict
-    Copyright 2011 Reto Zingg <g.d0b3rm4n@gmail.com>
+    Copyright 2011 - 2014 Reto Zingg <g.d0b3rm4n@gmail.com>
 
  ***************************************************************************/
 
@@ -45,6 +45,11 @@ public:
     Q_INVOKABLE QString getTranslation(QString, QString);
 //    Q_INVOKABLE QStringList listSimilarWords(QString);
     Q_INVOKABLE void setSelectDict(int index, bool value);
+
+    Q_INVOKABLE QString dictInfoAuthor(QString dict);
+    Q_INVOKABLE QString dictInfoDescription(QString dict);
+    Q_INVOKABLE QString dictInfoWordsCount(QString dict);
+
     SuggestModel *m_suggestModel;
     DictListModel *m_availableDicts;
 

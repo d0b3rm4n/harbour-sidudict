@@ -1,7 +1,7 @@
 /***************************************************************************
 
     sidudictlib.cpp - Sidudict, a StarDict clone based on QStarDict
-    Copyright 2011 Reto Zingg <g.d0b3rm4n@gmail.com>
+    Copyright 2011 - 2014 Reto Zingg <g.d0b3rm4n@gmail.com>
 
  ***************************************************************************/
 
@@ -143,6 +143,24 @@ void SiduDictLib::setSelectDict(int index, bool value)
 {
     IN;
     m_availableDicts->setSelectDict(index, value);
+}
+
+QString SiduDictLib::dictInfoAuthor(QString dict)
+{
+    IN;
+    return m_sd->dictInfo(dict).author();
+}
+
+QString SiduDictLib::dictInfoDescription(QString dict)
+{
+    IN;
+    return m_sd->dictInfo(dict).description();
+}
+
+QString SiduDictLib::dictInfoWordsCount(QString dict)
+{
+    IN;
+    return QString::number(m_sd->dictInfo(dict).wordsCount());
 }
 
 void SiduDictLib::availableDictsChanged(QModelIndex top, QModelIndex bottom)
