@@ -22,9 +22,25 @@ dictionaries.files = data/dictionaries/stardict-wikt-dan-eng-2.4.2/* \
                      data/dictionaries/stardict-wikt-eng-dan-2.4.2/* \
                      data/dictionaries/stardict-wikt-eng-deu-2.4.2/* \
                      data/dictionaries/stardict-wikt-eng-fin-2.4.2/* \
+                     data/dictionaries/stardict-wikt-eng-fra-2.4.2/* \
+                     data/dictionaries/stardict-wikt-eng-ita-2.4.2/* \
+                     data/dictionaries/stardict-wikt-eng-nld-2.4.2/* \
+                     data/dictionaries/stardict-wikt-eng-nob-2.4.2/* \
+                     data/dictionaries/stardict-wikt-eng-pol-2.4.2/* \
+                     data/dictionaries/stardict-wikt-eng-por-2.4.2/* \
+                     data/dictionaries/stardict-wikt-eng-rus-2.4.2/* \
+                     data/dictionaries/stardict-wikt-eng-spa-2.4.2/* \
                      data/dictionaries/stardict-wikt-eng-swe-2.4.2/* \
                      data/dictionaries/stardict-wikt-fin-eng-2.4.2/* \
-                     data/dictionaries/stardict-wikt-swe-eng-2.4.2/*
+                     data/dictionaries/stardict-wikt-fra-eng-2.4.2/* \
+                     data/dictionaries/stardict-wikt-ita-eng-2.4.2/* \
+                     data/dictionaries/stardict-wikt-nld-eng-2.4.2/* \
+                     data/dictionaries/stardict-wikt-nob-eng-2.4.2/* \
+                     data/dictionaries/stardict-wikt-pol-eng-2.4.2/* \
+                     data/dictionaries/stardict-wikt-por-eng-2.4.2/* \
+                     data/dictionaries/stardict-wikt-rus-eng-2.4.2/* \
+                     data/dictionaries/stardict-wikt-spa-eng-2.4.2/* \
+                     data/dictionaries/stardict-wikt-swe-eng-2.4.2
 
 
 INSTALLS += 86.png \

@@ -10,6 +10,9 @@ dictzip -d *.dict.dz
 
 for INDEX in $(ls -1 *.index); do makedict --output-format stardict --input-format dictd $INDEX; done
 
+dictzip stardict-wikt-*/*.dict
+
+
 makedict:
 https://github.com/soshial/xdxf_makedict.git
 
