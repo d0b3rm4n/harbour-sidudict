@@ -40,7 +40,7 @@ dictionaries.files = data/dictionaries/stardict-wikt-dan-eng-2.4.2/* \
                      data/dictionaries/stardict-wikt-por-eng-2.4.2/* \
                      data/dictionaries/stardict-wikt-rus-eng-2.4.2/* \
                      data/dictionaries/stardict-wikt-spa-eng-2.4.2/* \
-                     data/dictionaries/stardict-wikt-swe-eng-2.4.2
+                     data/dictionaries/stardict-wikt-swe-eng-2.4.2/*
 
 
 INSTALLS += 86.png \
