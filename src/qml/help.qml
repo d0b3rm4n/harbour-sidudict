@@ -43,9 +43,11 @@ Page {
                 anchors.margins: Theme.paddingMedium
                 function getText() {
                     var msg = "In the Settings you can enable resp. disable dictionaries."
+                    + " If you long press on a dictionary name in Settings, a context menu opens."
+                    + " Details provides info about the particular dictionary."
                     + "<br>"
                     + "<br>Additionally to the pre installed dictionaries, you can add your own"
-                    + " stardict dictionaries, copy the <b>.ifo,</b> <b>.dict</b> and <b>.idx</b>"
+                    + " stardict dictionaries, copy the <b>.ifo,</b> <b>.dict/dict.dz</b> and <b>.idx</b>"
                     + " files to a subfolder in Documents/Sidudict folder on your phone. You might"
                     + " need to create the Sidudict folder first. Then restart Sidudict and enable the"
                     + " new dictionary in the Settings."
@@ -54,6 +56,12 @@ Page {
                     + "<br>http://abloz.com/huzheng/stardict-dic/"
                     + "<br><b>NOTICE</b> these dictionaries are packaged in a tar ball, you need to unpack and"
                     + " unzip the tar ball first!"
+                    + "<br>"
+                    + "<br>If you want to create your own dictionaries here some links which migh help you:"
+                    + "<br>http://jalasthana.de/?p=828"
+                    + "<br>http://www.stardict.org/HowToCreateDictionary"
+                    + "<br>https://github.com/tkedwards/wiktionarytodict/"
+                    + "<br>https://github.com/soshial/xdxf_makedict"
 
                     return msg
                 }
