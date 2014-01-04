@@ -12,9 +12,9 @@ Name:       harbour-sidudict
 %{!?qtc_qmake5:%define qtc_qmake5 %qmake5}
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
-Summary:    A dictionary program based on QStarDict
-Version:    0.1
-Release:    2
+Summary:    A dictionary program
+Version:    0.2
+Release:    1
 Group:      Qt/Qt
 License:    GPLv2+ and dictionaries under cc by-sa 3.0
 Source0:    %{name}-%{version}.tar.bz2
@@ -29,7 +29,7 @@ BuildRequires:  pkgconfig(glib-2.0)
 BuildRequires:  glib2-devel
 
 %description
-A dictionary program for Stardict dictionaries.
+A dictionary program  based on QStarDict for Stardict dictionaries.
 
 
 %prep

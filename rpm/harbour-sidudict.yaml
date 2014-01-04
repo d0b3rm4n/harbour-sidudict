@@ -1,13 +1,13 @@
 Name: harbour-sidudict
-Summary: A dictionary program based on QStarDict
-Version: 0.1
-Release: 2
+Summary: A dictionary program
+Version: 0.2
+Release: 1
 Group: Qt/Qt
 License: GPLv2+ and dictionaries under cc by-sa 3.0
 Sources:
 - '%{name}-%{version}.tar.bz2'
 Description: |
-  A dictionary program for Stardict dictionaries.
+  A dictionary program  based on QStarDict for Stardict dictionaries.
 Configure: none
 Builder: qtc5
 PkgConfigBR:
@@ -20,10 +20,10 @@ Requires:
 - mapplauncherd-booster-silica-qt5
 - sailfishsilica-qt5
 Files:
+- 
 - /usr/share/harbour-sidudict
 - /usr/bin
 - /usr/share/applications/
 - /usr/share/icons/hicolor/86x86/apps/
 - /usr/share/harbour-sidudict/dic
-- 
 PkgBR: [glib2-devel]
