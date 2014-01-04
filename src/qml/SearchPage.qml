@@ -49,10 +49,6 @@ Page {
     property string searchString
     property bool keepSearchFieldFocus: true
     property int curIndex
-//    property string activeView: "list"
-
-//    onSearchStringChanged: listModel.update()
-//    Component.onCompleted: listModel.update()
 
     Keys.onReturnPressed: {
         if (starDictLib.isTranslatable(searchString)) {
@@ -62,25 +58,15 @@ Page {
     }
 
     onSearchStringChanged: {
-//        console.log("onSearchStringChanged")
-//        console.log("searchField: active: " + searchField.activeFocus + " focus: " + searchField.focus)
-//        console.log("searchPage.curIndex: " + searchPage.curIndex)
-
         starDictLib.updateList(searchString)
-
-//        console.log("searchField: active: " + searchField.activeFocus + " focus: " + searchField.focus)
-//        console.log("searchPage.curIndex: " + searchPage.curIndex)
-//        searchField.forceActiveFocus()
     }
 
     Component.onCompleted: {
-        console.log("Component.onCompleted 1")
         starDictLib.updateList(searchString)
     }
 
     Loader {
         anchors.fill: parent
-//        sourceComponent: activeView == "list" ? listViewComponent : gridViewComponent
         sourceComponent: listViewComponent
     }
 
@@ -88,10 +74,6 @@ Page {
         id: headerContainer
 
         width: searchPage.width
-
-//        PageHeader {
-//            title: "Countries"
-//        }
 
         SearchField {
             id: searchField
@@ -132,45 +114,25 @@ Page {
                 MenuItem {
                     text: "About"
                     onClicked: {
-                        console.log("Clicked option About")
+//                        console.log("Clicked option About")
                         pageStack.push(Qt.resolvedUrl("about.qml"))
                     }
                 }
                 MenuItem {
                     text: "Help"
                     onClicked: {
-                        console.log("Clicked option Help")
+//                        console.log("Clicked option Help")
                         pageStack.push(Qt.resolvedUrl("help.qml"))
                     }
                 }
                 MenuItem {
                     text: "Settings"
                     onClicked: {
-                        console.log("Clicked option Settings")
+//                        console.log("Clicked option Settings")
                         pageStack.push(Qt.resolvedUrl("settings.qml"))
                     }
                 }
             }
-
-//            delegate: BackgroundItem {
-//                id: backgroundItem
-
-//                ListView.onAdd: AddAnimation {
-//                    target: backgroundItem
-//                }
-//                ListView.onRemove: RemoveAnimation {
-//                    target: backgroundItem
-//                }
-
-//                Label {
-//                    x: searchField.textLeftMargin
-//                    anchors.verticalCenter: parent.verticalCenter
-//                    color: searchString.length > 0 ? (highlighted ? Theme.secondaryHighlightColor : Theme.secondaryColor)
-//                                                   : (highlighted ? Theme.highlightColor : Theme.primaryColor)
-//                    textFormat: Text.StyledText
-//                    text: Theme.highlightText(model.text, searchString, Theme.highlightColor)
-//                }
-//            }
 
             delegate: ListItem{
                 contentHeight: Theme.itemSizeMedium // two line delegate
@@ -200,7 +162,6 @@ Page {
             VerticalScrollDecorator {}
 
             Component.onCompleted: {
-                console.log("Component.onCompleted 2")
                 if (keepSearchFieldFocus) {
                     searchField.forceActiveFocus()
                 }
