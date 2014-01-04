@@ -51,6 +51,7 @@ public:
     QHash<int, QByteArray> roleNames() const;
     Qt::ItemFlags flags(const QModelIndex & index) const;
     QString firstDict();
+    QString firstEntry();
 
 signals:
 

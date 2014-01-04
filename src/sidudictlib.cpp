@@ -139,10 +139,10 @@ QString SiduDictLib::getTranslation(QString entry, QString dict)
     return QString();
 }
 
-bool SiduDictLib::isTranslatable(QString entry)
+bool SiduDictLib::isFirstListItemTranslatable()
 {
     IN;
-    return m_sd->isTranslatable(m_suggestModel->firstDict(), entry.simplified());
+    return m_sd->isTranslatable(m_suggestModel->firstDict(), m_suggestModel->firstEntry());
 }
 
 void SiduDictLib::setSelectDict(int index, bool value)
@@ -151,10 +151,16 @@ void SiduDictLib::setSelectDict(int index, bool value)
     m_availableDicts->setSelectDict(index, value);
 }
 
-QString SiduDictLib::getFirstDict()
+QString SiduDictLib::firstListItemDict()
 {
     IN;
     return m_suggestModel->firstDict();
+}
+
+QString SiduDictLib::firstListItemEntry()
+{
+    IN;
+    return m_suggestModel->firstEntry();
 }
 
 QString SiduDictLib::dictInfoAuthor(QString dict)

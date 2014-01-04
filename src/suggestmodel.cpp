@@ -123,3 +123,12 @@ QString SuggestModel::firstDict()
         return entryDictMap.at(0)->dict();
     }
 }
+
+QString SuggestModel::firstEntry()
+{
+    if (entryDictMap.empty()) {
+        return QString();
+    } else {
+        return entryDictMap.at(0)->entry();
+    }
+}

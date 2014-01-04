@@ -51,9 +51,10 @@ Page {
     property int curIndex
 
     Keys.onReturnPressed: {
-        if (starDictLib.isTranslatable(searchString)) {
-            var translation = starDictLib.getTranslation(searchString, starDictLib.getFirstDict());
-            pageStack.push(Qt.resolvedUrl("showEntry.qml"),{pageTitleEntry: searchString, dictTranslatedEntry: translation});
+        if (starDictLib.isFirstListItemTranslatable()) {
+            var entry = starDictLib.firstListItemEntry();
+            var translation = starDictLib.getTranslation(entry, starDictLib.firstListItemDict());
+            pageStack.push(Qt.resolvedUrl("showEntry.qml"),{pageTitleEntry: entry, dictTranslatedEntry: translation});
         }
     }
 
