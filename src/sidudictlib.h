@@ -42,9 +42,11 @@ public:
     SiduDictLib();
     ~SiduDictLib();
     Q_INVOKABLE void updateList(QString);
-    Q_INVOKABLE QString getTranslation(QString, QString);
+    Q_INVOKABLE QString getTranslation(QString entry, QString dict);
+    Q_INVOKABLE bool isTranslatable(QString entry);
 //    Q_INVOKABLE QStringList listSimilarWords(QString);
     Q_INVOKABLE void setSelectDict(int index, bool value);
+    Q_INVOKABLE QString getFirstDict();
 
     Q_INVOKABLE QString dictInfoAuthor(QString dict);
     Q_INVOKABLE QString dictInfoDescription(QString dict);

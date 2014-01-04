@@ -50,6 +50,7 @@ public:
     bool setData(const QModelIndex &index, const QVariant &value, int role);
     QHash<int, QByteArray> roleNames() const;
     Qt::ItemFlags flags(const QModelIndex & index) const;
+    QString firstDict();
 
 signals:
 

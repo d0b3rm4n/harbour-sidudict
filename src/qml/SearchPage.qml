@@ -54,6 +54,13 @@ Page {
 //    onSearchStringChanged: listModel.update()
 //    Component.onCompleted: listModel.update()
 
+    Keys.onReturnPressed: {
+        if (starDictLib.isTranslatable(searchString)) {
+            var translation = starDictLib.getTranslation(searchString, starDictLib.getFirstDict());
+            pageStack.push(Qt.resolvedUrl("showEntry.qml"),{pageTitleEntry: searchString, dictTranslatedEntry: translation});
+        }
+    }
+
     onSearchStringChanged: {
 //        console.log("onSearchStringChanged")
 //        console.log("searchField: active: " + searchField.activeFocus + " focus: " + searchField.focus)

@@ -114,3 +114,12 @@ Qt::ItemFlags SuggestModel::flags(const QModelIndex &index) const
     flags |= Qt::ItemIsEditable;
     return flags;
 }
+
+QString SuggestModel::firstDict()
+{
+    if (entryDictMap.empty()) {
+        return QString();
+    } else {
+        return entryDictMap.at(0)->dict();
+    }
+}

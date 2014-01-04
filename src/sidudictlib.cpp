@@ -139,10 +139,22 @@ QString SiduDictLib::getTranslation(QString entry, QString dict)
     return QString();
 }
 
+bool SiduDictLib::isTranslatable(QString entry)
+{
+    IN;
+    return m_sd->isTranslatable(m_suggestModel->firstDict(), entry.simplified());
+}
+
 void SiduDictLib::setSelectDict(int index, bool value)
 {
     IN;
     m_availableDicts->setSelectDict(index, value);
+}
+
+QString SiduDictLib::getFirstDict()
+{
+    IN;
+    return m_suggestModel->firstDict();
 }
 
 QString SiduDictLib::dictInfoAuthor(QString dict)
