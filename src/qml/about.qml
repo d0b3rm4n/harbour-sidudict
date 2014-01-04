@@ -52,13 +52,15 @@ Page {
                 anchors.margins: Theme.paddingMedium
                 function getText() {
                     var msg = "<b>Sidudict,</b> a dictionary program based on QStarDict."
-                    + "<br>Copyright © 2011-2013 Reto Zingg &lt;g.d0b3rm4n@gmail.com&gt;"
+                    + "<br>Copyright © 2011-2014 Reto Zingg &lt;g.d0b3rm4n@gmail.com&gt;"
                     + "<br>"
                     + "<br>Sidudict is open source software licensed under the terms of the GNU General Public License."
                     + "<br>"
-                    + "<br>You can find the Sidudict source here:"
-                    + "<br>https://gitorious.org/sidudict/sidudict"
+                    + "<br>You can find the Sidudict source here (pull requests very welcome!):"
+                    + "<br>https://github.com/d0b3rm4n/harbour-sidudict"
                     + "<br>"
+                    + "<br>Please report bugs and issues here:"
+                    + "<br>https://github.com/d0b3rm4n/harbour-sidudict/issues"
                     + "<br>"
                     + "<br>Included dictionaries are based on data from the Wiktionary dumps available from:"
                     + "<br>http://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2"
