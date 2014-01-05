@@ -30,6 +30,7 @@
 #include <QMultiHash>
 #include <QModelIndex>
 #include <QSettings>
+#include <QFile>
 
 #include <logging.h>
 
@@ -42,8 +43,25 @@
 SiduDictLib::SiduDictLib()
 {
     IN;
-    QSettings settings("harbour-sidudict","harbour-sidudict");
-    QStringList selectedDictList = settings.value("Sidudict/selectedDictList", QStringList()).toStringList();
+    QSettings settings("harbour-sidudict","dictionary-settings");
+    QMap<QString, QVariant> dictListSettings = settings.value("Sidudict/dictListSettings", QMap<QString, QVariant>()).toMap();
+
+    // handle old settings from 0.1-2
+    QSettings oldSettings("harbour-sidudict","harbour-sidudict");
+    QFile oldSettingsFile(oldSettings.fileName());
+    if (oldSettingsFile.exists()){
+        LOG() << "old Settings exists:" << oldSettings.fileName();
+        QStringList oldSelectedDictList = oldSettings.value("Sidudict/selectedDictList", QStringList()).toStringList();
+        foreach (const QString &dict, oldSelectedDictList) {
+            dictListSettings.insert(dict, QVariant(true));
+        }
+        settings.sync();
+        if (oldSettingsFile.remove()) {
+            LOG() << "removed old settings file";
+        } else {
+            LOG() << "could not remove old settings file:" << oldSettingsFile.errorString();
+        }
+    }
 
     m_lastTranslation = QString("No lookups yet...");
 
@@ -60,17 +78,17 @@ SiduDictLib::SiduDictLib()
             this,
             SLOT(availableDictsChanged(QModelIndex,QModelIndex)));
 
-    QMap<QString, bool> map;
+    QMap<QString, QVariant> map;
 
     LOG() << "available dicts" << m_sd->availableDicts();
     foreach(QString dict, m_sd->availableDicts()){
-        if (selectedDictList.empty()) {
-            map.insert(dict, true);
+        if (dictListSettings.empty()) {
+            map.insert(dict, QVariant(true));
         } else {
-            if (selectedDictList.contains(dict)) {
-                map.insert(dict, true);
+            if (dictListSettings.contains(dict)) {
+                map.insert(dict, dictListSettings.value(dict));
             } else {
-                map.insert(dict, false);
+                map.insert(dict, QVariant(true));
             }
         }
     }
@@ -89,8 +107,8 @@ SiduDictLib::SiduDictLib()
 SiduDictLib::~SiduDictLib()
 {
     IN;
-    QSettings settings("harbour-sidudict","harbour-sidudict");
-    settings.setValue("Sidudict/selectedDictList", m_availableDicts->selectedDictList());
+    QSettings settings("harbour-sidudict","dictionary-settings");
+    settings.setValue("Sidudict/dictListSettings", QVariant(m_availableDicts->dictListMap()));
     settings.sync();
     delete m_sd;
 }

@@ -43,7 +43,7 @@ public:
 
     DictListModel(QObject *parent = 0);
 
-    void setDictMap(const QMap<QString, bool> &map);
+    void setDictMap(const QMap<QString, QVariant> &map);
     int rowCount(const QModelIndex &parent) const;
     QVariant data(const QModelIndex &index, int role) const;
     bool setData(const QModelIndex &index, const QVariant &value, int role);
@@ -51,6 +51,7 @@ public:
     Qt::ItemFlags flags(const QModelIndex & index) const;
     void setSelectDict(int row, bool value);
     QStringList selectedDictList();
+    QMap<QString, QVariant> dictListMap();
     
 signals:
     
@@ -58,7 +59,7 @@ public slots:
     
 private:
     QString dictAt(int offset) const;
-    QMap<QString, bool> dictMap;
+    QMap<QString, QVariant> dictMap;
 };
 
 #endif // DICTLISTMODEL_H

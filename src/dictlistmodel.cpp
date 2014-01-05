@@ -35,7 +35,7 @@ DictListModel::DictListModel(QObject *parent) :
 }
 
 
-void DictListModel::setDictMap(const QMap<QString, bool> &map)
+void DictListModel::setDictMap(const QMap<QString, QVariant> &map)
 {
     IN;
     beginInsertRows(QModelIndex(),0,map.count() - 1);
@@ -71,7 +71,7 @@ bool DictListModel::setData(const QModelIndex &index, const QVariant &value, int
     if (index.row() >= 0 && index.row() < dictMap.count()
             && (role == Qt::EditRole || role == DICT_SELECT_ROLE)) {
 
-        dictMap.insert(dictAt(index.row()), value.toBool());
+        dictMap.insert(dictAt(index.row()), value);
 
         emit dataChanged(index, index);
         return true;
@@ -98,7 +98,7 @@ void DictListModel::setSelectDict(int row, bool value)
 {
     IN;
     QModelIndex index = createIndex(row, 0);
-    setData(index, value, DICT_SELECT_ROLE);
+    setData(index, QVariant(value), DICT_SELECT_ROLE);
 }
 
 QStringList DictListModel::selectedDictList()
@@ -106,10 +106,15 @@ QStringList DictListModel::selectedDictList()
     IN;
     QStringList selectedDicts;
     foreach(QString dict, dictMap.keys()){
-        if (dictMap.value(dict))
+        if (dictMap.value(dict).toBool())
             selectedDicts.append(dict);
     }
     return selectedDicts;
+}
+
+QMap<QString, QVariant> DictListModel::dictListMap()
+{
+    return dictMap;
 }
 
 QString DictListModel::dictAt(int offset) const
