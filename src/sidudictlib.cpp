@@ -47,6 +47,7 @@ SiduDictLib::SiduDictLib()
     QMap<QString, QVariant> dictListSettings = settings.value("Sidudict/dictListSettings", QMap<QString, QVariant>()).toMap();
 
     // handle old settings from 0.1-2
+    bool oldSettingsImported = false;
     QSettings oldSettings("harbour-sidudict","harbour-sidudict");
     QFile oldSettingsFile(oldSettings.fileName());
     if (oldSettingsFile.exists()){
@@ -55,7 +56,9 @@ SiduDictLib::SiduDictLib()
         foreach (const QString &dict, oldSelectedDictList) {
             dictListSettings.insert(dict, QVariant(true));
         }
+        settings.setValue("Sidudict/dictListSettings", QVariant(dictListSettings));
         settings.sync();
+        oldSettingsImported = true;
         if (oldSettingsFile.remove()) {
             LOG() << "removed old settings file";
         } else {
@@ -88,7 +91,11 @@ SiduDictLib::SiduDictLib()
             if (dictListSettings.contains(dict)) {
                 map.insert(dict, dictListSettings.value(dict));
             } else {
-                map.insert(dict, QVariant(true));
+                if (oldSettingsImported) {
+                    map.insert(dict, QVariant(false));
+                } else {
+                    map.insert(dict, QVariant(true));
+                }
             }
         }
     }
