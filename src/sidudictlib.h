@@ -48,7 +48,7 @@ public:
     Q_INVOKABLE bool isFirstListItemTranslatable();
     Q_INVOKABLE QString firstListItemDict();
     Q_INVOKABLE QString firstListItemEntry();
-
+    Q_INVOKABLE QString lastTranslation();
     Q_INVOKABLE QString dictInfoAuthor(QString dict);
     Q_INVOKABLE QString dictInfoDescription(QString dict);
     Q_INVOKABLE QString dictInfoWordsCount(QString dict);
@@ -61,7 +61,7 @@ public slots:
 
 private:
     StarDict *m_sd;
-
+    QString m_lastTranslation;
 };
 
 #endif // SIDUDICTLIB_H

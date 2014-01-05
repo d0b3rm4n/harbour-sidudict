@@ -41,8 +41,11 @@
 
 SiduDictLib::SiduDictLib()
 {
+    IN;
     QSettings settings("harbour-sidudict","harbour-sidudict");
     QStringList selectedDictList = settings.value("Sidudict/selectedDictList", QStringList()).toStringList();
+
+    m_lastTranslation = QString("No lookups yet...");
 
     m_sd = new StarDict(this);
     m_suggestModel = new SuggestModel();
@@ -133,7 +136,8 @@ QString SiduDictLib::getTranslation(QString entry, QString dict)
     LOG() << "getTranslation in:" << dict;
 
     if (m_sd->isTranslatable(dict, entry.simplified())) {
-        return m_sd->translate(dict, entry.simplified()).translation();
+        m_lastTranslation = m_sd->translate(dict, entry.simplified()).translation();
+        return m_lastTranslation;
     }
 
     return QString();
@@ -161,6 +165,12 @@ QString SiduDictLib::firstListItemEntry()
 {
     IN;
     return m_suggestModel->firstEntry();
+}
+
+QString SiduDictLib::lastTranslation()
+{
+    IN;
+    return m_lastTranslation;
 }
 
 QString SiduDictLib::dictInfoAuthor(QString dict)

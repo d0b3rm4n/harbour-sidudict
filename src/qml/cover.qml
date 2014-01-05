@@ -1,7 +1,9 @@
 /***************************************************************************
 
     cover.qml - Sidudict, a StarDict clone based on QStarDict
-    Copyright 2013 Reto Zingg <g.d0b3rm4n@gmail.com>
+    Copyright 2013 - 2014 Reto Zingg <g.d0b3rm4n@gmail.com>
+    Layout is inspired by:
+    https://github.com/pycage/tidings/blob/master/qml/cover/CoverPage.qml
 
  ***************************************************************************/
 
@@ -28,13 +30,52 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 CoverBackground {
-    Label {
-        id: label
-        anchors.centerIn: parent
-        text: "Sidudict"
+    property string translation: "No lookups yet..."
+
+    onStatusChanged: {
+        if (status === Cover.Active) {
+            translation = starDictLib.lastTranslation();
+        }
     }
-//    Image {
-//        anchors.centerIn: parent
-//        source: "file:///usr/share/icons/hicolor/86x86/apps/harbour-sidudict.png"
-//    }
+
+    Column {
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.leftMargin: Theme.paddingLarge
+        anchors.rightMargin: Theme.paddingLarge
+        width: parent.width
+
+        Item {
+            width: 1
+            height: Theme.paddingLarge
+        }
+
+        Item {
+            width: parent.width
+            height: childrenRect.height
+
+            Label {
+                id: labelEntry
+                anchors.left: parent.left
+                truncationMode: TruncationMode.Fade
+                font.pixelSize: Theme.fontSizeExtraSmall
+                color: Theme.secondaryColor
+                text: "Sidudict"
+            }
+        }
+
+        Separator {
+            width: parent.width
+            color: Theme.secondaryColor
+        }
+
+        Label {
+            id: labelTranslation
+            width: parent.width
+            font.pixelSize: Theme.fontSizeLarge
+            color: Theme.highlightColor
+            wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+            text: translation
+        }
+    }
 }
