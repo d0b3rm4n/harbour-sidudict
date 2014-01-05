@@ -8,7 +8,7 @@ Item {
         id: dictModelDelegate
         ListItem{
             onClicked: {
-//                console.log("Clicked: " + name + " - " + index);
+//                console.log("Clicked: " + name + " - " + index + " - " + dictSwitch.checked);
                 dictSwitch.checked = dictSwitch.checked ? false : true;
                 starDictLib.setSelectDict(index, dictSwitch.checked);
             }
@@ -16,6 +16,12 @@ Item {
                 Switch {
                     id: dictSwitch
                     checked: selected
+                    automaticCheck: false
+                    propagateComposedEvents: true
+                    onClicked: {
+//                        console.log("clicked dictSwitch");
+                        mouse.accepted = false;
+                    }
                 }
                 Label {
                     id: dictlabel
