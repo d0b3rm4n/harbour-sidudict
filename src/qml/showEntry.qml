@@ -25,6 +25,7 @@ Page {
                 wrapMode: Text.WordWrap
                 font.pointSize: translation.currentPointSize
                 color: Theme.primaryColor
+                textFormat: Text.RichText
 
                 PinchArea {
                     anchors.fill: parent
