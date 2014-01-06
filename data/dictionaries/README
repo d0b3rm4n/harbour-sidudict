@@ -16,6 +16,34 @@ dictzip stardict-wikt-*/*.dict
 makedict:
 https://github.com/soshial/xdxf_makedict.git
 
+patch dictd_parser.cpp so html tags stay html tags
+------------------------------------------------------------------------------
+$ git diff
+diff --git a/src/dictd_parser.cpp b/src/dictd_parser.cpp
+index 6dae42e..8088005 100644
+--- a/src/dictd_parser.cpp
++++ b/src/dictd_parser.cpp
+@@ -277,6 +277,19 @@ int Parser::parse(const std::string& filename)
+                }
+ 
+                replace(replace_table, conv_str.c_str(), enc_str);
++
++               ReplaceStrTable html_tbl;
++               html_tbl["&lt;sub&gt;"] = "<sub>";
++               html_tbl["&lt;/sub&gt;"] = "</sub>";
++               html_tbl["&lt;sup&gt;"] = "<sup>";
++               html_tbl["&lt;/sup&gt;"] = "</sup>";
++               html_tbl["&lt;b&gt;"] = "<b>";
++               html_tbl["&lt;/b&gt;"] = "</b>";
++               html_tbl["&lt;i&gt;"] = "<i>";
++               html_tbl["&lt;/i&gt;"] = "</i>";
++               html_tbl["&lt;!--"] = "<!--";
++               html_tbl["--&gt;"] = "-->";
++               replace(html_tbl, conv_str.c_str(), enc_str);
+                remove_not_valid(enc_str);
+                data_size=enc_str.length();
+------------------------------------------------------------------------------
+
 dictzip:
 from rpm:
 dictd-server
