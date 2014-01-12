@@ -47,5 +47,4 @@ INSTALLS += 86.png \
             sidudict.desktop \
             dictionaries
 
-OTHER_FILES += rpm/harbour-sidudict.yaml \
-               rpm/harbour-sidudict.spec
+OTHER_FILES += rpm/harbour-sidudict.spec
