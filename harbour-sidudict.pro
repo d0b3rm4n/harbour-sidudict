@@ -5,7 +5,7 @@
 #}
 
 TEMPLATE = subdirs
-SUBDIRS = src
+SUBDIRS = quazip/quazip/sidudict-quazip.pro src
 CONFIG += ordered
 
 ICONPATH = /usr/share/icons/hicolor

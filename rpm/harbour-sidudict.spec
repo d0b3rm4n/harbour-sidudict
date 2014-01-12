@@ -6,6 +6,8 @@
 Name:       harbour-sidudict
 
 # >> macros
+%define __provides_exclude_from ^%{_datadir}/.*$
+%define __requires_exclude ^libquazip.*$
 # << macros
 
 %{!?qtc_qmake:%define qtc_qmake %qmake}
@@ -26,7 +28,6 @@ BuildRequires:  pkgconfig(Qt5Qml)
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(qdeclarative5-boostable)
 BuildRequires:  pkgconfig(glib-2.0)
-BuildRequires:  glib2-devel
 
 %description
 A dictionary program  based on QStarDict for Stardict dictionaries.
@@ -59,11 +60,12 @@ rm -rf %{buildroot}
 # << install post
 
 %files
-%defattr(-,root,root,-)
-/usr/share/harbour-sidudict
-/usr/bin
-/usr/share/applications/
-/usr/share/icons/hicolor/86x86/apps/
-/usr/share/harbour-sidudict/dic
+%defattr(0644,root,root,0755)
+%attr(0755,-,-) %{_datadir}/%{name}/lib/*
+%attr(0755,-,-) /usr/bin/%{name}
+%{_datadir}/applications/%{name}.desktop
+%{_datadir}/icons/hicolor/86x86/apps/%{name}.png
+%{_datadir}/%{name}/qml
+%{_datadir}/%{name}/dic
 # >> files
 # << files

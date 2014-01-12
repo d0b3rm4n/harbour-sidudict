@@ -1,6 +1,10 @@
 CONFIG += link_pkgconfig
 PKGCONFIG += glib-2.0
-LIBS += -lz
+LIBS += -lz -lquazip -L../quazip/quazip
+
+DEPENDPATH += . ../quazip/quazip
+INCLUDEPATH += . ../quazip/quazip
+QMAKE_LFLAGS += -Wl,-rpath,\\$${LITERAL_DOLLAR}$${LITERAL_DOLLAR}ORIGIN/../share/harbour-sidudict/lib\
 
 INSTALLS += target
 target.path = /usr/bin/
@@ -37,8 +41,5 @@ HEADERS  += logging.h \
          dictlistmodel.h \
          suggestmodel.h \
          entrydictitem.h
-
-DEPENDPATH += .
-INCLUDEPATH += .
 
 OTHER_FILES += qml/*.qml qml/*.js
