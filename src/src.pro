@@ -4,7 +4,7 @@ LIBS += -lz -lquazip -L../quazip/quazip
 
 DEPENDPATH += . ../quazip/quazip
 INCLUDEPATH += . ../quazip/quazip
-QMAKE_LFLAGS += -Wl,-rpath,\\$${LITERAL_DOLLAR}$${LITERAL_DOLLAR}ORIGIN/../share/harbour-sidudict/lib\
+QMAKE_LFLAGS += -Wl,-rpath,\\$${LITERAL_DOLLAR}$${LITERAL_DOLLAR}ORIGIN/../share/harbour-sidudict/lib
 
 INSTALLS += target
 target.path = /usr/bin/
