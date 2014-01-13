@@ -1,7 +1,7 @@
 /***************************************************************************
 
-    settings.qml - Sidudict, a StarDict clone based on QStarDict
-    Copyright 2013 Reto Zingg <g.d0b3rm4n@gmail.com>
+    DictDownload.qml - Sidudict, a StarDict clone based on QStarDict
+    Copyright 2014 Reto Zingg <g.d0b3rm4n@gmail.com>
 
  ***************************************************************************/
 
@@ -26,27 +26,30 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import QtQuick.XmlListModel 2.0
 
 Page {
-    SilicaFlickable {
-        anchors.fill: parent
-        contentHeight: column.height
-        Column {
-            id: column
-            width: parent.width
-            spacing: Theme.paddingSmall
+    XmlListModel {
+        id: xmlModel
+        source: "https://raw.github.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/dictionaries.xml"
+        query: "/dictionaries/dictionary"
 
-            PageHeader {
-                id: settingsHeader
-                title: "Settings"
-            }
-            DictEntryList{
-                id: dictEntryList
-                height: Screen.height - settingsHeader.height;
-                anchors {left: parent.left; right: parent.right}
-                clip: false
-            }
+        XmlRole { name: "id"; query: "id/string()" }
+        XmlRole { name: "name"; query: "name/string()" }
+        XmlRole { name: "url"; query: "url/string()" }
+        XmlRole { name: "entries"; query: "entries/string()" }
+        XmlRole { name: "size"; query: "size/string()" }
+        XmlRole { name: "date"; query: "date/string()" }
+        XmlRole { name: "description"; query: "description/string()" }
+    }
+    SilicaListView {
+        id: listView
+        model: xmlModel
+        anchors.fill: parent
+        header: PageHeader {
+            title: "Download"
         }
+        delegate: DictDelegate{}
+        VerticalScrollDecorator {}
     }
 }
-

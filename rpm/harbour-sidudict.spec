@@ -23,6 +23,7 @@ Source0:    %{name}-%{version}.tar.bz2
 Source100:  harbour-sidudict.yaml
 Requires:   mapplauncherd-booster-silica-qt5
 Requires:   sailfishsilica-qt5
+Requires:   qt5-qtdeclarative-import-xmllistmodel
 BuildRequires:  pkgconfig(Qt5Quick)
 BuildRequires:  pkgconfig(Qt5Qml)
 BuildRequires:  pkgconfig(Qt5Core)

@@ -1,7 +1,7 @@
 /***************************************************************************
 
-    settings.qml - Sidudict, a StarDict clone based on QStarDict
-    Copyright 2013 Reto Zingg <g.d0b3rm4n@gmail.com>
+    DictDelegate.qml - Sidudict, a StarDict clone based on QStarDict
+    Copyright 2014 Reto Zingg <g.d0b3rm4n@gmail.com>
 
  ***************************************************************************/
 
@@ -27,26 +27,17 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
-Page {
-    SilicaFlickable {
-        anchors.fill: parent
-        contentHeight: column.height
-        Column {
-            id: column
-            width: parent.width
-            spacing: Theme.paddingSmall
-
-            PageHeader {
-                id: settingsHeader
-                title: "Settings"
-            }
-            DictEntryList{
-                id: dictEntryList
-                height: Screen.height - settingsHeader.height;
-                anchors {left: parent.left; right: parent.right}
-                clip: false
-            }
-        }
+ListItem {
+    Label { text: name + " - " + id + " - " + url}
+    onClicked: {
+        // console.log("Details clicked");
+        pageStack.push(Qt.resolvedUrl("DictDownloadDetails.qml"),
+                       {
+                           dictionaryName: name,
+                           dictionaryEntries: entries,
+                           dictionarySize: size,
+                           dictionaryDate: date,
+                           dictionaryDescription: description
+                       })
     }
 }
-
