@@ -113,13 +113,6 @@ Page {
 
             PullDownMenu {
                 MenuItem {
-                    text: "Download"
-                    onClicked: {
-//                        console.log("Clicked option Download")
-                        pageStack.push(Qt.resolvedUrl("DictDownload.qml"))
-                    }
-                }
-                MenuItem {
                     text: "About"
                     onClicked: {
 //                        console.log("Clicked option About")
@@ -131,6 +124,13 @@ Page {
                     onClicked: {
 //                        console.log("Clicked option Help")
                         pageStack.push(Qt.resolvedUrl("help.qml"))
+                    }
+                }
+                MenuItem {
+                    text: "Download"
+                    onClicked: {
+//                        console.log("Clicked option Download")
+                        pageStack.push(Qt.resolvedUrl("DictDownload.qml"))
                     }
                 }
                 MenuItem {

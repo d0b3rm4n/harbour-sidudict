@@ -130,6 +130,16 @@ StarDict::StarDict(QObject *parent)
     {
         m_dictDirs << "/usr/share/harbour-sidudict/dic";
         m_dictDirs << QDir::homePath() + "/Documents/Sidudict";
+
+        QByteArray xdg_data_home = qgetenv("XDG_DATA_HOME");
+        if (xdg_data_home.isEmpty()) {
+            QString xdgLocation = QDir::homePath() + QString("/.local/share/harbour-sidudict/");
+            m_dictDirs << xdgLocation;
+        } else {
+            QString xdgLocation = QString("%1/harbour-sidudict/").arg(xdg_data_home.constData());
+            m_dictDirs << xdgLocation;
+        }
+        LOG() << "m_dictDirs" << m_dictDirs;
     }
 }
 

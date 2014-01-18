@@ -33,6 +33,7 @@
 #include "dictlistmodel.h"
 #include "suggestmodel.h"
 #include "lib/stardict.h"
+#include "downloadmanager.h"
 
 class SiduDictLib:public QObject
 {
@@ -52,16 +53,24 @@ public:
     Q_INVOKABLE QString dictInfoAuthor(QString dict);
     Q_INVOKABLE QString dictInfoDescription(QString dict);
     Q_INVOKABLE QString dictInfoWordsCount(QString dict);
+    Q_INVOKABLE void downloadDict(QString url);
+    Q_INVOKABLE bool showNotification(QString category, const QString summary, const QString text, QString previewBody, QString previewSummary, QString icon);
 
     SuggestModel *m_suggestModel;
     DictListModel *m_availableDicts;
 
 public slots:
     void availableDictsChanged(QModelIndex top, QModelIndex bottom);
+    void downloadDone();
+    void downloadError(QByteArray url, QString errorMsg);
+    void downloadEnded(QByteArray url);
 
 private:
     StarDict *m_sd;
     QString m_lastTranslation;
+    DownloadManager *m_downloadManager;
+
+    void updateDictCatalogue();
 };
 
 #endif // SIDUDICTLIB_H

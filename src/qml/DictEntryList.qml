@@ -7,6 +7,7 @@ Item {
     Component {
         id: dictModelDelegate
         ListItem{
+            id: dictListItem
             onClicked: {
 //                console.log("Clicked: " + name + " - " + index + " - " + dictSwitch.checked);
                 dictSwitch.checked = dictSwitch.checked ? false : true;

@@ -30,6 +30,7 @@ import Sailfish.Silica 1.0
 Page {
     property string dictionaryName
     property string dictionaryEntries
+    property string dictionaryUrl
     property string dictionarySize
     property string dictionaryDate
     property string dictionaryDescription
@@ -37,6 +38,17 @@ Page {
     SilicaFlickable {
         anchors.fill: parent
         contentHeight: column.height
+
+        PullDownMenu {
+            MenuItem {
+                text: "Download"
+                onClicked: {
+                    console.log("Download from pull down" + dictionaryUrl);
+                    starDictLib.downloadDict(dictionaryUrl);
+                }
+
+            }
+        }
         Column {
             id: column
             width: parent.width

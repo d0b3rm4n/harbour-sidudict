@@ -31,6 +31,7 @@
 #include <QModelIndex>
 #include <QSettings>
 #include <QFile>
+#include <QtDBus/QtDBus>
 
 #include <logging.h>
 
@@ -39,6 +40,7 @@
 #include "suggestmodel.h"
 #include "lib/stardict.h"
 #include "entrydictitem.h"
+#include "downloadmanager.h"
 
 SiduDictLib::SiduDictLib()
 {
@@ -81,6 +83,7 @@ SiduDictLib::SiduDictLib()
             this,
             SLOT(availableDictsChanged(QModelIndex,QModelIndex)));
 
+
     QMap<QString, QVariant> map;
 
     LOG() << "available dicts" << m_sd->availableDicts();
@@ -109,6 +112,23 @@ SiduDictLib::SiduDictLib()
         LOG() << m_sd->dictInfo(dict).description();
         LOG() << m_sd->dictInfo(dict).wordsCount();
     }
+
+    m_downloadManager = new DownloadManager();
+
+    connect(m_downloadManager,
+            SIGNAL(done()),
+            this,
+            SLOT(downloadDone()));
+
+    connect(m_downloadManager,
+            SIGNAL(downloadFailed(QByteArray, QString)),
+            this,
+            SLOT(downloadError(QByteArray, QString)));
+
+    connect(m_downloadManager,
+            SIGNAL(downloadEnded(QByteArray)),
+            this,
+            SLOT(downloadEnded(QByteArray)));
 }
 
 SiduDictLib::~SiduDictLib()
@@ -216,6 +236,12 @@ QString SiduDictLib::dictInfoWordsCount(QString dict)
     return QString::number(m_sd->dictInfo(dict).wordsCount());
 }
 
+void SiduDictLib::downloadDict(QString url)
+{
+    IN;
+    m_downloadManager->doDownload(QUrl(url));
+}
+
 void SiduDictLib::availableDictsChanged(QModelIndex top, QModelIndex bottom)
 {
     IN;
@@ -224,4 +250,98 @@ void SiduDictLib::availableDictsChanged(QModelIndex top, QModelIndex bottom)
 
     LOG() << "selected dicts" << m_availableDicts->selectedDictList();
     m_sd->setLoadedDicts(m_availableDicts->selectedDictList());
+}
+
+void SiduDictLib::downloadDone()
+{
+    IN;
+    LOG() << "all downloads finished";
+
+//    showNotification("x-fi.rmz.sidudict.download",
+//                     "All Sidudict downloads finished.",
+//                     "All queued downloads for Sidudict finished.",
+//                     "All downloads finished.",
+//                     "All Sidudict downloads finished.",
+//                     "icon-s-update");
+}
+
+void SiduDictLib::downloadError(QByteArray url, QString errorMsg)
+{
+    IN;
+    LOG() << "Download Error:" << url;
+    showNotification("x-fi.rmz.sidudict.download",
+                     "Sidudict download failed!",
+                     "Failed to download: " + url + " Error: " + errorMsg,
+                     "Sidudict download failed!",
+                     "A Sidudict file could not be downloaded!",
+                     "icon-system-warning");
+}
+
+void SiduDictLib::downloadEnded(QByteArray url)
+{
+    IN;
+    LOG() << "Download Ended:" << url;
+    showNotification("x-fi.rmz.sidudict.download",
+                     "Sidudict download finished!",
+                     "Finished to download: " + url,
+                     "Sidudict download finished!",
+                     "",
+                     "icon-s-update");
+
+    updateDictCatalogue();
+}
+
+void SiduDictLib::updateDictCatalogue()
+{
+    IN;
+    QMap<QString, QVariant> newMap;
+    QMap<QString, QVariant> currentMap = m_availableDicts->dictListMap();
+
+    LOG() << "available dicts" << m_sd->availableDicts();
+    foreach(QString dict, m_sd->availableDicts()){
+        if (currentMap.contains(dict)) {
+            newMap.insert(dict, currentMap.value(dict));
+        } else {
+            newMap.insert(dict, QVariant(true));
+        }
+    }
+    m_availableDicts->setDictMap(newMap);
+
+    LOG() << "loaded dicts" << m_sd->loadedDicts();
+
+}
+
+bool SiduDictLib::showNotification(const QString category,
+                                   const QString summary,
+                                   const QString text,
+                                   const QString previewSummary,
+                                   const QString previewBody,
+                                   const QString icon)
+{
+    IN;
+    QVariantMap hints;
+    hints.insert("category", category);
+    hints.insert("x-nemo-preview-body", previewBody);
+    hints.insert("x-nemo-preview-summary", previewSummary);
+    QList<QVariant> argumentList;
+    argumentList << "Sidudict";    //app_name
+    argumentList << (uint)0;       // replace_id
+    argumentList << icon;          // app_icon
+    argumentList << summary;       // summary
+    argumentList << text;          // body
+    argumentList << QStringList(); // actions
+    argumentList << hints;         // hints
+    argumentList << (int)5000;     // timeout in ms
+
+  static QDBusInterface notifyApp("org.freedesktop.Notifications",
+                                  "/org/freedesktop/Notifications",
+                                  "org.freedesktop.Notifications");
+  QDBusMessage reply = notifyApp.callWithArgumentList(QDBus::AutoDetect,
+                                                      "Notify", argumentList);
+
+  if(reply.type() == QDBusMessage::ErrorMessage) {
+    LOG() << "D-Bus Error:" << reply.errorMessage();
+    return false;
+  }
+  return true;
 }

@@ -67,6 +67,6 @@ rm -rf %{buildroot}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/86x86/apps/%{name}.png
 %{_datadir}/%{name}/qml
-%{_datadir}/%{name}/dic
+#%{_datadir}/%{name}/dic
 # >> files
 # << files

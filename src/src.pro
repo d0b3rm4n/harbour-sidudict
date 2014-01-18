@@ -2,6 +2,8 @@ CONFIG += link_pkgconfig
 PKGCONFIG += glib-2.0
 LIBS += -lz -lquazip -L../quazip/quazip
 
+QT += dbus
+
 DEPENDPATH += . ../quazip/quazip
 INCLUDEPATH += . ../quazip/quazip
 QMAKE_LFLAGS += -Wl,-rpath,\\$${LITERAL_DOLLAR}$${LITERAL_DOLLAR}ORIGIN/../share/harbour-sidudict/lib
@@ -28,7 +30,8 @@ SOURCES += main.cpp\
         sidudictlib.cpp \
         dictlistmodel.cpp \
         suggestmodel.cpp \
-        entrydictitem.cpp
+        entrydictitem.cpp \
+        downloadmanager.cpp
 
 HEADERS  += logging.h \
          lib/dictziplib.hpp \
@@ -40,6 +43,7 @@ HEADERS  += logging.h \
          sidudictlib.h \
          dictlistmodel.h \
          suggestmodel.h \
-         entrydictitem.h
+         entrydictitem.h \
+         downloadmanager.h
 
 OTHER_FILES += qml/*.qml qml/*.js
