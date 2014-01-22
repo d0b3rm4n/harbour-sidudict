@@ -39,6 +39,12 @@ Item {
                         pageStack.push(Qt.resolvedUrl("DictDetails.qml"),{dictionaryName: name})
                     }
                 }
+//                MenuItem {
+//                    text: "Delete"
+//                    onClicked: {
+////                        console.log("Delete clicked for dict: " + name);
+//                          starDictLib.deleteDictionary(name);
+//                }
             }
         }
     }

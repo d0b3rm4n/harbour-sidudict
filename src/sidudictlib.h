@@ -55,6 +55,7 @@ public:
     Q_INVOKABLE QString dictInfoWordsCount(QString dict);
     Q_INVOKABLE void downloadDict(QString url);
     Q_INVOKABLE bool showNotification(QString category, const QString summary, const QString text, QString previewBody, QString previewSummary, QString icon);
+    Q_INVOKABLE void deleteDictionary(QString dict);
 
     SuggestModel *m_suggestModel;
     DictListModel *m_availableDicts;

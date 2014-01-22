@@ -1,7 +1,7 @@
 /***************************************************************************
 
     stardict.cpp - Sidudict, a StarDict clone based on QStarDict
-    Copyright 2011 Reto Zingg <g.d0b3rm4n@gmail.com>
+    Copyright 2011, 2014 Reto Zingg <g.d0b3rm4n@gmail.com>
     this file was taken from qstardict-0.13.1 and adapted for Sidudict
 
  ***************************************************************************/
@@ -192,6 +192,7 @@ StarDict::DictInfo StarDict::dictInfo(const QString &dict)
     result.setAuthor(QString::fromUtf8(nativeInfo.author.c_str()));
     result.setDescription(QString::fromUtf8(nativeInfo.description.c_str()));
     result.setWordsCount(nativeInfo.wordcount ? static_cast<long>(nativeInfo.wordcount) : -1);
+    result.setIfoFileName(QString::fromUtf8(nativeInfo.ifo_file_name.c_str()));
     return result;
 }
 

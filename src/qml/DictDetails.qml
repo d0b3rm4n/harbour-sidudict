@@ -30,9 +30,24 @@ import Sailfish.Silica 1.0
 Page {
     property string dictionaryName
 
+    RemorsePopup { id: remorse }
+
     SilicaFlickable {
         anchors.fill: parent
         contentHeight: column.height
+        PullDownMenu{
+            MenuItem {
+                text: "Delete"
+                onClicked: {
+//                    console.log("Delete clicked for: " + dictionaryName);
+                    remorse.execute("Delete: " + dictionaryName,
+                        function() {
+                            starDictLib.deleteDictionary(dictionaryName);
+                            pageStack.navigateBack(PageStackAction.Animated);
+                        } )
+                }
+            }
+        }
         Column {
             id: column
             width: parent.width

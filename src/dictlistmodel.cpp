@@ -1,7 +1,7 @@
 /***************************************************************************
 
     dictlistmodel.cpp - Sidudict, a StarDict clone based on QStarDict
-    Copyright 2013 Reto Zingg <g.d0b3rm4n@gmail.com>
+    Copyright 2013, 2014 Reto Zingg <g.d0b3rm4n@gmail.com>
 
  ***************************************************************************/
 
@@ -38,14 +38,23 @@ DictListModel::DictListModel(QObject *parent) :
 void DictListModel::setDictMap(const QMap<QString, QVariant> &map)
 {
     IN;
-    beginInsertRows(QModelIndex(),0,map.count() - 1);
-    dictMap = map;
-    endInsertRows();
+    if (!dictMap.isEmpty()){
+        LOG() << "ResetModel";
+        beginRemoveRows(QModelIndex(), 0, dictMap.size() - 1);
+        dictMap.clear();
+        endRemoveRows();
+    }
 
-    QModelIndex top = createIndex(0, 0);
-    QModelIndex bottom = createIndex(map.count() - 1, 0);
+    int counter = 0;
+    foreach(QString item, map.keys()){
+        beginInsertRows(QModelIndex(), counter, counter);
+        dictMap.insert(item, map.value(item));
+        endInsertRows();
 
-    emit dataChanged(top, bottom);
+        QModelIndex index = createIndex(counter, counter);
+
+        emit dataChanged(index, index);
+    }
 }
 
 int DictListModel::rowCount(const QModelIndex & /* parent */) const

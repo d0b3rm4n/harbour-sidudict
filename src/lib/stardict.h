@@ -1,7 +1,7 @@
 /***************************************************************************
 
     stardict.h - Sidudict, a StarDict clone based on QStarDict
-    Copyright 2011 Reto Zingg <g.d0b3rm4n@gmail.com>
+    Copyright 2011, 2014 Reto Zingg <g.d0b3rm4n@gmail.com>
     this file was taken from qstardict-0.13.1 and adapted for Sidudict
 
  ***************************************************************************/
@@ -60,17 +60,20 @@ public:
          * @param name A dictionary name
          * @param author A dictionary author
          * @param desription A dictionary description
+         * @param ifoFileName The IFO file name
          * @param wordsCount A count of words that available in dictionary
          */
         DictInfo(const QString &plugin,
                  const QString &name,
                  const QString &author = QString(),
                  const QString &description = QString(),
+                 const QString &ifoFileName = QString(),
                  long wordsCount = -1L)
                      : m_plugin(plugin),
                      m_name(name),
                      m_author(author),
                      m_description(description),
+                     m_ifo_file_name(ifoFileName),
                      m_wordsCount(wordsCount)
         { }
 
@@ -82,6 +85,8 @@ public:
         { return m_author; }
         const QString &description() const
         { return m_description; }
+        const QString &ifoFileName() const
+        { return m_ifo_file_name; }
         long wordsCount() const
         { return m_wordsCount; }
 
@@ -93,6 +98,8 @@ public:
         { m_author = author; }
         void setDescription(const QString &description)
         { m_description = description; }
+        void setIfoFileName(const QString &ifoFileName)
+        { m_ifo_file_name = ifoFileName; }
         void setWordsCount(long wordsCount)
         { m_wordsCount = wordsCount; }
 
@@ -101,6 +108,7 @@ public:
         QString m_name;
         QString m_author;
         QString m_description;
+        QString m_ifo_file_name;
         long m_wordsCount;
     };
 

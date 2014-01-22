@@ -110,6 +110,7 @@ SiduDictLib::SiduDictLib()
         LOG() << m_sd->dictInfo(dict).name();
         LOG() << m_sd->dictInfo(dict).author();
         LOG() << m_sd->dictInfo(dict).description();
+        LOG() << m_sd->dictInfo(dict).ifoFileName();
         LOG() << m_sd->dictInfo(dict).wordsCount();
     }
 
@@ -344,4 +345,59 @@ bool SiduDictLib::showNotification(const QString category,
     return false;
   }
   return true;
+}
+
+void SiduDictLib::deleteDictionary(QString dict)
+{
+    IN;
+    QFileInfo ifoFile(m_sd->dictInfo(dict).ifoFileName());
+
+    QDir ifoFileDir = ifoFile.absoluteDir();
+    QString ifoFileDirName = ifoFileDir.path();
+    QString ifoFileName = ifoFile.fileName();
+
+    QString idxFileName = ifoFile.baseName();
+    idxFileName.append(".idx");
+
+    QString dictFileName = ifoFile.baseName();
+    dictFileName.append(".dict");
+
+    QString dictDzFileName = ifoFile.baseName();
+    dictDzFileName.append(".dict.dz");
+
+    QString oftFileName = ifoFile.baseName();
+    oftFileName.append(".idx.oft");
+
+    LOG() << "ifoFileName" << ifoFileName;
+    LOG() << "idxFileName" << idxFileName;
+    LOG() << "dictDzFileName" << dictDzFileName;
+    LOG() << "dictFileName" << dictFileName;
+    LOG() << "oftFileName" << oftFileName;
+    LOG() << "ifoFileDirName" << ifoFileDirName;
+
+    ifoFileDir.remove(ifoFileName);
+    ifoFileDir.remove(idxFileName);
+    ifoFileDir.remove(dictDzFileName);
+    ifoFileDir.remove(dictFileName);
+    ifoFileDir.remove(oftFileName);
+    ifoFileDir.rmdir(ifoFileDir.absolutePath());
+
+    if (ifoFile.exists()){
+        LOG() << "Dictionary removing failed!" << dict;
+        showNotification("x-fi.rmz.sidudict.delete",
+                         "Dictionary removing failed!",
+                         dict,
+                         "Dictionary removing failed!",
+                         dict,
+                         "");
+    } else {
+        LOG() << "Dictionary removed!" << dict;
+        showNotification("x-fi.rmz.sidudict.delete",
+                         "Dictionary removed!",
+                         dict,
+                         "Dictionary removed!",
+                         dict,
+                         "");
+    }
+    updateDictCatalogue();
 }
