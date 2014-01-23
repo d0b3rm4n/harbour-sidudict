@@ -28,6 +28,12 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 Page {
+    property string _RICHTEXT_STYLESHEET_PREAMBLE: "<html><style>a { text-decoration: underline; color: '"
+                                                   + Theme.highlightColor
+                                                   + "' } </style><body>";
+
+    property string _RICHTEXT_STYLESHEET_APPENDIX: "</body></html>";
+
     SilicaFlickable {
         anchors.fill: parent
         contentHeight: column.height
@@ -41,27 +47,45 @@ Page {
                 wrapMode: Text.WordWrap
                 anchors {left: parent.left; right: parent.right}
                 anchors.margins: Theme.paddingMedium
+                textFormat: Text.RichText
                 function getText() {
-                    var msg = "In the Settings you can enable resp. disable dictionaries."
-                    + " If you long press on a dictionary name in Settings, a context menu opens."
-                    + " Details provides info about the particular dictionary."
+                    var msg = _RICHTEXT_STYLESHEET_PREAMBLE
+                    + "Sidudict does not contain pre installed dictionaries any longer"
+                    + " (the package would just grow too much, and not all users want all"
+                    + " dictionaries installed)."
                     + "<br>"
-                    + "<br>Additionally to the pre installed dictionaries, you can add your own"
+                    + "<br>But you can easily download dictionaries from the Download view."
+                    + " Either you long press on the name to open the context menu 'Download'"
+                    + " or you tap on the name to see first some details about the dictionary."
+                    + " There you can download it with the pull-down menu 'Download'."
+                    + "<br>"
+                    + "<br>In the Settings you can enable resp. disable dictionaries."
+                    + " If you long press on a dictionary name in Settings, a context menu opens."
+                    + " Details provides info about the particular dictionary. The Details view"
+                    + " has a pull-down menu to delete that particular dictionary."
+                    + "<br>"
+                    + "<br>Additionally to the downloadable dictionaries, you can add your own"
                     + " stardict dictionaries, copy the <b>.ifo,</b> <b>.dict/dict.dz</b> and <b>.idx</b>"
                     + " files to a subfolder in Documents/Sidudict folder on your phone. You might"
                     + " need to create the Sidudict folder first. Then restart Sidudict, new found dictionaries"
                     + " are enabled by default."
                     + "<br>"
                     + "<br>You can download dictionaries from e.g. here:"
-                    + "<br>http://abloz.com/huzheng/stardict-dic/"
+                    + "<br><a href='http://abloz.com/huzheng/stardict-dic/'>"
+                    + "http://abloz.com/huzheng/stardict-dic/</a>"
                     + "<br><b>NOTICE</b> these dictionaries are packaged in a tar ball, you need to unpack and"
                     + " unzip the tar ball first!"
                     + "<br>"
                     + "<br>If you want to create your own dictionaries here some links which migh help you:"
-                    + "<br>http://jalasthana.de/?p=828"
-                    + "<br>http://www.stardict.org/HowToCreateDictionary"
-                    + "<br>https://github.com/tkedwards/wiktionarytodict/"
-                    + "<br>https://github.com/soshial/xdxf_makedict"
+                    + "<br><a href='http://jalasthana.de/?p=828'>"
+                    + "http://jalasthana.de/?p=828</a>"
+                    + "<br><a href='http://www.stardict.org/HowToCreateDictionary'>"
+                    + "http://www.stardict.org/HowToCreateDictionary</a>"
+                    + "<br><a href='https://github.com/tkedwards/wiktionarytodict/'>"
+                    + "https://github.com/tkedwards/wiktionarytodict/</a>"
+                    + "<br><a href='https://github.com/soshial/xdxf_makedict'>"
+                    + "https://github.com/soshial/xdxf_makedict</a>"
+                    + _RICHTEXT_STYLESHEET_APPENDIX
 
                     return msg
                 }

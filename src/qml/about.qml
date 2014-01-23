@@ -28,6 +28,12 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 Page {
+    property string _RICHTEXT_STYLESHEET_PREAMBLE: "<html><style>a { text-decoration: underline; color: '"
+                                                   + Theme.highlightColor
+                                                   + "' } </style><body>";
+
+    property string _RICHTEXT_STYLESHEET_APPENDIX: "</body></html>";
+
     SilicaFlickable {
         anchors.fill: parent
         contentHeight: column.height
@@ -50,24 +56,34 @@ Page {
                 wrapMode: Text.WordWrap
                 anchors {left: parent.left; right: parent.right}
                 anchors.margins: Theme.paddingMedium
+                textFormat: Text.RichText
                 function getText() {
-                    var msg = "<b>Sidudict,</b> a dictionary program based on QStarDict."
-                    + "<br>Copyright © 2011-2014 Reto Zingg &lt;g.d0b3rm4n@gmail.com&gt;"
+                    var msg = _RICHTEXT_STYLESHEET_PREAMBLE
+                    + "<b>Sidudict,</b> a dictionary program based on QStarDict."
+                    + "<br>Copyright © 2011-2014 Reto Zingg "
+                    + "&lt;<a href='mailto:g.d0b3rm4n@gmail.com'>g.d0b3rm4n@gmail.com</a>&gt;"
                     + "<br>"
                     + "<br>Sidudict is open source software licensed under the terms of the GNU General Public License."
                     + "<br>"
-                    + "<br>You can find the Sidudict source here (pull requests very welcome!):"
-                    + "<br>https://github.com/d0b3rm4n/harbour-sidudict"
+                    + "<br>You can find the Sidudict source here (pull requests are very welcome!):"
+                    + "<br><a href='https://github.com/d0b3rm4n/harbour-sidudict'>"
+                    + "https://github.com/d0b3rm4n/harbour-sidudict</a>"
                     + "<br>"
                     + "<br>Please report bugs and issues here:"
-                    + "<br>https://github.com/d0b3rm4n/harbour-sidudict/issues"
+                    + "<br><a href='https://github.com/d0b3rm4n/harbour-sidudict/issues'>"
+                    + "https://github.com/d0b3rm4n/harbour-sidudict/issues</a>"
                     + "<br>"
-                    + "<br>Included dictionaries are based on data from the Wiktionary dumps available from:"
-                    + "<br>http://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2"
+                    + "<br>Downloadable dictionaries are based on data from the Wiktionary dumps available from:"
+                    + "<br><a href='http://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2'>"
+                    + "http://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2</a>"
                     + "<br>All content in these dictionaries are under the same license as Wiktionary content."
                     + "<br>"
                     + "<br>Source:"
-                    + "<br>https://github.com/tkedwards/wiktionarytodict/blob/master/packaging/wiktionarytodict_20130929.tar.gz"
+                    + "<br><a href='https://github.com/tkedwards/wiktionarytodict/blob/master/packaging/wiktionarytodict_20130929.tar.gz'>"
+                    + "https://github.com/tkedwards/wiktionarytodict/blob/master/packaging/wiktionarytodict_20130929.tar.gz</a>"
+                    + "<br>"
+                    + "<br> Icon provided by: Copyright © by Alain Molteni &lt;alain_m@bluewin.ch&gt;"
+                    + _RICHTEXT_STYLESHEET_APPENDIX
 
                     return msg
                 }
