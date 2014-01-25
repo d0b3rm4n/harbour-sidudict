@@ -284,9 +284,9 @@ void SiduDictLib::downloadEnded(QByteArray url)
     LOG() << "Download Ended:" << url;
     showNotification("x-fi.rmz.sidudict.download",
                      "Sidudict download finished!",
-                     "Finished to download: " + url,
+                     url,
                      "Sidudict download finished!",
-                     "",
+                     url,
                      "icon-s-update");
 
     updateDictCatalogue();
