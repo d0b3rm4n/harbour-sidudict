@@ -1,7 +1,7 @@
 /***************************************************************************
 
     help.qml - Sidudict, a StarDict clone based on QStarDict
-    Copyright 2013 Reto Zingg <g.d0b3rm4n@gmail.com>
+    Copyright 2013 - 2014 Reto Zingg <g.d0b3rm4n@gmail.com>
 
  ***************************************************************************/
 

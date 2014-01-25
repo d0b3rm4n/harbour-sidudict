@@ -1,7 +1,7 @@
 /***************************************************************************
 
     SearchPage.qml - Sidudict, a StarDict clone based on QStarDict
-    Copyright 2013 Reto Zingg <g.d0b3rm4n@gmail.com>
+    Copyright 2013 - 2014 Reto Zingg <g.d0b3rm4n@gmail.com>
     This file is based on the silicacomponentgallery-qt5 SearchPage.qml
     see copyright note below.
 
