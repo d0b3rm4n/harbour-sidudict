@@ -1,7 +1,7 @@
 /***************************************************************************
 
     settings.qml - Sidudict, a StarDict clone based on QStarDict
-    Copyright 2013 Reto Zingg <g.d0b3rm4n@gmail.com>
+    Copyright 2013 - 2014 Reto Zingg <g.d0b3rm4n@gmail.com>
 
  ***************************************************************************/
 
@@ -28,23 +28,58 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 Page {
-    SilicaFlickable {
+    SilicaListView{
+        id: listView
+        model: availableDictListModel
         anchors.fill: parent
-        contentHeight: column.height
-        Column {
-            id: column
-            width: parent.width
-            spacing: Theme.paddingSmall
+        header: PageHeader {
+            title: "Settings"
+        }
+        delegate: dictModelDelegate
+        VerticalScrollDecorator {}
+    }
 
-            PageHeader {
-                id: settingsHeader
-                title: "Settings"
+    Component {
+        id: dictModelDelegate
+        ListItem{
+            id: dictListItem
+            onClicked: {
+//                console.log("Clicked: " + name + " - " + index + " - " + dictSwitch.checked);
+                dictSwitch.checked = dictSwitch.checked ? false : true;
+                starDictLib.setSelectDict(index, dictSwitch.checked);
             }
-            DictEntryList{
-                id: dictEntryList
-                height: Screen.height - settingsHeader.height;
-                anchors {left: parent.left; right: parent.right}
-                clip: false
+            Row {
+                Switch {
+                    id: dictSwitch
+                    checked: selected
+                    automaticCheck: false
+                    propagateComposedEvents: true
+                    onClicked: {
+//                        console.log("clicked dictSwitch");
+                        mouse.accepted = false;
+                    }
+                }
+                Label {
+                    id: dictlabel
+                    text: name
+                    anchors.verticalCenter: parent.verticalCenter
+                    color: Theme.primaryColor
+                }
+            }
+            menu: ContextMenu {
+                MenuItem {
+                    text: "Details"
+                    onClicked: {
+//                        console.log("Details clicked");
+                        pageStack.push(Qt.resolvedUrl("DictDetails.qml"),{dictionaryName: name})
+                    }
+                }
+//                MenuItem {
+//                    text: "Delete"
+//                    onClicked: {
+////                        console.log("Delete clicked for dict: " + name);
+//                          starDictLib.deleteDictionary(name);
+//                }
             }
         }
     }
