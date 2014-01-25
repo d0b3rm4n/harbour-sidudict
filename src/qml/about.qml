@@ -28,12 +28,6 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 Page {
-    property string _RICHTEXT_STYLESHEET_PREAMBLE: "<html><style>a { text-decoration: underline; color: '"
-                                                   + Theme.highlightColor
-                                                   + "' } </style><body>";
-
-    property string _RICHTEXT_STYLESHEET_APPENDIX: "</body></html>";
-
     SilicaFlickable {
         anchors.fill: parent
         contentHeight: column.height
@@ -56,12 +50,17 @@ Page {
                 wrapMode: Text.WordWrap
                 anchors {left: parent.left; right: parent.right}
                 anchors.margins: Theme.paddingMedium
-                textFormat: Text.RichText
+                textFormat: Text.StyledText
+                linkColor: Theme.highlightColor
+                onLinkActivated: {
+//                    console.log("clicked: " + link);
+                    Qt.openUrlExternally(link);
+                }
+
                 function getText() {
-                    var msg = _RICHTEXT_STYLESHEET_PREAMBLE
-                    + "<b>Sidudict,</b> a dictionary program based on QStarDict."
+                    var msg = "<b>Sidudict,</b> a dictionary program based on QStarDict."
                     + "<br>Copyright © 2011-2014 Reto Zingg "
-                    + "&lt;<a href='mailto:g.d0b3rm4n@gmail.com'>g.d0b3rm4n@gmail.com</a>&gt;"
+                    + "&lt;g.d0b3rm4n@gmail.com&gt;"
                     + "<br>"
                     + "<br>Sidudict is open source software licensed under the terms of the GNU General Public License."
                     + "<br>"
@@ -83,7 +82,6 @@ Page {
                     + "https://github.com/tkedwards/wiktionarytodict/blob/master/packaging/wiktionarytodict_20130929.tar.gz</a>"
                     + "<br>"
                     + "<br> Icon provided by: Copyright © by Alain Molteni &lt;alain_m@bluewin.ch&gt;"
-                    + _RICHTEXT_STYLESHEET_APPENDIX
 
                     return msg
                 }

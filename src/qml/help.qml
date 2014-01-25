@@ -28,12 +28,6 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 Page {
-    property string _RICHTEXT_STYLESHEET_PREAMBLE: "<html><style>a { text-decoration: underline; color: '"
-                                                   + Theme.highlightColor
-                                                   + "' } </style><body>";
-
-    property string _RICHTEXT_STYLESHEET_APPENDIX: "</body></html>";
-
     SilicaFlickable {
         anchors.fill: parent
         contentHeight: column.height
@@ -47,10 +41,14 @@ Page {
                 wrapMode: Text.WordWrap
                 anchors {left: parent.left; right: parent.right}
                 anchors.margins: Theme.paddingMedium
-                textFormat: Text.RichText
+                textFormat: Text.StyledText
+                linkColor: Theme.highlightColor
+                onLinkActivated: {
+//                    console.log("clicked: " + link);
+                    Qt.openUrlExternally(link);
+                }
                 function getText() {
-                    var msg = _RICHTEXT_STYLESHEET_PREAMBLE
-                    + "Sidudict does not contain pre installed dictionaries any longer"
+                    var msg = "Sidudict does not contain pre installed dictionaries any longer"
                     + " (the package would just grow too much, and not all users want all"
                     + " dictionaries installed)."
                     + "<br>"
@@ -85,7 +83,6 @@ Page {
                     + "https://github.com/tkedwards/wiktionarytodict/</a>"
                     + "<br><a href='https://github.com/soshial/xdxf_makedict'>"
                     + "https://github.com/soshial/xdxf_makedict</a>"
-                    + _RICHTEXT_STYLESHEET_APPENDIX
 
                     return msg
                 }
