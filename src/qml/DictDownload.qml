@@ -31,7 +31,7 @@ import QtQuick.XmlListModel 2.0
 Page {
     XmlListModel {
         id: xmlModel
-        source: "https://raw.github.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/dictionaries.xml"
+        source: "https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/dictionaries.xml"
         query: "/dictionaries/dictionary"
 
         XmlRole { name: "id"; query: "id/string()" }
