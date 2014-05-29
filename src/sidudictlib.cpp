@@ -68,6 +68,14 @@ SiduDictLib::SiduDictLib()
         }
     }
 
+    QString oldCachePath = QDir::homePath() + QString("/.cache/sdcv");
+    QString newCachePath = QDir::homePath() + QString("/.cache/harbour-sidudict");
+    QFile oldCache(oldCachePath);
+    if(oldCache.exists()){
+        LOG () << oldCachePath << "exists, needs to be renamed to: " << newCachePath;
+        oldCache.rename(oldCachePath, newCachePath);
+    }
+
     m_lastTranslation = QString("No lookups yet...");
 
     m_sd = new StarDict(this);

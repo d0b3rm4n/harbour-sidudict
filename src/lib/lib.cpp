@@ -650,7 +650,7 @@ strlist_t offset_index::get_cache_variant(const std::string& url)
             g_mkdir(g_get_user_cache_dir(), 0700) == -1)
         return res;
 
-    std::string cache_dir = std::string(g_get_user_cache_dir()) + G_DIR_SEPARATOR_S + "sdcv";
+    std::string cache_dir = std::string(g_get_user_cache_dir()) + G_DIR_SEPARATOR_S + "harbour-sidudict";
 
     if (!g_file_test(cache_dir.c_str(), G_FILE_TEST_EXISTS))
     {
