@@ -146,12 +146,22 @@ void DownloadManager::downloadFinished(QNetworkReply *reply)
         LOG() << "Download of" << url.toEncoded().constData() << "failed:" << qPrintable(reply->errorString());
         emit downloadFailed(url.toEncoded(), reply->errorString());
     } else {
-        QString filename = saveFileName(url);
-        if (saveToDisk(filename, reply)){
-            LOG() << "Download of" << url.toEncoded().constData() << "succeded saved to:"  << qPrintable(filename);
-            emit downloadEnded(url.toEncoded());
+        int httpStatusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+        if (httpStatusCode == 200) {
+            QString filename = saveFileName(url);
+            if (saveToDisk(filename, reply)){
+                LOG() << "Download of" << url.toEncoded().constData() << "succeded saved to:"  << qPrintable(filename);
+                emit downloadEnded(url.toEncoded());
+            } else {
+                emit downloadFailed(url.toEncoded(), "Could not save file!");
+            }
+        } else if (httpStatusCode == 301) {
+            QUrl redirectUrl = reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl();
+            LOG() << url << ": 301 Moved Permanently to:";
+            LOG() << redirectUrl;
+            doDownload(redirectUrl);
         } else {
-            emit downloadFailed(url.toEncoded(), "Could not save file!");
+            emit downloadFailed(url.toEncoded(), QString("Could not handle HTTP status Code: %f").arg(httpStatusCode));
         }
     }
 
