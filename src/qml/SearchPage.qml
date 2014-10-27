@@ -79,7 +79,7 @@ Page {
         SearchField {
             id: searchField
             width: parent.width
-            inputMethodHints: Qt.ImhNoPredictiveText | Qt.ImhNoAutoUppercase
+            inputMethodHints: Qt.ImhNoAutoUppercase
             placeholderText: "Search for..."
 
             Binding {
