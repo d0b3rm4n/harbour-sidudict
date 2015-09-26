@@ -20,7 +20,10 @@ CONFIG(release, debug|release) {
 TARGET = harbour-sidudict
 TEMPLATE = app
 
-include(../quazip/quazip/quazip.pri)
+# include QuaZIP
+!exists(third_party/quazip/quazip/quazip.pri): \
+    error("Some git submodules are missing, please run 'git submodule update --init' in toplevel directory")
+include(third_party/quazip/quazip/quazip.pri)
 
 SOURCES += main.cpp\
         lib/dictziplib.cpp \
