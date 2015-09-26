@@ -1,11 +1,9 @@
 CONFIG += link_pkgconfig
 PKGCONFIG += glib-2.0
-LIBS += -lz -lquazip -L../quazip/quazip
+LIBS += -lz
 
 QT += dbus
 
-DEPENDPATH += . ../quazip/quazip
-INCLUDEPATH += . ../quazip/quazip
 QMAKE_LFLAGS += -Wl,-rpath,\\$${LITERAL_DOLLAR}$${LITERAL_DOLLAR}ORIGIN/../share/harbour-sidudict/lib
 
 INSTALLS += target
@@ -21,6 +19,8 @@ CONFIG(release, debug|release) {
 
 TARGET = harbour-sidudict
 TEMPLATE = app
+
+include(../quazip/quazip/quazip.pri)
 
 SOURCES += main.cpp\
         lib/dictziplib.cpp \
