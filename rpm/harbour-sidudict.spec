@@ -64,7 +64,7 @@ rm -rf %{buildroot}
 
 %files
 %defattr(0644,root,root,0755)
-%{_datadir}/%{name}/lib
+#%{_datadir}/%{name}/lib
 %attr(0755,-,-) /usr/bin/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/86x86/apps/%{name}.png

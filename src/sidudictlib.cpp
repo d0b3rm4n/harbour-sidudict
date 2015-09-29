@@ -47,6 +47,7 @@ SiduDictLib::SiduDictLib()
     IN;
     QSettings settings("harbour-sidudict","dictionary-settings");
     QMap<QString, QVariant> dictListSettings = settings.value("Sidudict/dictListSettings", QMap<QString, QVariant>()).toMap();
+    setInputMethod(settings.value("Sidudict/inputMethod", "none").toString());
 
     // handle old settings from 0.1-2
     bool oldSettingsImported = false;
@@ -145,6 +146,7 @@ SiduDictLib::~SiduDictLib()
     IN;
     QSettings settings("harbour-sidudict","dictionary-settings");
     settings.setValue("Sidudict/dictListSettings", QVariant(m_availableDicts->dictListMap()));
+    settings.setValue("Sidudict/inputMethod", mInputMethod);
     settings.sync();
     delete m_sd;
 }
@@ -408,4 +410,15 @@ void SiduDictLib::deleteDictionary(QString dict)
                          "");
     }
     updateDictCatalogue();
+}
+
+QString SiduDictLib::getInputMethod() const
+{
+    return mInputMethod;
+}
+
+void SiduDictLib::setInputMethod(const QString &method)
+{
+    mInputMethod = method;
+    emit inputMethodChanged(method);
 }

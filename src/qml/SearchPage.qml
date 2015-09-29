@@ -43,12 +43,13 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import "input.js" as Input
 
 Page {
     id: searchPage
-    property string searchString
     property bool keepSearchFieldFocus: true
     property int curIndex
+    property string inputMethod: starDictLib.inputMethod
 
     Keys.onReturnPressed: {
         if (starDictLib.isFirstListItemTranslatable()) {
@@ -58,12 +59,8 @@ Page {
         }
     }
 
-    onSearchStringChanged: {
-        starDictLib.updateList(searchString)
-    }
-
     Component.onCompleted: {
-        starDictLib.updateList(searchString)
+        starDictLib.updateList(searchField.text)
     }
 
     Loader {
@@ -82,10 +79,24 @@ Page {
             inputMethodHints: Qt.ImhNoAutoUppercase
             placeholderText: "Search for..."
 
-            Binding {
-                target: searchPage
-                property: "searchString"
-                value: searchField.text
+            property string prevText
+
+            onTextChanged: {
+                if (searchPage.status !== PageStatus.Active) {
+                    text = prevText
+                    return
+                }
+                if (text.length === prevText.length + 1) {
+                    if (inputMethod === "telex") {
+                        var modified = Input.telexAdd(text)
+                        if (typeof modified !== 'undefined') {
+                            text = modified
+                        }
+                    }
+                }
+                prevText = text
+                if (text.length > 1)
+                    starDictLib.updateList(text)
             }
         }
     }
@@ -147,6 +158,7 @@ Page {
                 anchors.margins: Theme.paddingMedium
                 onClicked: {
                     var translation = starDictLib.getTranslation(entry, dict)
+                    searchField.text = entry
                     pageStack.push(Qt.resolvedUrl("showEntry.qml"),{pageTitleEntry: entry, dictTranslatedEntry: translation})
                 }
 
