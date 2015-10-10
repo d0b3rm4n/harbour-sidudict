@@ -77,8 +77,6 @@ Page {
                     + " unzip the tar ball first!"
                     + "<br>"
                     + "<br>If you want to create your own dictionaries here some links which migh help you:"
-                    + "<br><a href='http://jalasthana.de/?p=828'>"
-                    + "http://jalasthana.de/?p=828</a>"
                     + "<br><a href='http://www.stardict.org/HowToCreateDictionary'>"
                     + "http://www.stardict.org/HowToCreateDictionary</a>"
                     + "<br><a href='https://github.com/tkedwards/wiktionarytodict/'>"
