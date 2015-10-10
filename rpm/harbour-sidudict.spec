@@ -67,7 +67,7 @@ rm -rf %{buildroot}
 %{_datadir}/%{name}/lib
 %attr(0755,-,-) /usr/bin/%{name}
 %{_datadir}/applications/%{name}.desktop
-%{_datadir}/icons/hicolor/86x86/apps/%{name}.png
+%{_datadir}/icons/hicolor/*/apps/%{name}.png
 %{_datadir}/%{name}/qml
 #%{_datadir}/%{name}/dic
 # >> files
