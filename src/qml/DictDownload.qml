@@ -29,6 +29,8 @@ import Sailfish.Silica 1.0
 import QtQuick.XmlListModel 2.0
 
 Page {
+    allowedOrientations: defaultAllowedOrientations
+
     XmlListModel {
         id: xmlModel
         source: "https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/dictionaries.xml"

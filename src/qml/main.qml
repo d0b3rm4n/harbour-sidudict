@@ -29,6 +29,7 @@ import Sailfish.Silica 1.0
 
 ApplicationWindow{
     id: rootWindow
+    allowedOrientations: defaultAllowedOrientations
     cover: Qt.resolvedUrl("cover.qml")
     initialPage: Component { SearchPage{} }
 }

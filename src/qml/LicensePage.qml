@@ -29,6 +29,7 @@ import Sailfish.Silica 1.0
 import "license.js" as License
 
 Page {
+    allowedOrientations: defaultAllowedOrientations
 
     SilicaFlickable {
         anchors.fill: parent

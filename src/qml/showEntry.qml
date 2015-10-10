@@ -31,6 +31,8 @@ Page {
     property string pageTitleEntry
     property string dictTranslatedEntry
 
+    allowedOrientations: defaultAllowedOrientations
+
     SilicaFlickable {
         anchors.fill: parent
         contentHeight: column.height

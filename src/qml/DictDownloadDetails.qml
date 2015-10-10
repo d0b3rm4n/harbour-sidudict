@@ -35,6 +35,8 @@ Page {
     property string dictionaryDate
     property string dictionaryDescription
 
+    allowedOrientations: defaultAllowedOrientations
+
     SilicaFlickable {
         anchors.fill: parent
         contentHeight: column.height

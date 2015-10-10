@@ -50,6 +50,8 @@ Page {
     property bool keepSearchFieldFocus: true
     property int curIndex
 
+    allowedOrientations: defaultAllowedOrientations
+
     Keys.onReturnPressed: {
         if (starDictLib.isFirstListItemTranslatable()) {
             var entry = starDictLib.firstListItemEntry();
