@@ -41,7 +41,7 @@
 **
 ****************************************************************************************/
 
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 import "input.js" as Input
 
@@ -50,6 +50,8 @@ Page {
     property bool keepSearchFieldFocus: true
     property int curIndex
     property string inputMethod: starDictLib.inputMethod
+
+    allowedOrientations: defaultAllowedOrientations
 
     Keys.onReturnPressed: {
         if (starDictLib.isFirstListItemTranslatable()) {

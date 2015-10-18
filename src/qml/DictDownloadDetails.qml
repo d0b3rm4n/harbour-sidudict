@@ -24,7 +24,7 @@
  *                                                                         *
  ***************************************************************************/
 
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 
 Page {
@@ -34,6 +34,8 @@ Page {
     property string dictionarySize
     property string dictionaryDate
     property string dictionaryDescription
+
+    allowedOrientations: defaultAllowedOrientations
 
     SilicaFlickable {
         anchors.fill: parent

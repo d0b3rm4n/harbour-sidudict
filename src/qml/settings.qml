@@ -24,10 +24,12 @@
  *                                                                         *
  ***************************************************************************/
 
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 
 Page {
+    allowedOrientations: defaultAllowedOrientations
+
     ListModel {
         id: inputMethodNames
         ListElement { name: "none"; token: "none" }
@@ -44,7 +46,7 @@ Page {
         return 0
     }
 
-    SilicaListView {
+    SilicaListView{
         id: listView
         anchors.fill: parent
 
@@ -90,7 +92,6 @@ Page {
         delegate: ListItem {
             id: dictListItem
             onClicked: {
-                console.log("Clicked: " + name + " - " + index + " - " + dictSwitch.checked);
                 dictSwitch.checked = dictSwitch.checked ? false : true;
                 starDictLib.setSelectDict(index, dictSwitch.checked);
             }

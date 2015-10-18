@@ -15,7 +15,7 @@ Name:       harbour-sidudict
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    A dictionary program
-Version:    0.4
+Version:    0.5
 Release:    1
 Group:      Qt/Qt
 License:    GPLv2+ and dictionaries under cc by-sa 3.0
@@ -67,7 +67,7 @@ rm -rf %{buildroot}
 #%{_datadir}/%{name}/lib
 %attr(0755,-,-) /usr/bin/%{name}
 %{_datadir}/applications/%{name}.desktop
-%{_datadir}/icons/hicolor/86x86/apps/%{name}.png
+%{_datadir}/icons/hicolor/*/apps/%{name}.png
 %{_datadir}/%{name}/qml
 #%{_datadir}/%{name}/dic
 # >> files

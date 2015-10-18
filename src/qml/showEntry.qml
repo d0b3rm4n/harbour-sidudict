@@ -24,12 +24,14 @@
  *                                                                         *
  ***************************************************************************/
 
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 
 Page {
     property string pageTitleEntry
     property string dictTranslatedEntry
+
+    allowedOrientations: defaultAllowedOrientations
 
     SilicaFlickable {
         anchors.fill: parent

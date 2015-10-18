@@ -24,11 +24,12 @@
  *                                                                         *
  ***************************************************************************/
 
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 import "license.js" as License
 
 Page {
+    allowedOrientations: defaultAllowedOrientations
 
     SilicaFlickable {
         anchors.fill: parent
