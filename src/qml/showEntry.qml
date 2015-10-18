@@ -26,6 +26,7 @@
 
 import QtQuick 2.2
 import Sailfish.Silica 1.0
+import "utils.js" as Utils
 
 Page {
     property string pageTitleEntry
@@ -39,43 +40,105 @@ Page {
         Column {
             id: column
             width: parent.width
-            spacing: Theme.paddingSmall
+            spacing: Theme.paddingMedium
 
             PageHeader { title: pageTitleEntry }
-            Label {
-                id: translation
-                property int minimumPointSize: Theme.fontSizeExtraSmall
-                property int maximumPointSize: Theme.fontSizeExtraLarge
-                property int currentPointSize: Theme.fontSizeMedium
+
+            Row {
+                id: buttonRow
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    margins: Theme.paddingMedium
+                }
+                spacing: Theme.paddingSmall
+
+                Rectangle {
+                    width: parent.width - copyText.width - smallerText.width - biggerText.width - buttonRow.spacing * 3
+                    height: smallerText.height
+                    opacity: 0
+                }
+                Button {
+                    id: copyText
+                    preferredWidth: Theme.buttonWidthSmall / 3
+                    text: dentry.selectedText.length > 0 ? qsTr("Copy") : qsTr("Copy all")
+                    onClicked: dentry.copyText()
+                }
+                Button {
+                    id: smallerText
+                    preferredWidth: Theme.buttonWidthSmall / 3
+                    text: qsTr("-")
+                    enabled: dentry.font.pointSize > Theme.fontSizeExtraSmall
+                    onClicked: dentry.setFontSize(dentry.font.pointSize - 2)
+                }
+                Button {
+                    id: biggerText
+                    preferredWidth: Theme.buttonWidthSmall / 3
+                    text: qsTr("+")
+                    enabled: dentry.font.pointSize < Theme.fontSizeExtraLarge
+                    onClicked: dentry.setFontSize(dentry.font.pointSize + 2)
+                }
+            }
+
+            TextEdit {
+                id: dentry
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    // left margin allows easier text selection
+                    leftMargin: Theme.itemSizeSmall / 2
+                    // right margin allows scrolling
+                    rightMargin: Theme.itemSizeSmall
+                }
                 text: dictTranslatedEntry
-                anchors {left: parent.left; right: parent.right}
-                anchors.margins: Theme.paddingMedium
-                wrapMode: Text.WordWrap
-                font.pointSize: translation.currentPointSize
+                focus: false
+                readOnly: true
+                selectByMouse: true
                 color: Theme.primaryColor
+                wrapMode: Text.WordWrap
                 textFormat: Text.RichText
 
-                PinchArea {
-                    anchors.fill: parent
-                    onPinchUpdated: {
-                        var desiredSize = pinch.scale * translation.currentPointSize;
-                        if(desiredSize >= translation.minimumPointSize && desiredSize <= translation.maximumPointSize)
-                            translation.font.pointSize = desiredSize
-                        else if (desiredSize < translation.minimumPointSize)
-                            translation.font.pointSize = translation.minimumPointSize
-                        else if (desiredSize > translation.maximumPointSize)
-                            translation.font.pointSize = translation.maximumPointSize
-                    }
-                    onPinchFinished: {
-                        var desiredSize = pinch.scale * translation.currentPointSize;
-                        if(desiredSize >= translation.minimumPointSize && desiredSize <= translation.maximumPointSize)
-                            translation.currentPointSize = desiredSize
-                        else if (desiredSize < translation.minimumPointSize)
-                            translation.currentPointSize = translation.minimumPointSize
-                        else if (desiredSize > translation.maximumPointSize)
-                            translation.currentPointSize = translation.maximumPointSize
+                property int prevSelectionStart: -1
+                property int prevSelectionEnd: -1
 
-                        translation.font.pointSize = translation.currentPointSize;
+                function setFontSize(newSize) {
+                    if (newSize < Theme.fontSizeExtraSmall) {
+                        newSize = Theme.fontSizeExtraSmall
+                    } else if (newSize > Theme.fontSizeExtraLarge) {
+                        newSize = Theme.fontSizeExtraLarge
+                    }
+                    font.pointSize = newSize
+                }
+
+                function copyText() {
+                    var cleaned = Utils.removeHtmlTags(selectedText.length > 0 ? selectedText : text)
+                    if (cleaned.lenght === 0)
+                        return
+                    Clipboard.text = cleaned
+                    //console.log("copied " + cleaned.length)
+                }
+
+                onSelectedTextChanged: {
+                    //console.log("select " + selectionStart + ":" + selectionEnd + "(prev: " + prevSelectionStart + ":" + prevSelectionEnd + ")")
+                    if (prevSelectionStart === -1) {
+                        selectWord()
+                    } else if (prevSelectionStart >= 0) {
+                        if (selectionEnd < prevSelectionStart || selectionStart > prevSelectionEnd) {
+                            // click outside of the current selection removes selection
+                            deselect()
+                            // but this handler will be called again immediately,
+                            // and we need to avoid word selection
+                            prevSelectionStart = -2
+                            prevSelectionEnd = -2
+                            return
+                        }
+                    }
+                    if (selectionStart < selectionEnd) {
+                        prevSelectionStart = selectionStart
+                        prevSelectionEnd = selectionEnd
+                    } else {
+                        prevSelectionStart = -1
+                        prevSelectionEnd = -1
                     }
                 }
             }
