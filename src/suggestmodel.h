@@ -44,7 +44,7 @@ public:
 
     SuggestModel(QObject *parent = 0);
 
-    void setSuggestMap(QList<EntryDictItem*> &map);
+    void setSuggestMap(const QList<EntryDictItem*> &map);
     int rowCount(const QModelIndex &parent) const;
     QVariant data(const QModelIndex &index, int role) const;
     bool setData(const QModelIndex &index, const QVariant &value, int role);

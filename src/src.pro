@@ -34,7 +34,8 @@ SOURCES += main.cpp\
         dictlistmodel.cpp \
         suggestmodel.cpp \
         entrydictitem.cpp \
-        downloadmanager.cpp
+        downloadmanager.cpp \
+        worker.cpp
 
 HEADERS  += logging.h \
          lib/dictziplib.hpp \
@@ -47,6 +48,7 @@ HEADERS  += logging.h \
          dictlistmodel.h \
          suggestmodel.h \
          entrydictitem.h \
-         downloadmanager.h
+         downloadmanager.h \
+         worker.h
 
 OTHER_FILES += qml/*.qml qml/*.js
