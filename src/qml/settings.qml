@@ -37,7 +37,7 @@ Page {
     }
 
     function selectedInputMethod() {
-        var cur = starDictLib.inputMethod
+        var cur = starDictLib.readSetting("inputMethod")
         for (var i = 0; i < inputMethodNames.count; ++i) {
             if (cur === inputMethodNames.get(i).token) {
                 return i
@@ -76,7 +76,7 @@ Page {
                         MenuItem {
                             text: model.name
                             onClicked: {
-                                starDictLib.inputMethod = token
+                                starDictLib.writeSetting("inputMethod", token)
                             }
                         }
                     }

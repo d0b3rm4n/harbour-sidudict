@@ -56,10 +56,9 @@ public:
     Q_INVOKABLE void downloadDict(QString url);
     Q_INVOKABLE bool showNotification(QString category, const QString summary, const QString text, QString previewBody, QString previewSummary, QString icon);
     Q_INVOKABLE void deleteDictionary(QString dict);
-    Q_PROPERTY(QString inputMethod READ getInputMethod WRITE setInputMethod NOTIFY inputMethodChanged)
 
-    QString getInputMethod() const;
-    void setInputMethod(const QString &method);
+    Q_INVOKABLE QString readSetting(const QString &key) const;
+    Q_INVOKABLE void writeSetting(const QString &key, const QString &value);
 
     SuggestModel *m_suggestModel;
     DictListModel *m_availableDicts;
@@ -72,7 +71,6 @@ public slots:
     void updateSuggestions();
 
 signals:
-    void inputMethodChanged(const QString &method);
     void queryChanged(const QString &query);
 
 private:
@@ -80,7 +78,7 @@ private:
     Worker *m_worker;
     QString m_lastTranslation;
     DownloadManager *m_downloadManager;
-    QString m_inputMethod;
+    QVector<QPair<QString, QString> > m_settings;
 
     void updateDictCatalogue();
 };

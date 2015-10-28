@@ -47,7 +47,8 @@ SiduDictLib::SiduDictLib()
     IN;
     QSettings settings("harbour-sidudict","dictionary-settings");
     QMap<QString, QVariant> dictListSettings = settings.value("Sidudict/dictListSettings", QMap<QString, QVariant>()).toMap();
-    setInputMethod(settings.value("Sidudict/inputMethod", "none").toString());
+    writeSetting("inputMethod", settings.value("Sidudict/inputMethod", "none").toString());
+    writeSetting("entryFontSize", settings.value("Sidudict/entryFontSize", "32").toString());
 
     // handle old settings from 0.1-2
     bool oldSettingsImported = false;
@@ -149,7 +150,9 @@ SiduDictLib::~SiduDictLib()
     IN;
     QSettings settings("harbour-sidudict","dictionary-settings");
     settings.setValue("Sidudict/dictListSettings", QVariant(m_availableDicts->dictListMap()));
-    settings.setValue("Sidudict/inputMethod", m_inputMethod);
+    for (const QPair<QString, QString> &p : m_settings) {
+        settings.setValue("Sidudict/" + p.first, p.second);
+    }
     settings.sync();
     m_thread->quit();
     delete m_worker;
@@ -398,13 +401,23 @@ void SiduDictLib::deleteDictionary(QString dict)
     updateDictCatalogue();
 }
 
-QString SiduDictLib::getInputMethod() const
+QString SiduDictLib::readSetting(const QString &key) const
 {
-    return m_inputMethod;
+    for (const QPair<QString, QString> &p : m_settings) {
+        if (p.first == key)
+            return p.second;
+    }
+    return "";
 }
 
-void SiduDictLib::setInputMethod(const QString &method)
+void SiduDictLib::writeSetting(const QString &key, const QString &value)
 {
-    m_inputMethod = method;
-    emit inputMethodChanged(method);
+    for (QPair<QString, QString> &p : m_settings) {
+        if (p.first == key) {
+            p.second = value;
+            return;
+        }
+    }
+    QPair<QString, QString> pair(key, value);
+    m_settings.push_back(pair);
 }

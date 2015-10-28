@@ -1,4 +1,4 @@
-CONFIG += link_pkgconfig
+CONFIG += link_pkgconfig c++11
 PKGCONFIG += glib-2.0
 LIBS += -lz
 

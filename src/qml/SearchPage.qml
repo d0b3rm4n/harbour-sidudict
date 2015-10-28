@@ -49,7 +49,7 @@ Page {
     id: searchPage
     property bool keepSearchFieldFocus: true
     property int curIndex
-    property string inputMethod: starDictLib.inputMethod
+    property string inputMethod: "none"
 
     allowedOrientations: defaultAllowedOrientations
 
@@ -63,6 +63,12 @@ Page {
 
     Component.onCompleted: {
         starDictLib.updateList(searchField.text)
+    }
+
+    onStatusChanged: {
+        if (status === PageStatus.Activating) {
+            inputMethod = starDictLib.readSetting("inputMethod")
+        }
     }
 
     Loader {

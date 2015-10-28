@@ -31,8 +31,17 @@ import "utils.js" as Utils
 Page {
     property string pageTitleEntry
     property string dictTranslatedEntry
+    property int fontSize: starDictLib.readSetting("entryFontSize")
 
     allowedOrientations: defaultAllowedOrientations
+
+    onStatusChanged: {
+        if (status !== PageStatus.Deactivating)
+            return
+        if (dentry.font.pointSize === fontSize)
+            return
+        starDictLib.writeSetting("entryFontSize", String(dentry.font.pointSize))
+    }
 
     SilicaFlickable {
         anchors.fill: parent
@@ -97,6 +106,7 @@ Page {
                 color: Theme.primaryColor
                 wrapMode: Text.WordWrap
                 textFormat: Text.RichText
+                font.pointSize: fontSize
 
                 property int prevSelectionStart: -1
                 property int prevSelectionEnd: -1
