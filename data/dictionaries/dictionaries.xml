@@ -3,217 +3,235 @@
     <dictionary>
         <id>1</id>
         <name>Wiktionary Danish to English</name>
-        <entries>12757</entries>
-        <size>608K</size>
-        <date>2014.01.04</date>
+        <entries>25899</entries>
+        <size>1.1M</size>
+        <date>20210416</date>
         <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-dan-eng-2.4.2.zip</url>
-        <description>This file was converted from the original database on:&lt;br&gt;          Fri Sep 27 13:10:43 2013&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;     unknown&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed.  Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates Danish to English. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;http://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.&lt;br&gt;Source url: unknown</description>
+        <description>This file was converted from the original database on:&lt;br&gt; Wed Jun 16 15:40:33 2021&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;https://github.com/tkedwards/wiktionarytodict&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed. Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates Danish to English. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;https://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.</description>
     </dictionary>
     <dictionary>
         <id>2</id>
         <name>Wiktionary German to English</name>
-        <entries>47233</entries>
-        <size>2.4M</size>
-        <date>2014.01.04</date>
+        <entries>78725</entries>
+        <size>3.4M</size>
+        <date>20210416</date>
         <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-deu-eng-2.4.2.zip</url>
-        <description>This file was converted from the original database on:&lt;br&gt;          Fri Sep 27 11:49:23 2013&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;     unknown&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed.  Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates German to English. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;http://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.&lt;br&gt;Source url: unknown</description>
+        <description>This file was converted from the original database on:&lt;br&gt; Wed Jun 16 15:40:33 2021&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;https://github.com/tkedwards/wiktionarytodict&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed. Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates German to English. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;https://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.</description>
     </dictionary>
     <dictionary>
         <id>3</id>
-        <name>Wiktionary English to Danish</name>
-        <entries>9766</entries>
-        <size>520K</size>
-        <date>2014.01.04</date>
-        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-eng-dan-2.4.2.zip</url>
-        <description>This file was converted from the original database on:&lt;br&gt;          Fri Sep 27 13:10:43 2013&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;     unknown&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed.  Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates English to Danish. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;http://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.&lt;br&gt;Source url: unknown</description>
+        <name>Wiktionary Greek to English</name>
+        <entries>28800</entries>
+        <size>1.6M</size>
+        <date>20210416</date>
+        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-ell-eng-2.4.2.zip</url>
+        <description>This file was converted from the original database on:&lt;br&gt; Wed Jun 16 15:40:33 2021&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;https://github.com/tkedwards/wiktionarytodict&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed. Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates Greek to English. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;https://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.</description>
     </dictionary>
     <dictionary>
         <id>4</id>
-        <name>Wiktionary English to German</name>
-        <entries>33796</entries>
-        <size>1.9M</size>
-        <date>2014.01.04</date>
-        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-eng-deu-2.4.2.zip</url>
-        <description>This file was converted from the original database on:&lt;br&gt;          Fri Sep 27 11:49:22 2013&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;     unknown&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed.  Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates English to German. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;http://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.&lt;br&gt;Source url: unknown</description>
+        <name>Wiktionary English to Danish</name>
+        <entries>20452</entries>
+        <size>1.1M</size>
+        <date>20210416</date>
+        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-eng-dan-2.4.2.zip</url>
+        <description>This file was converted from the original database on:&lt;br&gt; Wed Jun 16 15:40:33 2021&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;https://github.com/tkedwards/wiktionarytodict&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed. Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates English to Danish. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;https://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.</description>
     </dictionary>
     <dictionary>
         <id>5</id>
-        <name>Wiktionary English to Finnish</name>
-        <entries>36147</entries>
-        <size>2.2M</size>
-        <date>2014.01.04</date>
-        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-eng-fin-2.4.2.zip</url>
-        <description>This file was converted from the original database on:&lt;br&gt;          Fri Sep 27 13:10:56 2013&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;     unknown&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed.  Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates English to Finnish. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;http://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.&lt;br&gt;Source url: unknown</description>
+        <name>Wiktionary English to German</name>
+        <entries>51443</entries>
+        <size>2.9M</size>
+        <date>20210416</date>
+        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-eng-deu-2.4.2.zip</url>
+        <description>This file was converted from the original database on:&lt;br&gt; Wed Jun 16 15:40:34 2021&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;https://github.com/tkedwards/wiktionarytodict&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed. Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates English to German. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;https://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.</description>
     </dictionary>
     <dictionary>
         <id>6</id>
-        <name>Wiktionary English to French</name>
-        <entries>34935</entries>
-        <size>1.9M</size>
-        <date>2014.01.04</date>
-        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-eng-fra-2.4.2.zip</url>
-        <description>This file was converted from the original database on:&lt;br&gt;          Fri Sep 27 12:30:32 2013&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;     unknown&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed.  Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates English to French. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;http://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.&lt;br&gt;Source url: unknown</description>
+        <name>Wiktionary English to Greek</name>
+        <entries>27261</entries>
+        <size>1.5M</size>
+        <date>20210416</date>
+        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-eng-ell-2.4.2.zip</url>
+        <description>This file was converted from the original database on:&lt;br&gt; Wed Jun 16 15:40:34 2021&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;https://github.com/tkedwards/wiktionarytodict&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed. Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates English to Greek. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;https://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.</description>
     </dictionary>
     <dictionary>
         <id>7</id>
-        <name>Wiktionary English to Italian</name>
-        <entries>23252</entries>
-        <size>1.2M</size>
-        <date>2014.01.04</date>
-        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-eng-ita-2.4.2.zip</url>
-        <description>This file was converted from the original database on:&lt;br&gt;          Fri Sep 27 12:30:33 2013&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;     unknown&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed.  Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates English to Italian. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;http://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.&lt;br&gt;Source url: unknown</description>
+        <name>Wiktionary English to Finnish</name>
+        <entries>58129</entries>
+        <size>3.4M</size>
+        <date>20210416</date>
+        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-eng-fin-2.4.2.zip</url>
+        <description>This file was converted from the original database on:&lt;br&gt; Wed Jun 16 15:40:34 2021&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;https://github.com/tkedwards/wiktionarytodict&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed. Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates English to Finnish. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;https://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.</description>
     </dictionary>
     <dictionary>
         <id>8</id>
-        <name>Wiktionary English to Dutch</name>
-        <entries>20804</entries>
-        <size>1.2M</size>
-        <date>2014.01.04</date>
-        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-eng-nld-2.4.2.zip</url>
-        <description>This file was converted from the original database on:&lt;br&gt;          Fri Sep 27 11:49:23 2013&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;     unknown&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed.  Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates English to Dutch. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;http://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.&lt;br&gt;Source url: unknown</description>
+        <name>Wiktionary English to French</name>
+        <entries>54475</entries>
+        <size>2.8M</size>
+        <date>20210416</date>
+        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-eng-fra-2.4.2.zip</url>
+        <description>This file was converted from the original database on:&lt;br&gt; Wed Jun 16 15:40:34 2021&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;https://github.com/tkedwards/wiktionarytodict&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed. Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates English to French. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;https://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.</description>
     </dictionary>
     <dictionary>
         <id>9</id>
-        <name>Wiktionary English to Norwegian</name>
-        <entries>9725</entries>
-        <size>532K</size>
-        <date>2014.01.04</date>
-        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-eng-nob-2.4.2.zip</url>
-        <description>This file was converted from the original database on:&lt;br&gt;          Fri Sep 27 11:49:22 2013&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;     unknown&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed.  Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates English to Norwegian. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;http://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.&lt;br&gt;Source url: unknown</description>
+        <name>Wiktionary English to Italian</name>
+        <entries>39856</entries>
+        <size>2.0M</size>
+        <date>20210416</date>
+        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-eng-ita-2.4.2.zip</url>
+        <description>This file was converted from the original database on:&lt;br&gt; Wed Jun 16 15:40:34 2021&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;https://github.com/tkedwards/wiktionarytodict&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed. Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates English to Italian. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;https://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.</description>
     </dictionary>
     <dictionary>
         <id>10</id>
-        <name>Wiktionary English to Polish</name>
-        <entries>16390</entries>
-        <size>892K</size>
-        <date>2014.01.04</date>
-        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-eng-pol-2.4.2.zip</url>
-        <description>This file was converted from the original database on:&lt;br&gt;          Fri Sep 27 13:10:49 2013&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;     unknown&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed.  Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates English to Polish. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;http://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.&lt;br&gt;Source url: unknown</description>
+        <name>Wiktionary English to Dutch</name>
+        <entries>30355</entries>
+        <size>1.7M</size>
+        <date>20210416</date>
+        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-eng-nld-2.4.2.zip</url>
+        <description>This file was converted from the original database on:&lt;br&gt; Wed Jun 16 15:40:34 2021&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;https://github.com/tkedwards/wiktionarytodict&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed. Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates English to Dutch. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;https://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.</description>
     </dictionary>
     <dictionary>
         <id>11</id>
-        <name>Wiktionary English to Portuguese</name>
-        <entries>17808</entries>
-        <size>964K</size>
-        <date>2014.01.04</date>
-        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-eng-por-2.4.2.zip</url>
-        <description>This file was converted from the original database on:&lt;br&gt;          Fri Sep 27 12:30:41 2013&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;     unknown&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed.  Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates English to Portuguese. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;http://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.&lt;br&gt;Source url: unknown</description>
+        <name>Wiktionary English to Norwegian</name>
+        <entries>20431</entries>
+        <size>1016K</size>
+        <date>20210416</date>
+        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-eng-nob-2.4.2.zip</url>
+        <description>This file was converted from the original database on:&lt;br&gt; Wed Jun 16 15:40:35 2021&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;https://github.com/tkedwards/wiktionarytodict&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed. Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates English to Norwegian. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;https://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.</description>
     </dictionary>
     <dictionary>
         <id>12</id>
-        <name>Wiktionary English to Russian</name>
-        <entries>33263</entries>
-        <size>2.4M</size>
-        <date>2014.01.04</date>
-        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-eng-rus-2.4.2.zip</url>
-        <description>This file was converted from the original database on:&lt;br&gt;          Fri Sep 27 13:06:48 2013&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;     unknown&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed.  Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates English to Russian. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;http://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.&lt;br&gt;Source url: unknown</description>
+        <name>Wiktionary English to Polish</name>
+        <entries>29438</entries>
+        <size>1.5M</size>
+        <date>20210416</date>
+        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-eng-pol-2.4.2.zip</url>
+        <description>This file was converted from the original database on:&lt;br&gt; Wed Jun 16 15:40:35 2021&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;https://github.com/tkedwards/wiktionarytodict&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed. Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates English to Polish. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;https://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.</description>
     </dictionary>
     <dictionary>
         <id>13</id>
-        <name>Wiktionary English to Spanish</name>
-        <entries>29358</entries>
-        <size>1.6M</size>
-        <date>2014.01.04</date>
-        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-eng-spa-2.4.2.zip</url>
-        <description>This file was converted from the original database on:&lt;br&gt;          Fri Sep 27 11:49:22 2013&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;     unknown&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed.  Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates English to Spanish. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;http://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.&lt;br&gt;Source url: unknown</description>
+        <name>Wiktionary English to Portuguese</name>
+        <entries>43672</entries>
+        <size>2.3M</size>
+        <date>20210416</date>
+        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-eng-por-2.4.2.zip</url>
+        <description>This file was converted from the original database on:&lt;br&gt; Wed Jun 16 15:40:35 2021&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;https://github.com/tkedwards/wiktionarytodict&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed. Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates English to Portuguese. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;https://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.</description>
     </dictionary>
     <dictionary>
         <id>14</id>
-        <name>Wiktionary English to Swedish</name>
-        <entries>17342</entries>
-        <size>976K</size>
-        <date>2014.01.04</date>
-        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-eng-swe-2.4.2.zip</url>
-        <description>This file was converted from the original database on:&lt;br&gt;          Fri Sep 27 12:30:38 2013&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;     unknown&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed.  Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates English to Swedish. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;http://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.&lt;br&gt;Source url: unknown</description>
+        <name>Wiktionary English to Russian</name>
+        <entries>47543</entries>
+        <size>3.0M</size>
+        <date>20210416</date>
+        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-eng-rus-2.4.2.zip</url>
+        <description>This file was converted from the original database on:&lt;br&gt; Wed Jun 16 15:40:35 2021&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;https://github.com/tkedwards/wiktionarytodict&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed. Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates English to Russian. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;https://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.</description>
     </dictionary>
     <dictionary>
         <id>15</id>
-        <name>Wiktionary Finnish to English</name>
-        <entries>49089</entries>
-        <size>2.8M</size>
-        <date>2014.01.04</date>
-        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-fin-eng-2.4.2.zip</url>
-        <description>This file was converted from the original database on:&lt;br&gt;          Fri Sep 27 13:10:57 2013&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;     unknown&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed.  Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates Finnish to English. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;http://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.&lt;br&gt;Source url: unknown</description>
+        <name>Wiktionary English to Spanish</name>
+        <entries>47220</entries>
+        <size>2.5M</size>
+        <date>20210416</date>
+        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-eng-spa-2.4.2.zip</url>
+        <description>This file was converted from the original database on:&lt;br&gt; Wed Jun 16 15:40:35 2021&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;https://github.com/tkedwards/wiktionarytodict&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed. Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates English to Spanish. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;https://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.</description>
     </dictionary>
     <dictionary>
         <id>16</id>
-        <name>Wiktionary French to English</name>
-        <entries>41106</entries>
-        <size>2.2M</size>
-        <date>2014.01.04</date>
-        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-fra-eng-2.4.2.zip</url>
-        <description>This file was converted from the original database on:&lt;br&gt;          Fri Sep 27 12:30:33 2013&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;     unknown&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed.  Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates French to English. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;http://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.&lt;br&gt;Source url: unknown</description>
+        <name>Wiktionary English to Swedish</name>
+        <entries>31496</entries>
+        <size>1.6M</size>
+        <date>20210416</date>
+        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-eng-swe-2.4.2.zip</url>
+        <description>This file was converted from the original database on:&lt;br&gt; Wed Jun 16 15:40:35 2021&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;https://github.com/tkedwards/wiktionarytodict&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed. Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates English to Swedish. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;https://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.</description>
     </dictionary>
     <dictionary>
         <id>17</id>
-        <name>Wiktionary Italian to English</name>
-        <entries>27665</entries>
-        <size>1.4M</size>
-        <date>2014.01.04</date>
-        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-ita-eng-2.4.2.zip</url>
-        <description>This file was converted from the original database on:&lt;br&gt;          Fri Sep 27 12:30:33 2013&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;     unknown&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed.  Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates Italian to English. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;http://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.&lt;br&gt;Source url: unknown</description>
+        <name>Wiktionary Finnish to English</name>
+        <entries>79853</entries>
+        <size>3.5M</size>
+        <date>20210416</date>
+        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-fin-eng-2.4.2.zip</url>
+        <description>This file was converted from the original database on:&lt;br&gt; Wed Jun 16 15:40:35 2021&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;https://github.com/tkedwards/wiktionarytodict&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed. Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates Finnish to English. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;https://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.</description>
     </dictionary>
     <dictionary>
         <id>18</id>
-        <name>Wiktionary Dutch to English</name>
-        <entries>29363</entries>
-        <size>1.6M</size>
-        <date>2014.01.04</date>
-        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-nld-eng-2.4.2.zip</url>
-        <description>This file was converted from the original database on:&lt;br&gt;          Fri Sep 27 11:49:23 2013&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;     unknown&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed.  Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates Dutch to English. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;http://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.&lt;br&gt;Source url: unknown</description>
+        <name>Wiktionary French to English</name>
+        <entries>63509</entries>
+        <size>2.8M</size>
+        <date>20210416</date>
+        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-fra-eng-2.4.2.zip</url>
+        <description>This file was converted from the original database on:&lt;br&gt; Wed Jun 16 15:40:36 2021&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;https://github.com/tkedwards/wiktionarytodict&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed. Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates French to English. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;https://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.</description>
     </dictionary>
     <dictionary>
         <id>19</id>
-        <name>Wiktionary Norwegian to English</name>
-        <entries>13077</entries>
-        <size>624K</size>
-        <date>2014.01.04</date>
-        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-nob-eng-2.4.2.zip</url>
-        <description>This file was converted from the original database on:&lt;br&gt;          Fri Sep 27 11:49:22 2013&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;     unknown&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed.  Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates Norwegian to English. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;http://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.&lt;br&gt;Source url: unknown</description>
+        <name>Wiktionary Italian to English</name>
+        <entries>48663</entries>
+        <size>2.1M</size>
+        <date>20210416</date>
+        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-ita-eng-2.4.2.zip</url>
+        <description>This file was converted from the original database on:&lt;br&gt; Wed Jun 16 15:40:36 2021&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;https://github.com/tkedwards/wiktionarytodict&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed. Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates Italian to English. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;https://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.</description>
     </dictionary>
     <dictionary>
         <id>20</id>
-        <name>Wiktionary Polish to English</name>
-        <entries>20859</entries>
-        <size>1.1M</size>
-        <date>2014.01.04</date>
-        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-pol-eng-2.4.2.zip</url>
-        <description>This file was converted from the original database on:&lt;br&gt;          Fri Sep 27 13:10:49 2013&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;     unknown&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed.  Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates Polish to English. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;http://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.&lt;br&gt;Source url: unknown</description>
+        <name>Wiktionary Dutch to English</name>
+        <entries>41613</entries>
+        <size>1.8M</size>
+        <date>20210416</date>
+        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-nld-eng-2.4.2.zip</url>
+        <description>This file was converted from the original database on:&lt;br&gt; Wed Jun 16 15:40:36 2021&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;https://github.com/tkedwards/wiktionarytodict&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed. Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates Dutch to English. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;https://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.</description>
     </dictionary>
     <dictionary>
         <id>21</id>
-        <name>Wiktionary Portuguese to English</name>
-        <entries>21744</entries>
-        <size>1.1M</size>
-        <date>2014.01.04</date>
-        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-por-eng-2.4.2.zip</url>
-        <description>This file was converted from the original database on:&lt;br&gt;          Fri Sep 27 12:30:41 2013&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;     unknown&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed.  Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates Portuguese to English. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;http://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.&lt;br&gt;Source url: unknown</description>
+        <name>Wiktionary Norwegian to English</name>
+        <entries>25403</entries>
+        <size>1020K</size>
+        <date>20210416</date>
+        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-nob-eng-2.4.2.zip</url>
+        <description>This file was converted from the original database on:&lt;br&gt; Wed Jun 16 15:40:36 2021&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;https://github.com/tkedwards/wiktionarytodict&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed. Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates Norwegian to English. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;https://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.</description>
     </dictionary>
     <dictionary>
         <id>22</id>
-        <name>Wiktionary Russian to English</name>
-        <entries>48570</entries>
-        <size>3.5M</size>
-        <date>2014.01.04</date>
-        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-rus-eng-2.4.2.zip</url>
-        <description>This file was converted from the original database on:&lt;br&gt;          Fri Sep 27 13:06:49 2013&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;     unknown&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed.  Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates Russian to English. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;http://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.&lt;br&gt;Source url: unknown</description>
+        <name>Wiktionary Polish to English</name>
+        <entries>38860</entries>
+        <size>1.7M</size>
+        <date>20210416</date>
+        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-pol-eng-2.4.2.zip</url>
+        <description>This file was converted from the original database on:&lt;br&gt; Wed Jun 16 15:40:36 2021&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;https://github.com/tkedwards/wiktionarytodict&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed. Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates Polish to English. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;https://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.</description>
     </dictionary>
     <dictionary>
         <id>23</id>
-        <name>Wiktionary Spanish to English</name>
-        <entries>35758</entries>
-        <size>1.9M</size>
-        <date>2014.01.04</date>
-        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-spa-eng-2.4.2.zip</url>
-        <description>This file was converted from the original database on:&lt;br&gt;          Fri Sep 27 11:49:22 2013&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;     unknown&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed.  Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates Spanish to English. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;http://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.&lt;br&gt;Source url: unknown</description>
+        <name>Wiktionary Portuguese to English</name>
+        <entries>52218</entries>
+        <size>2.2M</size>
+        <date>20210416</date>
+        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-por-eng-2.4.2.zip</url>
+        <description>This file was converted from the original database on:&lt;br&gt; Wed Jun 16 15:40:36 2021&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;https://github.com/tkedwards/wiktionarytodict&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed. Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates Portuguese to English. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;https://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.</description>
     </dictionary>
     <dictionary>
         <id>24</id>
+        <name>Wiktionary Russian to English</name>
+        <entries>70544</entries>
+        <size>4.0M</size>
+        <date>20210416</date>
+        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-rus-eng-2.4.2.zip</url>
+        <description>This file was converted from the original database on:&lt;br&gt; Wed Jun 16 15:40:37 2021&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;https://github.com/tkedwards/wiktionarytodict&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed. Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates Russian to English. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;https://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.</description>
+    </dictionary>
+    <dictionary>
+        <id>25</id>
+        <name>Wiktionary Spanish to English</name>
+        <entries>58790</entries>
+        <size>2.5M</size>
+        <date>20210416</date>
+        <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-spa-eng-2.4.2.zip</url>
+        <description>This file was converted from the original database on:&lt;br&gt; Wed Jun 16 15:40:37 2021&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;https://github.com/tkedwards/wiktionarytodict&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed. Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates Spanish to English. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;https://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.</description>
+    </dictionary>
+    <dictionary>
+        <id>26</id>
         <name>Wiktionary Swedish to English</name>
-        <entries>23713</entries>
-        <size>1.2M</size>
-        <date>2014.01.04</date>
+        <entries>40803</entries>
+        <size>1.7M</size>
+        <date>20210416</date>
         <url>https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries/stardict-wikt-swe-eng-2.4.2.zip</url>
-        <description>This file was converted from the original database on:&lt;br&gt;          Fri Sep 27 12:30:38 2013&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;     unknown&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed.  Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates Swedish to English. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;http://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.&lt;br&gt;Source url: unknown</description>
+        <description>This file was converted from the original database on:&lt;br&gt; Wed Jun 16 15:40:37 2021&lt;br&gt;&lt;br&gt;The original data is available from:&lt;br&gt;https://github.com/tkedwards/wiktionarytodict&lt;br&gt;&lt;br&gt;The original data was distributed with the notice shown below. No&lt;br&gt;additional restrictions are claimed. Please redistribute this changed&lt;br&gt;version under the same conditions and restriction that apply to the&lt;br&gt;original version.&lt;br&gt;&lt;br&gt;This dictionary tranlsates Swedish to English. It was created by the&lt;br&gt;script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based&lt;br&gt;on data from the Wiktionary dumps available from&lt;br&gt;https://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2&lt;br&gt;All content in this dictionary is under the same license as Wiktionary&lt;br&gt;content.</description>
     </dictionary>
 </dictionaries>
