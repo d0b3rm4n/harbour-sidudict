@@ -28,7 +28,7 @@
 ##############################################################################
 
 DICT_XML="dictionaries.xml"
-GITHUB="https://raw.github.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries"
+GITHUB="https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries"
 
 echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>" > ${DICT_XML}
 echo "<dictionaries>" >> ${DICT_XML}
@@ -45,7 +45,7 @@ for IFO_FILE in $(ls -1 */*.ifo) ; do
     WORDCOUNT=$(grep 'wordcount=' ${IFO_FILE} | sed -e 's/wordcount=//')
     DATE=$(grep 'date=' ${IFO_FILE} | sed -e 's/date=//')
     BOOKNAME=$(grep 'bookname=' ${IFO_FILE} | sed -e 's/bookname=//')
-    DESCRIPTION=$(grep 'description=' ${IFO_FILE} | sed -e 's/description=//' | xmlstarlet esc )
+    DESCRIPTION=$(echo "This file was converted from the original database on:<br> $(date +'%a %b %d %H:%M:%S %Y')<br><br>The original data is available from:<br>https://github.com/tkedwards/wiktionarytodict<br><br>The original data was distributed with the notice shown below. No<br>additional restrictions are claimed. Please redistribute this changed<br>version under the same conditions and restriction that apply to the<br>original version.<br><br>This dictionary tranlsates ${BOOKNAME/Wiktionary /}. It was created by the<br>script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based<br>on data from the Wiktionary dumps available from<br>https://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2<br>All content in this dictionary is under the same license as Wiktionary<br>content." | sed -e 's/description=//' | xmlstarlet esc )
 
     echo "    <dictionary>" >> ${DICT_XML}
     echo "        <id>${COUNTER}</id>" >> ${DICT_XML}

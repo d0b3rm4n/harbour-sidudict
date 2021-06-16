@@ -1,48 +1,17 @@
 get files from:
 
-https://github.com/tkedwards/wiktionarytodict/blob/master/packaging/wiktionarytodict_20130929.tar.gz
-resp.
-https://github.com/tkedwards/wiktionarytodict/tree/master/packaging
+https://github.com/tkedwards/wiktionarytodict/releases/
 
 unpack...
 
 dictzip -d *.dict.dz
 
-for INDEX in $(ls -1 *.index); do makedict --output-format stardict --input-format dictd $INDEX; done
+export DATE=<wiktionarytodict release date>
+for INDEX in $(ls -1 *.index); do folder="stardict-${INDEX/\.index}-2.4.2"; mkdir -p $folder; cd $folder && pyglossary ../$INDEX ${INDEX/index/ifo} --read-format=DictOrg --write-format=Stardict && sed -i "s#bookname=.*#bookname=$(sed -n '/00-database-short/{n;p;}' ../${INDEX/index/dict} | xargs)\ndate=$DATE#" ${INDEX/index/ifo} && sed -i 's/version=3.0.0/version=2.4.2/' ${INDEX/index/ifo} && cd ..; done
 
-dictzip stardict-wikt-*/*.dict
 
-
-makedict:
-https://github.com/soshial/xdxf_makedict.git
-
-patch dictd_parser.cpp so html tags stay html tags
-------------------------------------------------------------------------------
-$ git diff
-diff --git a/src/dictd_parser.cpp b/src/dictd_parser.cpp
-index 6dae42e..8088005 100644
---- a/src/dictd_parser.cpp
-+++ b/src/dictd_parser.cpp
-@@ -277,6 +277,19 @@ int Parser::parse(const std::string& filename)
-                }
- 
-                replace(replace_table, conv_str.c_str(), enc_str);
-+
-+               ReplaceStrTable html_tbl;
-+               html_tbl["&lt;sub&gt;"] = "<sub>";
-+               html_tbl["&lt;/sub&gt;"] = "</sub>";
-+               html_tbl["&lt;sup&gt;"] = "<sup>";
-+               html_tbl["&lt;/sup&gt;"] = "</sup>";
-+               html_tbl["&lt;b&gt;"] = "<b>";
-+               html_tbl["&lt;/b&gt;"] = "</b>";
-+               html_tbl["&lt;i&gt;"] = "<i>";
-+               html_tbl["&lt;/i&gt;"] = "</i>";
-+               html_tbl["&lt;!--"] = "<!--";
-+               html_tbl["--&gt;"] = "-->";
-+               replace(html_tbl, conv_str.c_str(), enc_str);
-                remove_not_valid(enc_str);
-                data_size=enc_str.length();
-------------------------------------------------------------------------------
+pyglossary:
+https://github.com/ilius/pyglossary
 
 dictzip:
 from rpm:
