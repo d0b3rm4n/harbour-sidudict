@@ -1,7 +1,8 @@
 StarDict's dict ifo file
 version=2.4.2
 bookname=Wiktionary English to Polish
-date=20210416
-wordcount=29438
-idxfilesize=540224
+date=20220220
+wordcount=33852
+idxfilesize=626955
+sametypesequence=h
 description=

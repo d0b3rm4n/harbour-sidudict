@@ -1,7 +1,8 @@
 StarDict's dict ifo file
 version=2.4.2
 bookname=Wiktionary English to Dutch
-date=20210416
-wordcount=30355
-idxfilesize=557438
+date=20220220
+wordcount=31834
+idxfilesize=587569
+sametypesequence=h
 description=

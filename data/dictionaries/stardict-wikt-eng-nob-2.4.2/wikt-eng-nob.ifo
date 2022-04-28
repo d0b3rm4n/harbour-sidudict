@@ -1,7 +1,8 @@
 StarDict's dict ifo file
 version=2.4.2
 bookname=Wiktionary English to Norwegian
-date=20210416
-wordcount=20431
-idxfilesize=373241
+date=20220220
+wordcount=21131
+idxfilesize=386813
+sametypesequence=h
 description=

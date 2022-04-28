@@ -1,7 +1,8 @@
 StarDict's dict ifo file
 version=2.4.2
 bookname=Wiktionary Portuguese to English
-date=20210416
-wordcount=52218
-idxfilesize=1052294
+date=20220220
+wordcount=54215
+idxfilesize=1094783
+sametypesequence=h
 description=

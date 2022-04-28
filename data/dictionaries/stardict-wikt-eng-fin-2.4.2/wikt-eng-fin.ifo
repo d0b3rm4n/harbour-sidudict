@@ -1,7 +1,8 @@
 StarDict's dict ifo file
 version=2.4.2
 bookname=Wiktionary English to Finnish
-date=20210416
-wordcount=58129
-idxfilesize=1118694
+date=20220220
+wordcount=60000
+idxfilesize=1158276
+sametypesequence=h
 description=

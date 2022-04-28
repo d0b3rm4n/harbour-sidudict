@@ -1,7 +1,8 @@
 StarDict's dict ifo file
 version=2.4.2
 bookname=Wiktionary Spanish to English
-date=20210416
-wordcount=58790
-idxfilesize=1194927
+date=20220220
+wordcount=60983
+idxfilesize=1242579
+sametypesequence=h
 description=
