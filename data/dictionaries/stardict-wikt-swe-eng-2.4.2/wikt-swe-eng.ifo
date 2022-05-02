@@ -1,7 +1,8 @@
 StarDict's dict ifo file
 version=2.4.2
 bookname=Wiktionary Swedish to English
-date=20210416
-wordcount=40803
-idxfilesize=766874
+date=20220220
+wordcount=42484
+idxfilesize=800274
+sametypesequence=h
 description=

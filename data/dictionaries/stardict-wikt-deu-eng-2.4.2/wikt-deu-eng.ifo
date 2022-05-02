@@ -1,7 +1,8 @@
 StarDict's dict ifo file
 version=2.4.2
 bookname=Wiktionary German to English
-date=20210416
-wordcount=78725
-idxfilesize=1627717
+date=20220220
+wordcount=85472
+idxfilesize=1785624
+sametypesequence=h
 description=

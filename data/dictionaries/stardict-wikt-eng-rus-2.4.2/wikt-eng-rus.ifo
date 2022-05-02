@@ -1,7 +1,8 @@
 StarDict's dict ifo file
 version=2.4.2
 bookname=Wiktionary English to Russian
-date=20210416
-wordcount=47543
-idxfilesize=878599
+date=20220220
+wordcount=48667
+idxfilesize=901551
+sametypesequence=h
 description=

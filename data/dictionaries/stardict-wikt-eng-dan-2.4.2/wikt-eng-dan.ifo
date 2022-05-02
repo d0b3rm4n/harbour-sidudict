@@ -1,7 +1,8 @@
 StarDict's dict ifo file
 version=2.4.2
 bookname=Wiktionary English to Danish
-date=20210416
-wordcount=20452
-idxfilesize=377679
+date=20220220
+wordcount=21196
+idxfilesize=392656
+sametypesequence=h
 description=

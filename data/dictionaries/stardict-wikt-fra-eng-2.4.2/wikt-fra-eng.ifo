@@ -1,7 +1,8 @@
 StarDict's dict ifo file
 version=2.4.2
 bookname=Wiktionary French to English
-date=20210416
-wordcount=63509
-idxfilesize=1328535
+date=20220220
+wordcount=66081
+idxfilesize=1386704
+sametypesequence=h
 description=
