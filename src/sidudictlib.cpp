@@ -47,6 +47,8 @@ SiduDictLib::SiduDictLib()
     IN;
     QSettings settings("harbour-sidudict","dictionary-settings");
     QMap<QString, QVariant> dictListSettings = settings.value("Sidudict/dictListSettings", QMap<QString, QVariant>()).toMap();
+    writeSetting("inputMethod", settings.value("Sidudict/inputMethod", "none").toString());
+    writeSetting("entryFontSize", settings.value("Sidudict/entryFontSize", "32").toString());
 
     // handle old settings from 0.1-2
     bool oldSettingsImported = false;
@@ -78,10 +80,8 @@ SiduDictLib::SiduDictLib()
 
     m_lastTranslation = QString("No lookups yet...");
 
-    m_sd = new StarDict(this);
     m_suggestModel = new SuggestModel();
     QList<EntryDictItem*> emptyWordList;
-    emptyWordList.clear();
     m_suggestModel->setSuggestMap(emptyWordList);
 
     m_availableDicts = new DictListModel();
@@ -91,11 +91,14 @@ SiduDictLib::SiduDictLib()
             this,
             SLOT(availableDictsChanged(QModelIndex,QModelIndex)));
 
+    m_worker = new Worker;
+    m_thread = new QThread;
 
     QMap<QString, QVariant> map;
 
-    LOG() << "available dicts" << m_sd->availableDicts();
-    foreach(QString dict, m_sd->availableDicts()){
+    QStringList dictList = m_worker->dictionary().availableDicts();
+    LOG() << "available dicts" << dictList;
+    foreach(QString dict, dictList){
         if (dictListSettings.empty()) {
             map.insert(dict, QVariant(true));
         } else {
@@ -112,15 +115,14 @@ SiduDictLib::SiduDictLib()
     }
     m_availableDicts->setDictMap(map);
 
-    LOG() << "loaded dicts" << m_sd->loadedDicts();
+    dictList = m_worker->dictionary().loadedDicts();
+    LOG() << "loaded dicts" << dictList;
 
-    foreach (QString dict, m_sd->availableDicts()) {
-        LOG() << m_sd->dictInfo(dict).name();
-        LOG() << m_sd->dictInfo(dict).author();
-        LOG() << m_sd->dictInfo(dict).description();
-        LOG() << m_sd->dictInfo(dict).ifoFileName();
-        LOG() << m_sd->dictInfo(dict).wordsCount();
-    }
+    connect(this, SIGNAL(queryChanged(QString)),
+            m_worker, SLOT(updateList(QString)));
+
+    connect(m_worker, SIGNAL(suggestionsUpdated()),
+            this, SLOT(updateSuggestions()));
 
     m_downloadManager = new DownloadManager();
 
@@ -138,6 +140,9 @@ SiduDictLib::SiduDictLib()
             SIGNAL(downloadEnded(QByteArray)),
             this,
             SLOT(downloadEnded(QByteArray)));
+
+    m_worker->moveToThread(m_thread);
+    m_thread->start();
 }
 
 SiduDictLib::~SiduDictLib()
@@ -145,52 +150,39 @@ SiduDictLib::~SiduDictLib()
     IN;
     QSettings settings("harbour-sidudict","dictionary-settings");
     settings.setValue("Sidudict/dictListSettings", QVariant(m_availableDicts->dictListMap()));
+    for (const QPair<QString, QString> &p : m_settings) {
+        settings.setValue("Sidudict/" + p.first, p.second);
+    }
     settings.sync();
-    delete m_sd;
+    m_thread->quit();
+    delete m_worker;
+    delete m_thread;
 }
 
-void SiduDictLib::updateList(QString str){
+void SiduDictLib::updateList(QString str) {
     IN;
 
-    QList<EntryDictItem*> wordList;
-    wordList.clear();
+    m_worker->cancelUpdating();
 
     if (str.isEmpty()){
-        m_suggestModel->setSuggestMap(wordList);
+        QList<EntryDictItem*> map;
+        m_suggestModel->setSuggestMap(map);
     } else {
-
-        if (str.size() >= 3){
-            foreach (QString dict, m_sd->availableDicts()) {
-                QList<EntryDictItem*> tmpWordList;
-                foreach(QString entry, m_sd->findSimilarWords(dict, str.simplified())){
-                    EntryDictItem *item =  new EntryDictItem(entry, dict);
-                    tmpWordList.append(item);
-                }
-                wordList.append(tmpWordList);
-            }
-        }
-
-        foreach (QString dict, m_sd->availableDicts()) {
-            QList<EntryDictItem*> tmpWordList;
-            foreach(QString entry, m_sd->findWords(dict, str.simplified())){
-                EntryDictItem *item =  new EntryDictItem(entry, dict);
-                tmpWordList.prepend(item);
-            }
-            wordList.append(tmpWordList);
-        }
-
-        m_suggestModel->setSuggestMap(wordList);
+        emit queryChanged(str);
     }
+}
+
+void SiduDictLib::updateSuggestions()
+{
+    QList<EntryDictItem*> map;
+    m_worker->getSuggestions(map);
+    m_suggestModel->setSuggestMap(map);
 }
 
 QString SiduDictLib::getTranslation(QString entry, QString dict)
 {
-    IN;
-    LOG() << "getTranslation for:" << entry;
-    LOG() << "getTranslation in:" << dict;
-
-    if (m_sd->isTranslatable(dict, entry.simplified())) {
-        m_lastTranslation = m_sd->translate(dict, entry.simplified()).translation();
+    if (m_worker->isTranslatable(dict, entry.simplified())) {
+        m_lastTranslation = m_worker->translate(dict, entry.simplified()).translation();
         return m_lastTranslation;
     }
 
@@ -199,8 +191,7 @@ QString SiduDictLib::getTranslation(QString entry, QString dict)
 
 bool SiduDictLib::isFirstListItemTranslatable()
 {
-    IN;
-    return m_sd->isTranslatable(m_suggestModel->firstDict(), m_suggestModel->firstEntry());
+    return m_worker->isTranslatable(m_suggestModel->firstDict(), m_suggestModel->firstEntry());
 }
 
 void SiduDictLib::setSelectDict(int index, bool value)
@@ -230,19 +221,19 @@ QString SiduDictLib::lastTranslation()
 QString SiduDictLib::dictInfoAuthor(QString dict)
 {
     IN;
-    return m_sd->dictInfo(dict).author();
+    return m_worker->dictionary().dictInfo(dict).author();
 }
 
 QString SiduDictLib::dictInfoDescription(QString dict)
 {
     IN;
-    return m_sd->dictInfo(dict).description();
+    return m_worker->dictionary().dictInfo(dict).description();
 }
 
 QString SiduDictLib::dictInfoWordsCount(QString dict)
 {
     IN;
-    return QString::number(m_sd->dictInfo(dict).wordsCount());
+    return QString::number(m_worker->dictionary().dictInfo(dict).wordsCount());
 }
 
 void SiduDictLib::downloadDict(QString url)
@@ -258,7 +249,7 @@ void SiduDictLib::availableDictsChanged(QModelIndex top, QModelIndex bottom)
     Q_UNUSED(bottom);
 
     LOG() << "selected dicts" << m_availableDicts->selectedDictList();
-    m_sd->setLoadedDicts(m_availableDicts->selectedDictList());
+    m_worker->dictionary().setLoadedDicts(m_availableDicts->selectedDictList());
 }
 
 void SiduDictLib::downloadDone()
@@ -306,8 +297,8 @@ void SiduDictLib::updateDictCatalogue()
     QMap<QString, QVariant> newMap;
     QMap<QString, QVariant> currentMap = m_availableDicts->dictListMap();
 
-    LOG() << "available dicts" << m_sd->availableDicts();
-    foreach(QString dict, m_sd->availableDicts()){
+    LOG() << "available dicts" << m_worker->dictionary().availableDicts();
+    foreach(QString dict, m_worker->dictionary().availableDicts()){
         if (currentMap.contains(dict)) {
             newMap.insert(dict, currentMap.value(dict));
         } else {
@@ -316,7 +307,7 @@ void SiduDictLib::updateDictCatalogue()
     }
     m_availableDicts->setDictMap(newMap);
 
-    LOG() << "loaded dicts" << m_sd->loadedDicts();
+    LOG() << "loaded dicts" << m_worker->dictionary().loadedDicts();
 
 }
 
@@ -358,7 +349,7 @@ bool SiduDictLib::showNotification(const QString category,
 void SiduDictLib::deleteDictionary(QString dict)
 {
     IN;
-    QFileInfo ifoFile(m_sd->dictInfo(dict).ifoFileName());
+    QFileInfo ifoFile(m_worker->dictionary().dictInfo(dict).ifoFileName());
 
     QDir ifoFileDir = ifoFile.absoluteDir();
     QString ifoFileDirName = ifoFileDir.path();
@@ -408,4 +399,25 @@ void SiduDictLib::deleteDictionary(QString dict)
                          "");
     }
     updateDictCatalogue();
+}
+
+QString SiduDictLib::readSetting(const QString &key) const
+{
+    for (const QPair<QString, QString> &p : m_settings) {
+        if (p.first == key)
+            return p.second;
+    }
+    return "";
+}
+
+void SiduDictLib::writeSetting(const QString &key, const QString &value)
+{
+    for (QPair<QString, QString> &p : m_settings) {
+        if (p.first == key) {
+            p.second = value;
+            return;
+        }
+    }
+    QPair<QString, QString> pair(key, value);
+    m_settings.push_back(pair);
 }

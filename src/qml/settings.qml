@@ -30,23 +30,68 @@ import Sailfish.Silica 1.0
 Page {
     allowedOrientations: defaultAllowedOrientations
 
-    SilicaListView{
-        id: listView
-        model: availableDictListModel
-        anchors.fill: parent
-        header: PageHeader {
-            title: "Settings"
-        }
-        delegate: dictModelDelegate
-        VerticalScrollDecorator {}
+    ListModel {
+        id: inputMethodNames
+        ListElement { name: "none"; token: "none" }
+        ListElement { name: "Telex (for Vietnamese)"; token: "telex" }
     }
 
-    Component {
-        id: dictModelDelegate
-        ListItem{
+    function selectedInputMethod() {
+        var cur = starDictLib.readSetting("inputMethod")
+        for (var i = 0; i < inputMethodNames.count; ++i) {
+            if (cur === inputMethodNames.get(i).token) {
+                return i
+            }
+        }
+        return 0
+    }
+
+    SilicaListView{
+        id: listView
+        anchors.fill: parent
+
+        VerticalScrollDecorator { flickable: listView }
+
+        header: Column {
+            width: parent.width
+
+            PageHeader {
+                width: parent.width
+                title: qsTr("Settings")
+            }
+
+            SectionHeader {
+                text: qsTr("Special input methods")
+            }
+
+            ComboBox {
+                id: inputMethodBox
+                width: parent.width
+                label: qsTr("Method: ")
+                currentIndex: selectedInputMethod()
+
+                menu: ContextMenu {
+                    Repeater {
+                        model: inputMethodNames
+                        MenuItem {
+                            text: model.name
+                            onClicked: {
+                                starDictLib.writeSetting("inputMethod", token)
+                            }
+                        }
+                    }
+                }
+            }
+
+            SectionHeader {
+                text: qsTr("Dictionaries (long tap for details)")
+            }
+        }
+
+        model: availableDictListModel
+        delegate: ListItem {
             id: dictListItem
             onClicked: {
-//                console.log("Clicked: " + name + " - " + index + " - " + dictSwitch.checked);
                 dictSwitch.checked = dictSwitch.checked ? false : true;
                 starDictLib.setSelectDict(index, dictSwitch.checked);
             }
@@ -57,7 +102,7 @@ Page {
                     automaticCheck: false
                     propagateComposedEvents: true
                     onClicked: {
-//                        console.log("clicked dictSwitch");
+                        console.log("clicked dictSwitch");
                         mouse.accepted = false;
                     }
                 }
@@ -72,16 +117,9 @@ Page {
                 MenuItem {
                     text: "Details"
                     onClicked: {
-//                        console.log("Details clicked");
-                        pageStack.push(Qt.resolvedUrl("DictDetails.qml"),{dictionaryName: name})
+                        pageStack.push(Qt.resolvedUrl("DictDetails.qml"), { dictionaryName: name })
                     }
                 }
-//                MenuItem {
-//                    text: "Delete"
-//                    onClicked: {
-////                        console.log("Delete clicked for dict: " + name);
-//                          starDictLib.deleteDictionary(name);
-//                }
             }
         }
     }

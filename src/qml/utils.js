@@ -1,7 +1,7 @@
 /***************************************************************************
 
-    suggestmodel.h - Sidudict, a StarDict clone based on QStarDict
-    Copyright 2013 Reto Zingg <g.d0b3rm4n@gmail.com>
+    sidudictlib.cpp - Sidudict, a StarDict clone based on QStarDict
+    Copyright 2015 Murat Khairulin
 
  ***************************************************************************/
 
@@ -24,41 +24,43 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef SUGGESTMODEL_H
-#define SUGGESTMODEL_H
+.pragma library
 
-#include <QVariant>
-#include <QMultiHash>
-#include <QString>
-#include <QAbstractListModel>
+function removeStyles(text) {
+    while (true) {
+        var start = text.indexOf("<style")
+        if (start < 0)
+            break
+        var end = text.indexOf("</style>", start + 6)
+        if (end < 0)
+            break
+        text = text.substr(0, start) + text.substr(end + 8)
+    }
+    return text
+}
 
-#include "entrydictitem.h"
-
-class SuggestModel : public QAbstractListModel
-{
-public:
-    enum dictListModelRoles{
-        SUGGEST_ENTRY_ROLE = Qt::UserRole + 10,
-        SUGGEST_DICT_ROLE
-    };
-
-    SuggestModel(QObject *parent = 0);
-
-    void setSuggestMap(const QList<EntryDictItem*> &map);
-    int rowCount(const QModelIndex &parent) const;
-    QVariant data(const QModelIndex &index, int role) const;
-    bool setData(const QModelIndex &index, const QVariant &value, int role);
-    QHash<int, QByteArray> roleNames() const;
-    Qt::ItemFlags flags(const QModelIndex & index) const;
-    QString firstDict();
-    QString firstEntry();
-
-signals:
-
-public slots:
-
-private:
-    QList<EntryDictItem*> entryDictMap;
-};
-
-#endif // SUGGESTMODEL_H
+function removeHtmlTags(text) {
+    text = removeStyles(text)
+    var tokens = []
+    var inTag = false
+    var textStart = 0
+    var textLen = 0
+    for (var i = 0; i < text.length; ++i) {
+        var cur = text[i]
+        if (cur === "<") {
+            if (textLen > 0)
+                tokens.push(text.substr(textStart, textLen))
+            inTag = true
+            textLen = 0
+        } else if (cur === ">") {
+            inTag = false
+            textStart = i + 1
+            textLen = 0
+        } else if (!inTag) {
+            ++textLen
+        }
+    }
+    if (textLen > 0)
+        tokens.push(text.substr(textStart, textLen))
+    return tokens.join(" ")
+}

@@ -1,11 +1,9 @@
-CONFIG += link_pkgconfig
+CONFIG += link_pkgconfig c++11
 PKGCONFIG += glib-2.0
-LIBS += -lz -lquazip -L../quazip/quazip
+LIBS += -lz
 
 QT += dbus
 
-DEPENDPATH += . ../quazip/quazip
-INCLUDEPATH += . ../quazip/quazip
 QMAKE_LFLAGS += -Wl,-rpath,\\$${LITERAL_DOLLAR}$${LITERAL_DOLLAR}ORIGIN/../share/harbour-sidudict/lib
 
 INSTALLS += target
@@ -22,6 +20,11 @@ CONFIG(release, debug|release) {
 TARGET = harbour-sidudict
 TEMPLATE = app
 
+# include QuaZIP
+!exists(third_party/quazip/quazip/quazip.pri): \
+    error("Some git submodules are missing, please run 'git submodule update --init' in toplevel directory")
+include(third_party/quazip/quazip/quazip.pri)
+
 SOURCES += main.cpp\
         lib/dictziplib.cpp \
         lib/distance.cpp \
@@ -31,7 +34,8 @@ SOURCES += main.cpp\
         dictlistmodel.cpp \
         suggestmodel.cpp \
         entrydictitem.cpp \
-        downloadmanager.cpp
+        downloadmanager.cpp \
+        worker.cpp
 
 HEADERS  += logging.h \
          lib/dictziplib.hpp \
@@ -44,6 +48,7 @@ HEADERS  += logging.h \
          dictlistmodel.h \
          suggestmodel.h \
          entrydictitem.h \
-         downloadmanager.h
+         downloadmanager.h \
+         worker.h
 
 OTHER_FILES += qml/*.qml qml/*.js

@@ -1,0 +1,3 @@
+[submodule "src/third_party/quazip"]
+	path = src/third_party/quazip
+	url = git@github.com:binaryking/quazip.git
