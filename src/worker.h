@@ -1,7 +1,7 @@
 /***************************************************************************
 
-    EntryList.qml - Sidudict, a StarDict clone based on QStarDict
-    Copyright 2013 - 2014 Reto Zingg <g.d0b3rm4n@gmail.com>
+    sidudictlib.cpp - Sidudict, a StarDict clone based on QStarDict
+    Copyright 2015 Murat Khairulin
 
  ***************************************************************************/
 
@@ -24,31 +24,43 @@
  *                                                                         *
  ***************************************************************************/
 
-import QtQuick 2.2
-import Sailfish.Silica 1.0
+#ifndef WORKER_H
+#define WORKER_H
 
-Item {
-    id: entryList
-    signal entryClicked(string entry, string dict)
+#include <QObject>
+#include <lib/stardict.h>
+#include <entrydictitem.h>
 
-    SilicaListView {
-        anchors.fill: parent
-        model: entryListModel
-        spacing: Theme.paddingSmall
-        delegate: ListItem{
-            contentHeight: Theme.itemSizeMedium // two line delegate
-            onClicked: entryList.entryClicked(entry, dict)
-            Label {
-                id: label
-                text: entry
-                color: Theme.primaryColor
-            }
-            Label {
-                anchors.top: label.bottom
-                text: dict
-                font.pixelSize: Theme.fontSizeSmall
-                color: Theme.secondaryColor
-            }
-        }
+class Worker : public QObject
+{
+    Q_OBJECT
+public:
+    explicit Worker(QObject *parent = 0);
+    virtual ~Worker();
+
+    // these are to be called synchronously
+    void cancelUpdating();
+    void getSuggestions(QList<EntryDictItem*> &map);
+    bool isTranslatable(const QString &dict, const QString &entry);
+    StarDict::Translation translate(const QString &dict, const QString &entry);
+
+    StarDict &dictionary() {
+        return *m_sd;
     }
-}
+
+signals:
+    void suggestionsUpdated();
+
+public slots:
+    void updateList(const QString &query);
+
+private:
+    void setSuggestions(QList<EntryDictItem*> &map);
+
+    StarDict *m_sd;
+    bool m_cancelFlag;
+    QAtomicInt m_suggestionsLock;
+    QList<EntryDictItem*> m_suggestions;
+};
+
+#endif // WORKER_H

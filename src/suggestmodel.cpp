@@ -36,7 +36,7 @@ SuggestModel::SuggestModel(QObject *parent) :
 {
 }
 
-void SuggestModel::setSuggestMap(QList<EntryDictItem*> &map)
+void SuggestModel::setSuggestMap(const QList<EntryDictItem*> &map)
 {
     IN;
     LOG() << "map.count" << map.size();

@@ -32,8 +32,8 @@
 
 #include "dictlistmodel.h"
 #include "suggestmodel.h"
-#include "lib/stardict.h"
 #include "downloadmanager.h"
+#include "worker.h"
 
 class SiduDictLib:public QObject
 {
@@ -57,6 +57,9 @@ public:
     Q_INVOKABLE bool showNotification(QString category, const QString summary, const QString text, QString previewBody, QString previewSummary, QString icon);
     Q_INVOKABLE void deleteDictionary(QString dict);
 
+    Q_INVOKABLE QString readSetting(const QString &key) const;
+    Q_INVOKABLE void writeSetting(const QString &key, const QString &value);
+
     SuggestModel *m_suggestModel;
     DictListModel *m_availableDicts;
 
@@ -65,11 +68,17 @@ public slots:
     void downloadDone();
     void downloadError(QByteArray url, QString errorMsg);
     void downloadEnded(QByteArray url);
+    void updateSuggestions();
+
+signals:
+    void queryChanged(const QString &query);
 
 private:
-    StarDict *m_sd;
+    QThread *m_thread;
+    Worker *m_worker;
     QString m_lastTranslation;
     DownloadManager *m_downloadManager;
+    QVector<QPair<QString, QString> > m_settings;
 
     void updateDictCatalogue();
 };
