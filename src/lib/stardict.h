@@ -31,6 +31,7 @@
 #include "lib.h"
 
 #include <string>
+#include <QObject>
 #include <QVector>
 #include <QHash>
 #include <QStringList>
