@@ -40,7 +40,8 @@ const int MAX_FUZZY_DISTANCE = 3; // at most MAX_FUZZY_DISTANCE-1 differences al
 
 struct cacheItem
 {
-    guint32 offset;
+    guint64 offset;
+    guint32 size;
     gchar *data;
     //write code here to make it inline
     cacheItem()
@@ -61,11 +62,12 @@ class DictBase
     public:
         DictBase();
         ~DictBase();
-        gchar * GetWordData(guint32 idxitem_offset, guint32 idxitem_size);
+        gchar * GetWordData(guint64 idxitem_offset, guint32 idxitem_size);
         bool containSearchData();
-        bool SearchData(std::vector<std::string> &SearchWords, guint32 idxitem_offset, guint32 idxitem_size, gchar *origin_data);
+        bool SearchData(std::vector<std::string> &SearchWords, guint64 idxitem_offset, guint32 idxitem_size, gchar *origin_data);
     protected:
         std::string sametypesequence;
+        guint32 idxoffsetbits;
         FILE *dictfile;
         std::auto_ptr<dictData> dictdzfile;
     private:
@@ -86,14 +88,16 @@ struct DictInfo
     std::string description;
     guint32 index_file_size;
     std::string sametypesequence;
+    guint32 idxoffsetbits;
     bool load_from_ifo_file(const std::string& ifofilename, bool istreedict);
 };
 
 class index_file
 {
     public:
-        guint32 wordentry_offset;
+        guint64 wordentry_offset;
         guint32 wordentry_size;
+        guint32 idxoffsetbits;
 
         virtual ~index_file()
         {}
@@ -141,7 +145,7 @@ class Dict : public DictBase
             idx_file->get_data(index);
             return DictBase::GetWordData(idx_file->wordentry_offset, idx_file->wordentry_size);
         }
-        void get_key_and_data(glong index, const gchar **key, guint32 *offset, guint32 *size)
+        void get_key_and_data(glong index, const gchar **key, guint64 *offset, guint32 *size)
         {
             *key = idx_file->get_key_and_data(index);
             *offset = idx_file->wordentry_offset;

@@ -83,13 +83,31 @@ bool DictInfo::load_from_ifo_file(const std::string& ifofilename,
 
 #define TREEDICT_MAGIC_DATA "StarDict's treedict ifo file\nversion=2.4.2\n"
 #define DICT_MAGIC_DATA "StarDict's dict ifo file\nversion=2.4.2\n"
+#define TREEDICT_MAGIC_DATA3 "StarDict's treedict ifo file\nversion=3.0.0\n"
+#define DICT_MAGIC_DATA3 "StarDict's dict ifo file\nversion=3.0.0\n"
 
-    const gchar *magic_data = istreedict ? TREEDICT_MAGIC_DATA : DICT_MAGIC_DATA;
-    if (!g_str_has_prefix(buffer, magic_data))
-    {
-        g_free(buffer);
-        return false;
+    bool is_v3 = false;
+    if (istreedict) {
+        if (g_str_has_prefix(buffer, TREEDICT_MAGIC_DATA3))
+            is_v3 = true;
+        else if (!g_str_has_prefix(buffer, TREEDICT_MAGIC_DATA)) {
+            g_free(buffer);
+            return false;
+        }
+    } else {
+        if (g_str_has_prefix(buffer, DICT_MAGIC_DATA3))
+            is_v3 = true;
+        else if (!g_str_has_prefix(buffer, DICT_MAGIC_DATA)) {
+            g_free(buffer);
+            return false;
+        }
     }
+
+    const gchar *magic_data = istreedict ?
+        (is_v3 ? TREEDICT_MAGIC_DATA3 : TREEDICT_MAGIC_DATA) :
+        (is_v3 ? DICT_MAGIC_DATA3 : DICT_MAGIC_DATA);
+
+    idxoffsetbits = 32;
 
     gchar *p1, *p2, *p3;
 
@@ -199,6 +217,16 @@ bool DictInfo::load_from_ifo_file(const std::string& ifofilename,
         sametypesequence.assign(p2, p3 - p2);
     }
 
+    p2 = strstr(p1, "\nidxoffsetbits=");
+    if (p2)
+    {
+        p2 += sizeof("\nidxoffsetbits=") - 1;
+        p3 = strchr(p2, '\n');
+        gchar tmpbuf[16];
+        g_strlcpy(tmpbuf, p2, std::min(sizeof(tmpbuf), (gsize)(p3 - p2 + 1)));
+        idxoffsetbits = atol(tmpbuf);
+    }
+
     g_free(buffer);
 
     return true;
@@ -208,6 +236,7 @@ DictBase::DictBase()
 {
     dictfile = NULL;
     cache_cur = 0;
+    idxoffsetbits = 32;
 }
 
 DictBase::~DictBase()
@@ -216,10 +245,10 @@ DictBase::~DictBase()
         fclose(dictfile);
 }
 
-gchar* DictBase::GetWordData(guint32 idxitem_offset, guint32 idxitem_size)
+gchar* DictBase::GetWordData(guint64 idxitem_offset, guint32 idxitem_size)
 {
     for (int i = 0; i < WORDDATA_CACHE_NUM; i++)
-        if (cache[i].data && cache[i].offset == idxitem_offset)
+        if (cache[i].data && cache[i].offset == idxitem_offset && cache[i].size == idxitem_size)
             return cache[i].data;
 
     if (dictfile)
@@ -248,6 +277,11 @@ gchar* DictBase::GetWordData(guint32 idxitem_offset, guint32 idxitem_size)
         case 'y':
         case 'l':
         case 'g':
+        case 'h':
+        case 'k':
+        case 'w':
+        case 'r':
+        case 'n':
         case 'x':
             data_size += sizeof(gchar);
             break;
@@ -279,6 +313,11 @@ gchar* DictBase::GetWordData(guint32 idxitem_offset, guint32 idxitem_size)
             case 'y':
             case 'l':
             case 'g':
+            case 'h':
+            case 'k':
+            case 'w':
+            case 'r':
+            case 'n':
             case 'x':
                 sec_size = strlen(p2) + 1;
                 memcpy(p1, p2, sec_size);
@@ -362,6 +401,7 @@ gchar* DictBase::GetWordData(guint32 idxitem_offset, guint32 idxitem_size)
 
     cache[cache_cur].data = data;
     cache[cache_cur].offset = idxitem_offset;
+    cache[cache_cur].size = idxitem_size;
     cache_cur++;
     if (cache_cur == WORDDATA_CACHE_NUM)
         cache_cur = 0;
@@ -373,10 +413,10 @@ inline bool DictBase::containSearchData()
     if (sametypesequence.empty())
         return true;
 
-    return sametypesequence.find_first_of("mlgxty") != std::string::npos;
+    return sametypesequence.find_first_of("mlgxhtykwr") != std::string::npos;
 }
 
-bool DictBase::SearchData(std::vector<std::string> &SearchWords, guint32 idxitem_offset, guint32 idxitem_size, gchar *origin_data)
+bool DictBase::SearchData(std::vector<std::string> &SearchWords, guint64 idxitem_offset, guint32 idxitem_size, gchar *origin_data)
 {
     int nWord = SearchWords.size();
     std::vector<bool> WordFind(nWord, false);
@@ -403,6 +443,11 @@ bool DictBase::SearchData(std::vector<std::string> &SearchWords, guint32 idxitem
             case 'y':
             case 'l':
             case 'g':
+            case 'h':
+            case 'k':
+            case 'w':
+            case 'r':
+            case 'n':
             case 'x':
                 for (j = 0; j < nWord; j++)
                     if (!WordFind[j] && strstr(p, SearchWords[j].c_str()))
@@ -513,7 +558,7 @@ class offset_index : public index_file
         FILE *idxfile;
         gulong wordcount;
 
-        gchar wordentry_buf[256 + sizeof(guint32)*2]; // The length of "word_str" should be less than 256. See src/tools/DICTFILE_FORMAT.
+        gchar wordentry_buf[256 + sizeof(guint64) + sizeof(guint32)];
         struct index_entry
         {
             glong idx;
@@ -529,7 +574,8 @@ class offset_index : public index_file
         struct page_entry
         {
             gchar *keystr;
-            guint32 off, size;
+            guint64 off;
+            guint32 size;
         };
         std::vector<gchar> page_data;
         struct page_t
@@ -539,7 +585,7 @@ class offset_index : public index_file
 
             page_t(): idx( -1)
             {}
-            void fill(gchar *data, gint nent, glong idx_);
+            void fill(gchar *data, gint nent, glong idx_, guint32 idxoffsetbits_);
         }
         page;
         gulong load_page(glong page_idx);
@@ -568,7 +614,7 @@ class wordlist_index : public index_file
         std::vector<gchar *> wordlist;
 };
 
-void offset_index::page_t::fill(gchar *data, gint nent, glong idx_)
+void offset_index::page_t::fill(gchar *data, gint nent, glong idx_, guint32 idxoffsetbits_)
 {
     idx = idx_;
     gchar *p = data;
@@ -578,8 +624,13 @@ void offset_index::page_t::fill(gchar *data, gint nent, glong idx_)
         entries[i].keystr = p;
         len = strlen(p);
         p += len + 1;
-        entries[i].off = g_ntohl(*reinterpret_cast<guint32 *>(p));
-        p += sizeof(guint32);
+        if (idxoffsetbits_ == 64) {
+            entries[i].off = GUINT64_FROM_BE(*reinterpret_cast<guint64 *>(p));
+            p += sizeof(guint64);
+        } else {
+            entries[i].off = g_ntohl(*reinterpret_cast<guint32 *>(p));
+            p += sizeof(guint32);
+        }
         entries[i].size = g_ntohl(*reinterpret_cast<guint32 *>(p));
         p += sizeof(guint32);
     }
@@ -702,7 +753,9 @@ bool offset_index::load(const std::string& url, gulong wc, gulong fsize)
         guint32 j = 0;
         for (guint32 i = 0; i < wc; i++)
         {
-            index_size = strlen(p1) + 1 + 2 * sizeof(guint32);
+            index_size = strlen(p1) + 1
+                + (idxoffsetbits == 64 ? sizeof(guint64) : sizeof(guint32))
+                + sizeof(guint32);
             if (i % ENTR_PER_PAGE == 0)
             {
                 wordoffset[j] = p1 - idxdatabuffer;
@@ -742,7 +795,7 @@ inline gulong offset_index::load_page(glong page_idx)
         page_data.resize(wordoffset[page_idx + 1] - wordoffset[page_idx]);
         fseek(idxfile, wordoffset[page_idx], SEEK_SET);
         fread(&page_data[0], 1, page_data.size(), idxfile);
-        page.fill(&page_data[0], nentr, page_idx);
+        page.fill(&page_data[0], nentr, page_idx, idxoffsetbits);
     }
 
     return nentr;
@@ -862,11 +915,14 @@ bool wordlist_index::load(const std::string& url, gulong wc, gulong fsize)
 
     wordlist.resize(wc + 1);
     gchar *p1 = idxdatabuf;
+    guint32 entry_size = sizeof(guint32) + sizeof(guint32);
+    if (idxoffsetbits == 64)
+        entry_size = sizeof(guint64) + sizeof(guint32);
     guint32 i;
     for (i = 0; i < wc; i++)
     {
         wordlist[i] = p1;
-        p1 += strlen(p1) + 1 + 2 * sizeof(guint32);
+        p1 += strlen(p1) + 1 + entry_size;
     }
     wordlist[wc] = p1;
 
@@ -881,8 +937,13 @@ const gchar *wordlist_index::get_key(glong idx)
 void wordlist_index::get_data(glong idx)
 {
     gchar *p1 = wordlist[idx] + strlen(wordlist[idx]) + sizeof(gchar);
-    wordentry_offset = g_ntohl(*reinterpret_cast<guint32 *>(p1));
-    p1 += sizeof(guint32);
+    if (idxoffsetbits == 64) {
+        wordentry_offset = GUINT64_FROM_BE(*reinterpret_cast<guint64 *>(p1));
+        p1 += sizeof(guint64);
+    } else {
+        wordentry_offset = g_ntohl(*reinterpret_cast<guint32 *>(p1));
+        p1 += sizeof(guint32);
+    }
     wordentry_size = g_ntohl(*reinterpret_cast<guint32 *>(p1));
 }
 
@@ -975,6 +1036,7 @@ bool Dict::load(const std::string& ifofilename)
         idx_file.reset(new offset_index);
     }
 
+    idx_file->idxoffsetbits = idxoffsetbits;
     if (!idx_file->load(fullfilename, wordcount, idxfilesize))
         return false;
 
@@ -999,6 +1061,7 @@ bool Dict::load_ifofile(const std::string& ifofilename, gulong &idxfilesize)
     idxfilesize = dict_info.index_file_size;
 
     sametypesequence = dict_info.sametypesequence;
+    idxoffsetbits = dict_info.idxoffsetbits;
 
     return true;
 }
@@ -1277,7 +1340,7 @@ bool Libs::LookupSimilarWord(const gchar* sWord, glong & iWordIndex, int iLib)
         // Upper the first character and lower others.
         if (!bFound)
         {
-            gchar *nextchar = g_utf8_next_char(sWord);
+            gchar *nextchar = (gchar *)g_utf8_next_char(sWord);
             gchar *firstchar = g_utf8_strup(sWord, nextchar - sWord);
             nextchar = g_utf8_strdown(nextchar, -1);
             casestr = g_strdup_printf("%s%s", firstchar, nextchar);
@@ -1883,7 +1946,8 @@ bool Libs::LookupData(const gchar *sWord, std::vector<gchar *> *reslist)
             progress_func();
         const gulong iwords = narticles(i);
         const gchar *key;
-        guint32 offset, size;
+        guint64 offset;
+        guint32 size;
         for (gulong j = 0;
                 j < iwords;
                 ++j)

@@ -28,39 +28,99 @@
 ##############################################################################
 
 DICT_XML="dictionaries.xml"
-GITHUB="https://raw.githubusercontent.com/d0b3rm4n/harbour-sidudict/master/data/dictionaries"
+BASE_URL="https://download.wikdict.com/dictionaries/stardict"
+INDEX_URL="${BASE_URL}/"
+TMP_DIR=$(mktemp -d /tmp/stardict_gen.XXXXXX)
+TMP_ENTRIES=$(mktemp /tmp/stardict_entries.XXXXXX)
 
-echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>" > ${DICT_XML}
-echo "<dictionaries>" >> ${DICT_XML}
+cleanup() {
+    rm -rf "${TMP_DIR}" "${TMP_ENTRIES}"
+}
+trap cleanup EXIT
+
+echo "Fetching dictionary list from ${INDEX_URL}..."
+curl -sL "${INDEX_URL}" -o "${TMP_DIR}/index.html"
+
+if [ ! -s "${TMP_DIR}/index.html" ]; then
+    echo "ERROR: Failed to fetch index page"
+    exit 1
+fi
+
+# Extract filenames and sizes from the Apache directory listing
+# Lines are: <a href="wikdict-XX-YY.zip">wikdict-XX-YY.zip</a>  DATE  TIME  SIZE
+grep -oP '<a href="wikdict-[a-z]{2}-[a-z]{2,3}\.zip">([^<]+)</a>\s+[^"]+\s+[0-9.]+[KM]?' \
+    "${TMP_DIR}/index.html" > "${TMP_DIR}/zips.txt"
+
 COUNTER=1
-for IFO_FILE in $(ls -1 */*.ifo) ; do
-    echo "Process: ${IFO_FILE}"
+TOTAL=$(wc -l < "${TMP_DIR}/zips.txt")
 
-    DIR_NAME=$(dirname ${IFO_FILE})
+while IFS= read -r line; do
+    ZIPFILE=$(echo "$line" | sed -n 's/.*<a href="\(wikdict-[^"]*\.zip\)">.*/\1/p')
+    ZIPSIZE=$(echo "$line" | awk '{print $NF}')
 
-    zip -r ${DIR_NAME}.zip ${DIR_NAME}
-    URL="${GITHUB}/${DIR_NAME}.zip"
+    if [ -z "$ZIPFILE" ]; then
+        continue
+    fi
 
-    SIZE=$(du -h ${DIR_NAME}  |cut -f 1)
-    WORDCOUNT=$(grep 'wordcount=' ${IFO_FILE} | sed -e 's/wordcount=//')
-    DATE=$(grep 'date=' ${IFO_FILE} | sed -e 's/date=//')
-    BOOKNAME=$(grep 'bookname=' ${IFO_FILE} | sed -e 's/bookname=//')
-    DESCRIPTION=$(echo "This file was converted from the original database on:<br> $(date +'%a %b %d %H:%M:%S %Y')<br><br>The original data is available from:<br>https://github.com/tkedwards/wiktionarytodict<br><br>The original data was distributed with the notice shown below. No<br>additional restrictions are claimed. Please redistribute this changed<br>version under the same conditions and restriction that apply to the<br>original version.<br><br>This dictionary tranlsates ${BOOKNAME/Wiktionary /}. It was created by the<br>script /home/tim/devel/wiktionarytodict/wiktionarytodict.py and is based<br>on data from the Wiktionary dumps available from<br>https://dumps.wikimedia.org/enwiktionary/latest/enwiktionary-latest-pages-articles.xml.bz2<br>All content in this dictionary is under the same license as Wiktionary<br>content." | sed -e 's/description=//' | xmlstarlet esc )
+    echo "[${COUNTER}/${TOTAL}] Processing: ${ZIPFILE} (${ZIPSIZE})"
 
-    echo "    <dictionary>" >> ${DICT_XML}
-    echo "        <id>${COUNTER}</id>" >> ${DICT_XML}
-    echo "        <name>${BOOKNAME}</name>" >> ${DICT_XML}
-    echo "        <entries>${WORDCOUNT}</entries>" >> ${DICT_XML}
-    echo "        <size>${SIZE}</size>" >> ${DICT_XML}
-    echo "        <date>${DATE}</date>" >> ${DICT_XML}
-    echo "        <url>${URL}</url>" >> ${DICT_XML}
-    echo "        <description>${DESCRIPTION}</description>" >> ${DICT_XML}
-    echo "    </dictionary>" >> ${DICT_XML}
+    # Download zip to temp dir
+    curl -sL "${BASE_URL}/${ZIPFILE}" -o "${TMP_DIR}/${ZIPFILE}"
+
+    if [ ! -s "${TMP_DIR}/${ZIPFILE}" ]; then
+        echo "  WARNING: Failed to download, skipping"
+        continue
+    fi
+
+    # Extract and parse the IFO file
+    IFO_CONTENT=$(unzip -p "${TMP_DIR}/${ZIPFILE}" '*.ifo' 2>/dev/null)
+
+    if [ -z "$IFO_CONTENT" ]; then
+        echo "  WARNING: Could not read IFO, skipping"
+        rm -f "${TMP_DIR}/${ZIPFILE}"
+        continue
+    fi
+
+    BOOKNAME=$(echo "$IFO_CONTENT" | grep 'bookname=' | sed 's/bookname=//' | head -1)
+    WORDCOUNT=$(echo "$IFO_CONTENT" | grep 'wordcount=' | sed 's/wordcount=//' | head -1)
+    DATE=$(echo "$IFO_CONTENT" | grep 'date=' | sed 's/date=//' | head -1)
+
+    # XML escape the description
+    DESCRIPTION=$(echo "$IFO_CONTENT" | grep 'description=' | sed 's/description=//' | head -1)
+    if command -v xmlstarlet &>/dev/null && [ -n "$DESCRIPTION" ]; then
+        DESCRIPTION=$(echo "$DESCRIPTION" | xmlstarlet esc)
+    fi
+
+    URL="${BASE_URL}/${ZIPFILE}"
+
+    rm -f "${TMP_DIR}/${ZIPFILE}"
+
+    if [ -z "$BOOKNAME" ]; then
+        echo "  WARNING: No bookname, skipping"
+        continue
+    fi
+
+    echo "  Name: ${BOOKNAME}"
+    echo "  Entries: ${WORDCOUNT}"
+
+    # Write entry to temp file (avoids subshell COUNTER issue)
+    cat >> "${TMP_ENTRIES}" <<XMLENTRY
+    <dictionary>
+        <id>${COUNTER}</id>
+        <name>${BOOKNAME}</name>
+        <entries>${WORDCOUNT}</entries>
+        <size>${ZIPSIZE}</size>
+        <date>${DATE}</date>
+        <url>${URL}</url>
+        <description>${DESCRIPTION}</description>
+    </dictionary>
+XMLENTRY
 
     COUNTER=$((COUNTER + 1))
-done
+done < "${TMP_DIR}/zips.txt"
 
-echo "</dictionaries>" >> ${DICT_XML}
-
-xmlstarlet val ${DICT_XML}
-
+# Assemble final XML
+echo '<?xml version="1.0" encoding="utf-8"?>' > "${DICT_XML}"
+echo '<dictionaries>' >> "${DICT_XML}"
+cat "${TMP_ENTRIES}" >> "${DICT_XML}"
+echo '</dictionaries>' >> "${DICT_XML}"
